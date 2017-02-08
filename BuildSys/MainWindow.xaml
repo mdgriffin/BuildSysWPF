@@ -15,6 +15,10 @@
             <Label Name="lblSurname" Content="Surname" />
             <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" Name="txtSurname"/>
         </WrapPanel>
+        <WrapPanel>
+            <Label Name="lblStreet" Content="Street" />
+            <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" Name="txtStreet"/>
+        </WrapPanel>
         <Button Name="btnReg" Click="btnReg_Click" ToolTip="Example Button">Register</Button>
     </StackPanel>
 </Window>
