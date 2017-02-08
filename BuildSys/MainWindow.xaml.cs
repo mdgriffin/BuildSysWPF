@@ -25,6 +25,9 @@ namespace BuildSys
             InitializeComponent();
         }
 
-
+        private void btnReg_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Register a new customer");
+        }
     }
 }
