@@ -23,9 +23,9 @@ namespace BuildSys
         public String vatNo;
         public char accountType;
 
-        public CustomerModel(int customerId, String companyName, String title, String firstname, String surname, String street, String town, String county, String telno, String email, String vatNo, char accountType)
+        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType, String companyName, String vatNo) 
         {
-            this.customerId = customerId;
+            this.customerId = getNextCustomerId();
             this.companyName = companyName;
             this.title = title;
             this.firstname = firstname;
@@ -39,7 +39,12 @@ namespace BuildSys
             this.accountType = accountType;
         }
 
-        public static int getNextStockNo()
+        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email)
+        {
+            return new CustomerModel(title, firstname, surname, street, town, county, telno, email, accType, null, null);
+        }
+
+        public static int getNextCustomerId()
         {
             int nextStockNo;
 
@@ -72,7 +77,7 @@ namespace BuildSys
             return nextStockNo;
         }
 
-        public void regStock()
+        public void insert()
         {
             // Open the DB connection
             OracleConnection conn = new OracleConnection(CONNECTION_STRING);

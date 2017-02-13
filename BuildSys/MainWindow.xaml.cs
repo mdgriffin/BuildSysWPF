@@ -28,6 +28,7 @@ namespace BuildSys
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Register a new customer");
+            //CustomerModel newCust = new CustomerModel(txt);
         }
 
         private void cmbCounty_Loaded(object sender, RoutedEventArgs e)
