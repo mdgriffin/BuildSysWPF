@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BuildSys"
         mc:Ignorable="d"
-        Title="Build Sys" Height="480" Width="525">
+        Title="Build Sys"
+        Height="480"
+        Width="525">
     <StackPanel Name="frmReg" Margin="20">
         <WrapPanel
             Margin="0,5">
@@ -13,18 +15,22 @@
             <RadioButton VerticalAlignment="Center" Name="radAccType_personal"  GroupName="radAccType" Content="Personal" IsChecked="True"/>
             <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" Content="Business" />
         </WrapPanel>
-        <WrapPanel
-            Margin="0,5">
+        <WrapPanel Name="wpBusinessName" Margin="0,5" Visibility="Collapsed">
+            <Label Name="lblCompanyName" Content="Company Name" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtCompanyName"/>
+        </WrapPanel>
+        <WrapPanel Name="wpVatNumber" Margin="0,5" Visibility="Collapsed">
+            <Label Name="lblVatNumber" Content="Company Name" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtVatNumber"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,5">
             <Label Name="lblTitle" Content="Title" MinWidth="100"/>
             <ComboBox HorizontalAlignment="Left" x:Name="cmbTitle" SelectedIndex="0" VerticalAlignment="Center" Width="120" Loaded="cmbTitle_Loaded"/>
         </WrapPanel>
-        <WrapPanel
-            Margin="0,5">
-            <Label Name="lblFirstName" Content="First Name" MinWidth="100"/>
-            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtFirstName"/>
+        <WrapPanel Margin="0,5">
+            
         </WrapPanel>
-        <WrapPanel
-            Margin="0,5">
+        <WrapPanel Margin="0,5">
             <Label Name="lblSurname" Content="Surname" MinWidth="100"/>
             <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtSurname"/>
         </WrapPanel>
