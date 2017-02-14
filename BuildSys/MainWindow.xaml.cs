@@ -27,7 +27,6 @@ namespace BuildSys
 
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("Register a new customer");
             // TODO: Validate Data
             char accountType = radAccType_business.IsChecked.Value ? 'B' : 'P';
 
@@ -35,7 +34,7 @@ namespace BuildSys
             {
                 CustomerModel newCust = new CustomerModel(
                     cmbTitle.SelectedItem.ToString(),
-                    txtFirstName.Text,
+                    txtFirstname.Text,
                     txtSurname.Text,
                     txtStreet.Text,
                     txtTown.Text,
@@ -75,6 +74,26 @@ namespace BuildSys
             List<string> data = new List<string>() { "Mr", "Mrs", "Ms", "Miss", "Mx"};
 
             cmbTitle.ItemsSource = data;
+        }
+
+        private void radAccType_Checked(object sender, RoutedEventArgs e)
+        {
+            if (radAccType_business != null)
+            {
+                char accountType = radAccType_business.IsChecked.Value ? 'B' : 'P';
+
+                if (accountType == 'P')
+                {
+                    wpBusinessName.Visibility = Visibility.Collapsed;
+                    wpVatNumber.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    wpBusinessName.Visibility = Visibility.Visible;
+                    wpVatNumber.Visibility = Visibility.Visible;
+                }
+            }
+
         }
     }
 }

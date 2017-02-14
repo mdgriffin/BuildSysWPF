@@ -6,21 +6,21 @@
         xmlns:local="clr-namespace:BuildSys"
         mc:Ignorable="d"
         Title="Build Sys"
-        Height="480"
+        Height="600"
         Width="525">
     <StackPanel Name="frmReg" Margin="20">
         <WrapPanel
             Margin="0,5">
             <Label Name="lblAccType" Content="Account Type" MinWidth="100"/>
-            <RadioButton VerticalAlignment="Center" Name="radAccType_personal"  GroupName="radAccType" Content="Personal" IsChecked="True"/>
-            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" Content="Business" />
+            <RadioButton VerticalAlignment="Center" Name="radAccType_personal" GroupName="radAccType" Content="Personal" IsChecked="True" Checked="radAccType_Checked"/>
+            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" IsChecked="False" Content="Business" Checked="radAccType_Checked"/>
         </WrapPanel>
         <WrapPanel Name="wpBusinessName" Margin="0,5" Visibility="Collapsed">
             <Label Name="lblCompanyName" Content="Company Name" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtCompanyName"/>
         </WrapPanel>
         <WrapPanel Name="wpVatNumber" Margin="0,5" Visibility="Collapsed">
-            <Label Name="lblVatNumber" Content="Company Name" MinWidth="100"/>
+            <Label Name="lblVatNumber" Content="VAT Number" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtVatNumber"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
@@ -28,39 +28,34 @@
             <ComboBox HorizontalAlignment="Left" x:Name="cmbTitle" SelectedIndex="0" VerticalAlignment="Center" Width="120" Loaded="cmbTitle_Loaded"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
-            
+            <Label Name="lblFirstname" Content="Firstname" MinWidth="100"/>
+            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtFirstname"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblSurname" Content="Surname" MinWidth="100"/>
             <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtSurname"/>
         </WrapPanel>
-        <WrapPanel
-            Margin="0,5">
+        <WrapPanel Margin="0,5">
             <Label Name="lblPosition" Content="Position" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtPosition"/>
         </WrapPanel>
-        <WrapPanel
-            Margin="0,5">
+        <WrapPanel Margin="0,5">
             <Label Name="lblStreet" Content="Street" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtStreet"/>
         </WrapPanel>
-        <WrapPanel
-            Margin="0,5">
+        <WrapPanel Margin="0,5">
             <Label Name="lblTown" Content="Town" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtTown"/>
         </WrapPanel>
-        <WrapPanel
-            Margin="0,5">
+        <WrapPanel Margin="0,5">
             <Label Name="lblCounty" Content="County" MinWidth="100"/>
             <ComboBox HorizontalAlignment="Left" x:Name="cmbCounty" SelectedIndex="0" VerticalAlignment="Center" Width="120" Loaded="cmbCounty_Loaded"/>
         </WrapPanel>
-        <WrapPanel
-            Margin="0,5">
+        <WrapPanel Margin="0,5">
             <Label Name="lblTel" Content="Telephone" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtTel"/>
         </WrapPanel>
-        <WrapPanel
-            Margin="0,5">
+        <WrapPanel Margin="0,5">
             <Label Name="lblEmail" Content="Email" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtEmail"/>
         </WrapPanel>
