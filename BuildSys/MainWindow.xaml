@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BuildSys"
         mc:Ignorable="d"
-        Title="Build Sys" Height="440" Width="525">
+        Title="Build Sys" Height="480" Width="525">
     <StackPanel Name="frmReg" Margin="20">
         <WrapPanel
             Margin="0,5">
-            <Label Name="lblAccTyoe" Content="Account Type" MinWidth="100"/>
+            <Label Name="lblAccType" Content="Account Type" MinWidth="100"/>
             <RadioButton VerticalAlignment="Center" GroupName="accType" Content="Personal" IsChecked="True"/>
             <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" GroupName="accType" Content="Business" />
+        </WrapPanel>
+        <WrapPanel
+            Margin="0,5">
+            <Label Name="lblTitle" Content="Title" MinWidth="100"/>
+            <ComboBox HorizontalAlignment="Left" x:Name="cmbTitle" SelectedIndex="0" VerticalAlignment="Center" Width="120" Loaded="cmbTitle_Loaded"/>
         </WrapPanel>
         <WrapPanel
             Margin="0,5">

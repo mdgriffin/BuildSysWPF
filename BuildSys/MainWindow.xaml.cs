@@ -27,8 +27,13 @@ namespace BuildSys
 
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Register a new customer");
-            //CustomerModel newCust = new CustomerModel(txt);
+            //MessageBox.Show("Register a new customer");
+            // TODO: Validate Data
+            CustomerModel newCust = new CustomerModel(
+               cmbTitle.SelectedItem.ToString(), txtFirstName.Text, txtSurname.Text, txtStreet.Text, txtTown.Text, cmbCounty.SelectedItem.ToString(), txtTel.Text, txtEmail.Text
+            );
+
+            newCust.insertPrivateCustomer();
         }
 
         private void cmbCounty_Loaded(object sender, RoutedEventArgs e)
@@ -43,5 +48,11 @@ namespace BuildSys
             cmbCounty.ItemsSource = data;
         }
 
+        private void cmbTitle_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> data = new List<string>() { "Mr", "Mrs", "Ms", "Miss", "Mx"};
+
+            cmbTitle.ItemsSource = data;
+        }
     }
 }

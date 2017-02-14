@@ -39,9 +39,8 @@ namespace BuildSys
             this.accountType = accountType;
         }
 
-        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email)
+        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email): this(title, firstname, surname, street, town, county, telno, email, 'P', null, null)
         {
-            return new CustomerModel(title, firstname, surname, street, town, county, telno, email, accType, null, null);
         }
 
         public static int getNextCustomerId()
@@ -77,7 +76,7 @@ namespace BuildSys
             return nextStockNo;
         }
 
-        public void insert()
+        public void insertBusinessCustomer()
         {
             // Open the DB connection
             OracleConnection conn = new OracleConnection(CONNECTION_STRING);
@@ -91,12 +90,41 @@ namespace BuildSys
                 firstname + "','" +
                 surname + "','" +
                 street + "','" +
+                town + "','" +
                 county + "','" +
                 telno + "','" +
                 email + "','" +
                 vatNo + "','" +
-                accountType + "','" +
-            "')";
+                accountType + "'" +
+            ")";
+
+            // Execute the command
+            OracleCommand cmd = new OracleCommand(insertStmt, conn);
+            cmd.ExecuteNonQuery();
+
+            // Close the DB Connection
+            conn.Close();
+        }
+
+        public void insertPrivateCustomer  ()
+        {
+            // Open the DB connection
+            OracleConnection conn = new OracleConnection(CONNECTION_STRING);
+            conn.Open();
+
+            // Define the SQL query and INSERT stock record
+            String insertStmt = "INSERT INTO Customers (customer_id, title, firstname, surname, street, town, county, telephone, email, account_type) VALUES('" +
+                customerId.ToString() + "','" +
+                title + "','" +
+                firstname + "','" +
+                surname + "','" +
+                street + "','" +
+                town + "','" +
+                county + "','" +
+                telno + "','" +
+                email + "','" +
+                accountType + "'" +
+            ")";
 
             // Execute the command
             OracleCommand cmd = new OracleCommand(insertStmt, conn);
