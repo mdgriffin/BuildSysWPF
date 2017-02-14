@@ -29,11 +29,33 @@ namespace BuildSys
         {
             //MessageBox.Show("Register a new customer");
             // TODO: Validate Data
-            CustomerModel newCust = new CustomerModel(
-               cmbTitle.SelectedItem.ToString(), txtFirstName.Text, txtSurname.Text, txtStreet.Text, txtTown.Text, cmbCounty.SelectedItem.ToString(), txtTel.Text, txtEmail.Text
-            );
+            char accountType = radAccType_business.IsChecked.Value ? 'B' : 'P';
 
-            newCust.insertPrivateCustomer();
+            if (accountType == 'P')
+            {
+                CustomerModel newCust = new CustomerModel(
+                    cmbTitle.SelectedItem.ToString(),
+                    txtFirstName.Text,
+                    txtSurname.Text,
+                    txtStreet.Text,
+                    txtTown.Text,
+                    cmbCounty.SelectedItem.ToString(),
+                    txtTel.Text, txtEmail.Text,
+                    accountType
+                );
+
+                try
+                {
+                    newCust.insertPrivateCustomer();
+                } catch (Exception exc)
+                {
+                    MessageBox.Show("Error Saving Customer, please try again");
+                }
+            } else
+            {
+                // TODO: Insert a Business Customer
+            }
+            
         }
 
         private void cmbCounty_Loaded(object sender, RoutedEventArgs e)

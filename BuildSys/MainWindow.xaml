@@ -10,8 +10,8 @@
         <WrapPanel
             Margin="0,5">
             <Label Name="lblAccType" Content="Account Type" MinWidth="100"/>
-            <RadioButton VerticalAlignment="Center" GroupName="accType" Content="Personal" IsChecked="True"/>
-            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" GroupName="accType" Content="Business" />
+            <RadioButton VerticalAlignment="Center" Name="radAccType_personal"  GroupName="radAccType" Content="Personal" IsChecked="True"/>
+            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" Content="Business" />
         </WrapPanel>
         <WrapPanel
             Margin="0,5">

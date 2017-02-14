@@ -39,7 +39,7 @@ namespace BuildSys
             this.accountType = accountType;
         }
 
-        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email): this(title, firstname, surname, street, town, county, telno, email, 'P', null, null)
+        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType): this(title, firstname, surname, street, town, county, telno, email, accountType, null, null)
         {
         }
 
@@ -99,8 +99,14 @@ namespace BuildSys
             ")";
 
             // Execute the command
-            OracleCommand cmd = new OracleCommand(insertStmt, conn);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                OracleCommand cmd = new OracleCommand(insertStmt, conn);
+                cmd.ExecuteNonQuery();
+            } catch (OracleException exc)
+            {
+                throw;
+            }
 
             // Close the DB Connection
             conn.Close();
