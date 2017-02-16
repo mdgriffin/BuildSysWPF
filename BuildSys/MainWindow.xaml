@@ -36,10 +36,6 @@
             <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtSurname"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
-            <Label Name="lblPosition" Content="Position" MinWidth="100"/>
-            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtPosition"/>
-        </WrapPanel>
-        <WrapPanel Margin="0,5">
             <Label Name="lblStreet" Content="Street" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtStreet"/>
         </WrapPanel>

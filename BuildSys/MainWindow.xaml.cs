@@ -28,31 +28,58 @@ namespace BuildSys
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Validate Data
+            // TODO: Cannot save customer with a single quote in their surname
             char accountType = radAccType_business.IsChecked.Value ? 'B' : 'P';
 
             if (accountType == 'P')
             {
-                CustomerModel newCust = new CustomerModel(
-                    cmbTitle.SelectedItem.ToString(),
-                    txtFirstname.Text,
-                    txtSurname.Text,
-                    txtStreet.Text,
-                    txtTown.Text,
-                    cmbCounty.SelectedItem.ToString(),
-                    txtTel.Text, txtEmail.Text,
-                    accountType
-                );
-
                 try
                 {
-                    newCust.insertPrivateCustomer();
+                    new CustomerModel(
+                        cmbTitle.SelectedItem.ToString(),
+                        txtFirstname.Text,
+                        txtSurname.Text,
+                        txtStreet.Text,
+                        txtTown.Text,
+                        cmbCounty.SelectedItem.ToString(),
+                        txtTel.Text, txtEmail.Text,
+                        accountType
+                    ).insertPrivateCustomer();
+
+                    clearForm();
+
+                    MessageBox.Show("New Private Customer Created");
                 } catch (Exception exc)
                 {
+                    Console.WriteLine(exc.Message);
                     MessageBox.Show("Error Saving Customer, please try again");
                 }
             } else
             {
-                // TODO: Insert a Business Customer
+                try
+                {
+                    new CustomerModel(
+                        cmbTitle.SelectedItem.ToString(),
+                        txtFirstname.Text,
+                        txtSurname.Text,
+                        txtStreet.Text,
+                        txtTown.Text,
+                        cmbCounty.SelectedItem.ToString(),
+                        txtTel.Text,
+                        txtEmail.Text,
+                        accountType,
+                        txtCompanyName.Text,
+                        txtVatNumber.Text
+                    ).insertBusinessCustomer();
+
+                    clearForm();
+
+                    MessageBox.Show("New Business Customer Created");
+                } catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                    MessageBox.Show("Error Saving Customer, please try again");
+                }
             }
             
         }
@@ -94,6 +121,20 @@ namespace BuildSys
                 }
             }
 
+        }
+
+        private void clearForm ()
+        {
+            cmbTitle.SelectedIndex = 0;
+            txtFirstname.Text = "";
+            txtSurname.Text = "";
+            txtStreet.Text = "";
+            txtTown.Text = "";
+            cmbCounty.SelectedIndex = 0;
+            txtTel.Text = "";
+            txtEmail.Text = "";
+            txtCompanyName.Text = "";
+            txtVatNumber.Text = "";
         }
     }
 }

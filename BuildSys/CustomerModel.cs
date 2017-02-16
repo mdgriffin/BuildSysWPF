@@ -39,9 +39,7 @@ namespace BuildSys
             this.accountType = accountType;
         }
 
-        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType): this(title, firstname, surname, street, town, county, telno, email, accountType, null, null)
-        {
-        }
+        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType): this(title, firstname, surname, street, town, county, telno, email, accountType, null, null) {}
 
         public static int getNextCustomerId()
         {
