@@ -23,6 +23,9 @@ namespace BuildSys
         public String vatNo;
         public char accountType;
 
+        public Dictionary<String, String> errors;
+
+
         public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType, String companyName, String vatNo) 
         {
             this.customerId = getNextCustomerId();
@@ -40,6 +43,62 @@ namespace BuildSys
         }
 
         public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType): this(title, firstname, surname, street, town, county, telno, email, accountType, null, null) {}
+
+        public Boolean validates ()
+        {
+            Boolean valid = true;
+
+            if (!Validator.isEmpty(firstname))
+            {
+                errors.Add("firstname", Validator.ERROR_IS_EMPTY);
+            }
+
+            if (Validator.isEmpty(surname))
+            {
+                errors.Add("surname", Validator.ERROR_IS_EMPTY);
+            }
+
+            if (Validator.isEmpty(street))
+            {
+                errors.Add("street", Validator.ERROR_IS_EMPTY);
+            }
+
+            if (Validator.isEmpty(town))
+            {
+                errors.Add("town", Validator.ERROR_IS_EMPTY);
+            }
+
+            if (Validator.isNumeric(telno))
+            {
+                errors.Add("telno", Validator.ERROR_IS_EMAIL);
+            }
+
+            if (Validator.isEmail(email))
+            {
+                errors.Add("telno", Validator.ERROR_IS_EMPTY);
+            }
+
+            if (accountType != 'P')
+            {
+                if (Validator.isEmpty(companyName))
+                {
+                    errors.Add("companyName", Validator.ERROR_IS_EMPTY);
+                }
+
+                if (Validator.isVatNum(vatNo))
+                {
+                    errors.Add("vatNo", Validator.ERROR_IS_VAT_NUM);
+                }
+            }
+
+            if (errors.Count() > 0)
+            {
+                valid = false;
+            }
+
+            return valid;
+        }
+
 
         public static int getNextCustomerId()
         {

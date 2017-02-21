@@ -29,53 +29,64 @@ namespace BuildSys
         {
             // TODO: Validate Data
             // TODO: Cannot save customer with a single quote in their surname
+            String title = cmbTitle.SelectedItem.ToString();
+            String firstName = txtFirstname.Text;
+            String surname = txtSurname.Text;
+            String street = txtStreet.Text;
+            String town = txtTown.Text;
+            String county = cmbCounty.SelectedItem.ToString();
+            String telNum = txtTel.Text;
+            String email = txtEmail.Text;
             char accountType = radAccType_business.IsChecked.Value ? 'B' : 'P';
+
+            // Company Details
+            String company = txtCompanyName.Text;
+            String vatNum = txtVatNumber.Text;
 
             if (accountType == 'P')
             {
                 try
                 {
-                    new CustomerModel(
-                        cmbTitle.SelectedItem.ToString(),
-                        txtFirstname.Text,
-                        txtSurname.Text,
-                        txtStreet.Text,
-                        txtTown.Text,
-                        cmbCounty.SelectedItem.ToString(),
-                        txtTel.Text, txtEmail.Text,
-                        accountType
-                    ).insertPrivateCustomer();
+                    CustomerModel cust = new CustomerModel(title, firstName, surname, street, town, county, telNum, email, accountType);
 
-                    clearForm();
-
-                    MessageBox.Show("New Private Customer Created");
-                } catch (Exception exc)
+                    if (cust.validates())
+                    {
+                        cust.insertPrivateCustomer();
+                        clearForm();
+                        MessageBox.Show("New Private Customer Created");
+                    } else
+                    {
+                        // TODO: Show errors under form fields
+                        // cust.getErrors();
+                        MessageBox.Show("Form has errors");
+                    }
+                }
+                catch (Exception exc)
                 {
                     Console.WriteLine(exc.Message);
                     MessageBox.Show("Error Saving Customer, please try again");
                 }
-            } else
+            }
+            else
             {
                 try
                 {
-                    new CustomerModel(
-                        cmbTitle.SelectedItem.ToString(),
-                        txtFirstname.Text,
-                        txtSurname.Text,
-                        txtStreet.Text,
-                        txtTown.Text,
-                        cmbCounty.SelectedItem.ToString(),
-                        txtTel.Text,
-                        txtEmail.Text,
-                        accountType,
-                        txtCompanyName.Text,
-                        txtVatNumber.Text
-                    ).insertBusinessCustomer();
+                    CustomerModel businessCust = new CustomerModel(title, firstName, surname, street, town, county, telNum, email, accountType, company, vatNum);
 
-                    clearForm();
-
-                    MessageBox.Show("New Business Customer Created");
-                } catch (Exception exc)
+                    if (businessCust.validates())
+                    {
+                        businessCust.insertBusinessCustomer();
+                        clearForm();
+                        MessageBox.Show("New Business Customer Created");
+                    }
+                    else
+                    {
+                        // TODO: Show errors under form fields
+                        // businessCust.getErrors();
+                        MessageBox.Show("Form has errors");
+                    }
+                }
+                catch (Exception exc)
                 {
                     Console.WriteLine(exc.Message);
                     MessageBox.Show("Error Saving Customer, please try again");
