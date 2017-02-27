@@ -10,7 +10,7 @@
     Height="600"
     Width="525">
 
-    <!--<DockPanel>
+    <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Customer">
                 <MenuItem Header="_Register Customer" Click="CustomerReg_Click"/>
@@ -18,9 +18,6 @@
             </MenuItem>
         </Menu>
         <StackPanel></StackPanel>
-    </DockPanel>-->
-
-    <DockPanel>
         <Frame x:Name="_mainFrame" />
     </DockPanel>
 

@@ -16,7 +16,7 @@
     </UserControl.Resources>
     
     <Grid>
-        <DataGrid ItemsSource="{Binding Customers}" />
+        <DataGrid Margin="20 20 20 20"  ItemsSource="{Binding Customers}" />
 
     </Grid>
 </UserControl>
