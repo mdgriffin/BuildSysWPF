@@ -24,7 +24,7 @@
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblTitle" Content="Title" MinWidth="100"/>
-            <ComboBox HorizontalAlignment="Left" x:Name="cmbTitle" SelectedIndex="0" VerticalAlignment="Center" Width="120" Loaded="cmbTitle_Loaded"/>
+            <ComboBox HorizontalAlignment="Left" x:Name="cmbTitle" ItemsSource="{Binding}"  SelectedIndex="0" VerticalAlignment="Center" Width="120" Loaded="cmbTitle_Loaded"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblFirstname" Content="Firstname" MinWidth="100"/>
@@ -44,7 +44,7 @@
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblCounty" Content="County" MinWidth="100"/>
-            <ComboBox HorizontalAlignment="Left" x:Name="cmbCounty" SelectedIndex="0" VerticalAlignment="Center" Width="120" Loaded="cmbCounty_Loaded"/>
+            <ComboBox HorizontalAlignment="Left" x:Name="cmbCounty" ItemsSource="{Binding Path=Counties}"  SelectedIndex="0" VerticalAlignment="Center" Width="120"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblTel" Content="Telephone" MinWidth="100"/>

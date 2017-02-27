@@ -23,7 +23,18 @@ namespace BuildSys
         public CustomerForm()
         {
             InitializeComponent();
+
+            Counties = new List<string>() {
+                "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Derry", "Donegal",
+                "Down", "Dublin", "Fermanagh", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois",
+                "Leitrim", "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly",
+                "Roscommon", "Sligo", "Tipperary", "Tyrone", "Waterford", "Westmeath", "Wexford", "Wicklow"
+            };
+
+            DataContext = this;
         }
+
+        public List<String> Counties { get; set; }
 
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
@@ -77,6 +88,7 @@ namespace BuildSys
 
                     if (businessCust.validates())
                     {
+                        // TODO: Insert Business customer not working
                         businessCust.insertBusinessCustomer();
                         clearForm();
                         MessageBox.Show("New Business Customer Created");
@@ -95,18 +107,6 @@ namespace BuildSys
                 }
             }
 
-        }
-
-        private void cmbCounty_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<string> data = new List<string>() {
-                "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Derry", "Donegal",
-                "Down", "Dublin", "Fermanagh", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois",
-                "Leitrim", "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly",
-                "Roscommon", "Sligo", "Tipperary", "Tyrone", "Waterford", "Westmeath", "Wexford", "Wicklow"
-            };
-
-            cmbCounty.ItemsSource = data;
         }
 
         private void cmbTitle_Loaded(object sender, RoutedEventArgs e)
