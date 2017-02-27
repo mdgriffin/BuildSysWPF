@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,12 @@ namespace BuildSys
         public CustomerList()
         {
             InitializeComponent();
+
+            Customers = CustomerModel.getCustomers();
+
+            DataContext = this;
         }
+
+        public DataTable Customers { get; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,6 +100,26 @@ namespace BuildSys
             return valid;
         }
 
+        public static DataTable getCustomers()
+        {
+            // Open the DB connection
+            OracleConnection conn = new OracleConnection(CONNECTION_STRING);
+            conn.Open();
+
+            OracleCommand cmd = new OracleCommand("SELECT * FROM Customers", conn);
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+            // Create an empty data set
+            DataSet ds = new DataSet();
+
+            da.Fill(ds, "customers");
+
+            // Close Database
+            conn.Close();
+
+            return ds.Tables["customers"];
+        }
 
         public static int getNextCustomerId()
         {

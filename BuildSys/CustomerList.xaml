@@ -16,7 +16,7 @@
     </UserControl.Resources>
     
     <Grid>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Customers}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <DataGrid ItemsSource="{Binding Customers}" />
 
     </Grid>
 </UserControl>

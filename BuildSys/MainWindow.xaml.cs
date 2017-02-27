@@ -23,7 +23,8 @@ namespace BuildSys
         public MainWindow()
         {
             InitializeComponent();
-            _mainFrame.Navigate(new CustomerForm());
+            //_mainFrame.Navigate(new CustomerForm());
+            _mainFrame.Navigate(new CustomerList());
 
             //_mainFrame.NavigationService.Navigate(new Uri("http://www.google.com/"));
 
