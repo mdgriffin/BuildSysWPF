@@ -23,25 +23,20 @@ namespace BuildSys
         public MainWindow()
         {
             InitializeComponent();
-            _mainFrame.Navigate(new CustomerForm());
+            //_mainFrame.Navigate(new CustomerForm());
 
-            //_mainFrame.NavigationService.Navigate(new Uri("http://www.google.com/"));
-
-            /* == Example of navigating between 
-            _mainFrame.NavigationService.GoBack();
-            _mainFrame.NavigationService.GoForward();
-            _mainFrame.NavigationService.Refresh();
-            */
+            //DataContext = this;
         }
+
 
         private void CustomerReg_Click(object sender, RoutedEventArgs e)
         {
-            _mainFrame.Navigate(new CustomerForm());
+            //_mainFrame.Navigate(new CustomerForm());
         }
 
         private void CustomerList_Click(object sender, RoutedEventArgs e)
         {
-            _mainFrame.Navigate(new CustomerList());
+            //_mainFrame.Navigate(new CustomerList());
         }
     }
 }

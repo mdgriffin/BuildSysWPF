@@ -18,12 +18,9 @@
             </MenuItem>
         </Menu>
         <StackPanel></StackPanel>
-        <Frame x:Name="_mainFrame" />
+        <ContentControl x:Name="LayoutRoot">
+            <local:CustomerForm />
+        </ContentControl>
     </DockPanel>
 
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type local:CustomerModel}">
-            <local:CustomerForm />
-        </DataTemplate>
-    </Window.Resources>
 </Window>
