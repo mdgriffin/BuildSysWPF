@@ -6,13 +6,31 @@ using System.Linq;
 
 namespace BuildSys
 {
-
     public class CustomerModel : BaseModel
     {
         public int customerId { get; set; }
         public String companyName { get; set; }
         public String title { get; set; }
-        public String firstname { get; set; }
+
+        private string _firstname;
+        public String firstname
+        {
+            get
+            {
+                System.Diagnostics.Debug.WriteLine("Callig firstname getter = " + _firstname);
+                return this._firstname;
+            }
+            set
+            {
+                if (value != _firstname)
+                {
+                    this._firstname = value;
+                    NotifyPropertyChanged();
+                    System.Diagnostics.Debug.WriteLine("Callig firstname setter = " + _firstname);
+                }
+            }
+        }
+
         public String surname { get; set; }
         public String street { get; set; }
         public String town { get; set; }
@@ -48,7 +66,9 @@ namespace BuildSys
         {
             Boolean valid = true;
 
-            if (!Validator.isEmpty(firstname))
+            errors = new Dictionary<string, string>();
+
+            if (Validator.isEmpty(firstname))
             {
                 errors.Add("firstname", Validator.ERROR_IS_EMPTY);
             }
@@ -68,16 +88,18 @@ namespace BuildSys
                 errors.Add("town", Validator.ERROR_IS_EMPTY);
             }
 
-            if (Validator.isNumeric(telno))
+            if (!Validator.isNumeric(telno))
+            {
+                errors.Add("telno", Validator.ERROR_IS_NUMERIC);
+            }
+
+            if (!Validator.isEmail(email))
             {
                 errors.Add("telno", Validator.ERROR_IS_EMAIL);
             }
 
-            if (Validator.isEmail(email))
-            {
-                errors.Add("telno", Validator.ERROR_IS_EMPTY);
-            }
-
+            // TODO: Handle Saving of business customers
+            /*
             if (accountType != 'P')
             {
                 if (Validator.isEmpty(companyName))
@@ -90,6 +112,7 @@ namespace BuildSys
                     errors.Add("vatNo", Validator.ERROR_IS_VAT_NUM);
                 }
             }
+            */
 
             if (errors.Count() > 0)
             {
@@ -122,7 +145,7 @@ namespace BuildSys
 
         public static int getNextCustomerId()
         {
-            int nextStockNo;
+            int nextCustomerNo;
 
             // Open the DB connection
             OracleConnection conn = new OracleConnection(CONNECTION_STRING);
@@ -140,17 +163,17 @@ namespace BuildSys
 
             if (dr.IsDBNull(0))
             {
-                nextStockNo = 1;
+                nextCustomerNo = 1;
             }
             else
             {
-                nextStockNo = Convert.ToInt32(dr.GetValue(0)) + 1;
+                nextCustomerNo = Convert.ToInt32(dr.GetValue(0)) + 1;
             }
 
             // Close Database
             conn.Close();
 
-            return nextStockNo;
+            return nextCustomerNo;
         }
 
         public void insertBusinessCustomer()

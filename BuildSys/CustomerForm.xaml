@@ -29,7 +29,7 @@
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblFirstname" Content="Firstname" MinWidth="100"/>
-            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtFirstname" Text="{Binding customer.firstname}"/>
+            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtFirstname" Text="{Binding customer.firstname, Mode=TwoWay}"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblSurname" Content="Surname" MinWidth="100"/>
