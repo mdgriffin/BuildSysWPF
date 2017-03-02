@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="500"
              d:DesignWidth="500">
+
     <StackPanel Name="frmReg" Margin="20">
         <WrapPanel
             Margin="0,5">
@@ -16,43 +17,43 @@
         </WrapPanel>
         <WrapPanel Name="wpBusinessName" Margin="0,5" Visibility="Collapsed">
             <Label Name="lblCompanyName" Content="Company Name" MinWidth="100"/>
-            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtCompanyName"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtCompanyName" Text="{Binding customer.companyName}"/>
         </WrapPanel>
         <WrapPanel Name="wpVatNumber" Margin="0,5" Visibility="Collapsed">
             <Label Name="lblVatNumber" Content="VAT Number" MinWidth="100"/>
-            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtVatNumber"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtVatNumber"  Text="{Binding customer.vatNo}"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblTitle" Content="Title" MinWidth="100"/>
-            <ComboBox HorizontalAlignment="Left" x:Name="cmbTitle" ItemsSource="{Binding}"  SelectedIndex="0" VerticalAlignment="Center" Width="120" Loaded="cmbTitle_Loaded"/>
+            <ComboBox HorizontalAlignment="Left" x:Name="cmbTitle" VerticalAlignment="Center" Width="120" ItemsSource="{Binding Titles}" SelectedItem="{Binding customer.title}"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblFirstname" Content="Firstname" MinWidth="100"/>
-            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtFirstname"/>
+            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtFirstname" Text="{Binding customer.firstname}"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblSurname" Content="Surname" MinWidth="100"/>
-            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtSurname"/>
+            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtSurname" Text="{Binding customer.surname}" />
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblStreet" Content="Street" MinWidth="100"/>
-            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtStreet"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtStreet" Text="{Binding customer.street}"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblTown" Content="Town" MinWidth="100"/>
-            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtTown"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtTown" Text="{Binding customer.town}"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblCounty" Content="County" MinWidth="100"/>
-            <ComboBox HorizontalAlignment="Left" x:Name="cmbCounty" ItemsSource="{Binding Path=Counties}"  SelectedIndex="0" VerticalAlignment="Center" Width="120"/>
+            <ComboBox HorizontalAlignment="Left" x:Name="cmbCounty" ItemsSource="{Binding Path=Counties}"  SelectedItem="{Binding customer.county}" VerticalAlignment="Center" Width="120"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblTel" Content="Telephone" MinWidth="100"/>
-            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtTel"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtTel" Text="{Binding customer.telno}"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblEmail" Content="Email" MinWidth="100"/>
-            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtEmail"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtEmail" Text="{Binding customer.email}"/>
         </WrapPanel>
         <Button Name="btnReg" Click="btnReg_Click" Margin="0 10 0 0" ToolTip="Example Button">Register</Button>
     </StackPanel>

@@ -3,31 +3,28 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuildSys
 {
 
-    class CustomerModel : BaseModel
+    public class CustomerModel : BaseModel
     {
-        public int customerId;
-        public String companyName;
-        public String title;
-        public String firstname;
-        public String surname;
-        public String street;
-        public String town;
-        public String county;
-        public String telno;
-        public String email;
-        public String vatNo;
-        public char accountType;
+        public int customerId { get; set; }
+        public String companyName { get; set; }
+        public String title { get; set; }
+        public String firstname { get; set; }
+        public String surname { get; set; }
+        public String street { get; set; }
+        public String town { get; set; }
+        public String county { get; set; }
+        public String telno { get; set; }
+        public String email { get; set; }
+        public String vatNo { get; set; }
+        public char accountType { get; set; }
 
         public Dictionary<String, String> errors;
 
-
-        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType, String companyName, String vatNo) 
+        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType, String companyName, String vatNo)
         {
             this.customerId = getNextCustomerId();
             this.companyName = companyName;
@@ -43,9 +40,11 @@ namespace BuildSys
             this.accountType = accountType;
         }
 
-        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType): this(title, firstname, surname, street, town, county, telno, email, accountType, null, null) {}
+        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
 
-        public Boolean validates ()
+        public CustomerModel() : this("", "", "", "", "", "", "", "", '\n', "", "") { }
+
+        public Boolean validates()
         {
             Boolean valid = true;
 
@@ -181,16 +180,17 @@ namespace BuildSys
             {
                 OracleCommand cmd = new OracleCommand(insertStmt, conn);
                 cmd.ExecuteNonQuery();
-            } catch (OracleException exc)
+            }
+            catch (OracleException exc)
             {
-                throw;
+                throw exc;
             }
 
             // Close the DB Connection
             conn.Close();
         }
 
-        public void insertPrivateCustomer  ()
+        public void insertPrivateCustomer()
         {
             // Open the DB connection
             OracleConnection conn = new OracleConnection(CONNECTION_STRING);

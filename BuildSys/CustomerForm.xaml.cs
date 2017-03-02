@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BuildSys
 {
@@ -31,15 +21,22 @@ namespace BuildSys
                 "Roscommon", "Sligo", "Tipperary", "Tyrone", "Waterford", "Westmeath", "Wexford", "Wicklow"
             };
 
+            Titles = new List<string>() { "Mr", "Mrs", "Ms", "Miss", "Mx" };
+
+            customer = new CustomerModel();
+
             DataContext = this;
         }
 
         public List<String> Counties { get; set; }
+        public List<String> Titles { get; set; }
+        public CustomerModel customer { get; set; }
 
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Validate Data
             // TODO: Cannot save customer with a single quote in their surname
+            /*
             String title = cmbTitle.SelectedItem.ToString();
             String firstName = txtFirstname.Text;
             String surname = txtSurname.Text;
@@ -106,14 +103,8 @@ namespace BuildSys
                     MessageBox.Show("Error Saving Customer, please try again");
                 }
             }
+            */
 
-        }
-
-        private void cmbTitle_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<string> data = new List<string>() { "Mr", "Mrs", "Ms", "Miss", "Mx" };
-
-            cmbTitle.ItemsSource = data;
         }
 
         private void radAccType_Checked(object sender, RoutedEventArgs e)
@@ -138,16 +129,18 @@ namespace BuildSys
 
         private void clearForm()
         {
-            cmbTitle.SelectedIndex = 0;
-            txtFirstname.Text = "";
-            txtSurname.Text = "";
-            txtStreet.Text = "";
-            txtTown.Text = "";
-            cmbCounty.SelectedIndex = 0;
-            txtTel.Text = "";
-            txtEmail.Text = "";
-            txtCompanyName.Text = "";
-            txtVatNumber.Text = "";
+            //cmbTitle.SelectedIndex = 0;
+            //txtFirstname.Text = "";
+            //txtSurname.Text = "";
+            //txtStreet.Text = "";
+            //txtTown.Text = "";
+            //cmbCounty.SelectedIndex = 0;
+            //txtTel.Text = "";
+            //txtEmail.Text = "";
+            //txtCompanyName.Text = "";
+            //txtVatNumber.Text = "";
+
+            // TODO: Just create a new empty customer instead
         }
 
 
