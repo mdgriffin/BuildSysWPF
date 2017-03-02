@@ -31,12 +31,13 @@ namespace BuildSys
 
         private void CustomerReg_Click(object sender, RoutedEventArgs e)
         {
-            //_mainFrame.Navigate(new CustomerForm());
+            // TODO: Ensure that this is not the current page
+            LayoutRoot.Content = new CustomerForm();
         }
 
         private void CustomerList_Click(object sender, RoutedEventArgs e)
         {
-            //_mainFrame.Navigate(new CustomerList());
+            LayoutRoot.Content = new CustomerList();
         }
     }
 }
