@@ -14,7 +14,20 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Customer">
                 <MenuItem Header="_Register Customer" Click="CustomerReg_Click"/>
-                <MenuItem Header="_List Customser" Click="CustomerList_Click"/>
+                <MenuItem Header="_Manage Exisiting Customers" Click="CustomerList_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Materials">
+                <MenuItem Header="_Create Materials"/>
+                <MenuItem Header="_Manage Existing Materials"/>
+            </MenuItem>
+            <MenuItem Header="_Quotes">
+                <MenuItem Header="_Generate a Quote"/>
+                <MenuItem Header="_Manage Existing Quotes"/>
+            </MenuItem>
+            <MenuItem Header="_Reports">
+                <MenuItem Header="_Customer Reports"/>
+                <MenuItem Header="_Quote Reports"/>
+                <MenuItem Header="_Material Reports"/>
             </MenuItem>
         </Menu>
         <StackPanel></StackPanel>
