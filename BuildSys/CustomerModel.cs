@@ -1,12 +1,14 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace BuildSys
 {
-    public class CustomerModel : BaseModel
+    public class CustomerModel : BaseModel, System.ComponentModel.IDataErrorInfo
     {
         public int customerId { get; set; }
         public String companyName { get; set; }
@@ -31,6 +33,30 @@ namespace BuildSys
             }
         }
 
+        public string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+                    case "firstname":
+                        if (Validator.isEmpty(this.firstname))
+                            return "Firstname cannot be empty";
+                        break;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                return null;
+            }
+        }
+
         public String surname { get; set; }
         public String street { get; set; }
         public String town { get; set; }
@@ -39,6 +65,7 @@ namespace BuildSys
         public String email { get; set; }
         public String vatNo { get; set; }
         public char accountType { get; set; }
+
 
         public Dictionary<String, String> errors;
 
