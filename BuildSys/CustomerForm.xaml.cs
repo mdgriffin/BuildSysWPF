@@ -36,7 +36,7 @@ namespace BuildSys
         {
             char accountType = radAccType_business.IsChecked.Value ? 'B' : 'P';
 
-            if (customer.validates())
+            if (!customer.HasErrors)
             {
                 if (accountType == 'P')
                 {

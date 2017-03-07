@@ -29,7 +29,7 @@
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblFirstname" Content="Firstname" MinWidth="100"/>
-            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtFirstname" Text="{Binding Path=customer.firstname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" >
+            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtFirstname" Text="{Binding Path=customer.firstname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}" >
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>

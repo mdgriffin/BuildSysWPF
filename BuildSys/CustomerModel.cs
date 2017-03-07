@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace BuildSys
 {
-    public class CustomerModel : BaseModel, System.ComponentModel.IDataErrorInfo
+    public class CustomerModel : BaseModel, INotifyDataErrorInfo
     {
         public int customerId { get; set; }
         public String companyName { get; set; }
@@ -27,33 +27,9 @@ namespace BuildSys
                 if (value != _firstname)
                 {
                     this._firstname = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("firstname");
                     System.Diagnostics.Debug.WriteLine("Callig firstname setter = " + _firstname);
                 }
-            }
-        }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                switch (columnName)
-                {
-                    case "firstname":
-                        if (Validator.isEmpty(this.firstname))
-                            return "Firstname cannot be empty";
-                        break;
-                }
-
-                return string.Empty;
-            }
-        }
-
-        public string Error
-        {
-            get
-            {
-                return null;
             }
         }
 
@@ -67,7 +43,8 @@ namespace BuildSys
         public char accountType { get; set; }
 
 
-        public Dictionary<String, String> errors;
+
+        //public Dictionary<String, String> errors;
 
         public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType, String companyName, String vatNo)
         {
@@ -89,17 +66,18 @@ namespace BuildSys
 
         public CustomerModel() : this("", "", "", "", "", "", "", "", '\n', "", "") { }
 
-        public Boolean validates()
+        protected override void validate()
         {
-            Boolean valid = true;
+            //Boolean valid = true;
 
-            errors = new Dictionary<string, string>();
+            //propErrors = new Dictionary<string, string>();
 
             if (Validator.isEmpty(firstname))
             {
-                errors.Add("firstname", Validator.ERROR_IS_EMPTY);
+                AddError("firstname", Validator.ERROR_IS_EMPTY);
             }
 
+            /*
             if (Validator.isEmpty(surname))
             {
                 errors.Add("surname", Validator.ERROR_IS_EMPTY);
@@ -126,7 +104,6 @@ namespace BuildSys
             }
 
             // TODO: Handle Saving of business customers
-            /*
             if (accountType != 'P')
             {
                 if (Validator.isEmpty(companyName))
@@ -139,14 +116,14 @@ namespace BuildSys
                     errors.Add("vatNo", Validator.ERROR_IS_VAT_NUM);
                 }
             }
-            */
 
             if (errors.Count() > 0)
             {
                 valid = false;
             }
+            */
 
-            return valid;
+            //return valid;
         }
 
         public static DataTable getCustomers()
