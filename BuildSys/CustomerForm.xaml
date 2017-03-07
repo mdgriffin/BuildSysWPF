@@ -29,23 +29,8 @@
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblFirstname" Content="Firstname" MinWidth="100"/>
-            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtFirstname" Text="{Binding Path=customer.firstname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" >
-                <Validation.ErrorTemplate>
-                    <ControlTemplate>
-                        <StackPanel>
-                            <!-- Placeholder for the TextBox itself -->
-                            <AdornedElementPlaceholder x:Name="textBox"/>
-                            <ItemsControl ItemsSource="{Binding}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding ErrorContent}" Foreground="Red"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Validation.ErrorTemplate>
-            </TextBox>
+            <!--<TextBox x:Name="txtCountry" Text="{Binding SelectedCustomer.STRCOUNTRY, Mode=TwoWay, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="87,169,0,0"/>-->
+            <TextBox MinWidth="150"  VerticalAlignment="Center" x:Name="txtFirstname" Text="{Binding Path=customer.firstname, Mode=TwoWay, ValidatesOnDataErrors=True}" />
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblSurname" Content="Surname" MinWidth="100"/>

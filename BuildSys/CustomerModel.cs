@@ -1,20 +1,23 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using MvvmValidation;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Windows.Controls;
 
 namespace BuildSys
 {
-    public class CustomerModel : BaseModel, System.ComponentModel.IDataErrorInfo
+    public class CustomerModel : BaseModel
     {
         public int customerId { get; set; }
         public String companyName { get; set; }
         public String title { get; set; }
 
         private string _firstname;
+        private bool? isValid;
+        private string validationErrorsString;
+
         public String firstname
         {
             get
@@ -27,33 +30,30 @@ namespace BuildSys
                 if (value != _firstname)
                 {
                     this._firstname = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("firstname");
+                    Validator.Validate(nameof(firstname));
                     System.Diagnostics.Debug.WriteLine("Callig firstname setter = " + _firstname);
                 }
             }
         }
 
-        public string this[string columnName]
+        public string ValidationErrorsString
         {
-            get
+            get { return validationErrorsString; }
+            private set
             {
-                switch (columnName)
-                {
-                    case "firstname":
-                        if (Validator.isEmpty(this.firstname))
-                            return "Firstname cannot be empty";
-                        break;
-                }
-
-                return string.Empty;
+                validationErrorsString = value;
+                NotifyPropertyChanged("ValidationErrorsString");
             }
         }
 
-        public string Error
+        public bool? IsValid
         {
-            get
+            get { return isValid; }
+            private set
             {
-                return null;
+                isValid = value;
+                NotifyPropertyChanged("IsValid");
             }
         }
 
@@ -83,6 +83,36 @@ namespace BuildSys
             this.email = email;
             this.vatNo = vatNo;
             this.accountType = accountType;
+
+            PrepareValidationRules();
+            Validator.ResultChanged += OnValidationResultChanged;
+        }
+
+        private void PrepareValidationRules()
+        {
+            Validator.AddRequiredRule(() => firstname, "First Name is required");
+
+            Validator.AddRule(nameof(STREMAIL),
+                () =>
+                {
+                    const string regexPattern =
+                        @"^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$";
+                    return RuleResult.Assert(Regex.IsMatch(STREMAIL, regexPattern),
+                        "Email must by a valid email address");
+                });
+        }
+
+        private void OnValidationResultChanged(object sender, ValidationResultChangedEventArgs e)
+        {
+            if (IsValid.GetValueOrDefault(true)) return;
+            var validationResult = Validator.GetResult();
+
+            UpdateValidationSummary(validationResult);
+        }
+        private void UpdateValidationSummary(ValidationResult validationResult)
+        {
+            IsValid = validationResult.IsValid;
+            ValidationErrorsString = validationResult.ToString();
         }
 
         public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
@@ -95,7 +125,7 @@ namespace BuildSys
 
             errors = new Dictionary<string, string>();
 
-            if (Validator.isEmpty(firstname))
+           /* if (Validator.isEmpty(firstname))
             {
                 errors.Add("firstname", Validator.ERROR_IS_EMPTY);
             }
@@ -123,7 +153,7 @@ namespace BuildSys
             if (!Validator.isEmail(email))
             {
                 errors.Add("telno", Validator.ERROR_IS_EMAIL);
-            }
+            }*/
 
             // TODO: Handle Saving of business customers
             /*
