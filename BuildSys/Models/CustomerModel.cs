@@ -219,60 +219,6 @@ namespace BuildSys
 
         public CustomerModel() : this("", "", "", "", "", "", "", "", '\n', "", "") { }
 
-        /*
-        protected override void validate()
-        {
-            if (Validator.isEmpty(firstname))
-            {
-                AddError("firstname", Validator.ERROR_IS_EMPTY);
-            } else
-            {
-                RemoveError("firstname");
-            }
-
-            if (Validator.isEmpty(surname))
-            {
-                AddError("surname", Validator.ERROR_IS_EMPTY);
-            }
-
-            if (Validator.isEmpty(street))
-            {
-                AddError("street", Validator.ERROR_IS_EMPTY);
-            }
-
-            if (Validator.isEmpty(town))
-            {
-                AddError("town", Validator.ERROR_IS_EMPTY);
-            }
-
-            if (!Validator.isNumeric(telno))
-            {
-                AddError("telno", Validator.ERROR_IS_NUMERIC);
-            }
-
-            if (!Validator.isEmail(email))
-            {
-                AddError("telno", Validator.ERROR_IS_EMAIL);
-            }
-            
-            /*
-
-            // TODO: Handle Saving of business customers
-            if (accountType != 'P')
-            {
-                if (Validator.isEmpty(companyName))
-                {
-                    errors.Add("companyName", Validator.ERROR_IS_EMPTY);
-                }
-
-                if (Validator.isVatNum(vatNo))
-                {
-                    errors.Add("vatNo", Validator.ERROR_IS_VAT_NUM);
-                }
-            }
-        }
-        */
-
         protected override void validateProp (String propertyName)
         {
             
