@@ -61,7 +61,7 @@
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblCounty" Content="County" MinWidth="100"/>
-            <ComboBox HorizontalAlignment="Left" x:Name="cmbCounty" ItemsSource="{Binding Path=Counties}"  SelectedItem="{Binding customer.county}" VerticalAlignment="Center" Width="120"/>
+            <ComboBox HorizontalAlignment="Left" x:Name="cmbCounty" ItemsSource="{StaticResource Counties}"  SelectedItem="{Binding customer.county}" VerticalAlignment="Center" Width="120"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblTel" Content="Telephone" MinWidth="100"/>

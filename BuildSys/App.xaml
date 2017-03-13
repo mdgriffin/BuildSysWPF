@@ -4,6 +4,40 @@
              xmlns:local="clr-namespace:BuildSys"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <x:Array x:Key="Counties" Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+            <sys:String>Kerry</sys:String>
+            <sys:String>Antrim</sys:String>
+            <sys:String>Armagh</sys:String>
+            <sys:String>Carlow</sys:String>
+            <sys:String>Cavan</sys:String>
+            <sys:String>Clare</sys:String>
+            <sys:String>Cork</sys:String>
+            <sys:String>Derry</sys:String>
+            <sys:String>Donegal</sys:String>
+            <sys:String>Down</sys:String>
+            <sys:String>Dublin</sys:String>
+            <sys:String>Fermanagh</sys:String>
+            <sys:String>Galway</sys:String>
+            <sys:String>Kerry</sys:String>
+            <sys:String>Kildare</sys:String>
+            <sys:String>Kilkenny</sys:String>
+            <sys:String>Laois</sys:String>
+            <sys:String>Leitrim</sys:String>
+            <sys:String>Limerick</sys:String>
+            <sys:String>Longford</sys:String>
+            <sys:String>Louth</sys:String>
+            <sys:String>Mayo</sys:String>
+            <sys:String>Meath</sys:String>
+            <sys:String>Monaghan</sys:String>
+            <sys:String>Offaly</sys:String>
+            <sys:String>Roscommon</sys:String>
+            <sys:String>Sligo</sys:String>
+            <sys:String>Tipperary</sys:String>
+            <sys:String>Tyrone</sys:String>
+            <sys:String>Waterford</sys:String>
+            <sys:String>Westmeath</sys:String>
+            <sys:String>Wexford</sys:String>
+            <sys:String>Wicklow</sys:String>
+        </x:Array>
     </Application.Resources>
 </Application>
