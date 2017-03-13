@@ -210,70 +210,76 @@ namespace BuildSys
             this._email = email;
             this._vatNo = vatNo;
             this._accountType = accountType;
-
-            // Disable the Errors from bwing shown on first load
-            //propErrors.Clear();
         }
 
         public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
 
         public CustomerModel() : this("", "", "", "", "", "", "", "", '\n', "", "") { }
 
-        protected override void validateProp (String propertyName)
+        protected override bool validateProp (String propertyName)
         {
-            
+            bool valid = true;
+
             switch (propertyName)
             {
                 case "firstname":
                     if (Validator.isEmpty(firstname))
                     {
                         AddError("firstname", Validator.ERROR_IS_EMPTY);
+                        valid = false;
                     }
                     break;
                 case "surname":
                     if (Validator.isEmpty(surname))
                     {
                         AddError("surname", Validator.ERROR_IS_EMPTY);
+                        valid = false;
                     }
                     break;
                 case "street":
                     if (Validator.isEmpty(street))
                     {
                         AddError("street", Validator.ERROR_IS_EMPTY);
+                        valid = false;
                     }
                     break;
                 case "town":
                     if (Validator.isEmpty(town))
                     {
                         AddError("town", Validator.ERROR_IS_EMPTY);
+                        valid = false;
                     }
                     break;
                 case "telno":
                     if (!Validator.isNumeric(telno))
                     {
                         AddError("telno", Validator.ERROR_IS_NUMERIC);
+                        valid = false;
                     }
                     break;
                 case "email":
                     if (!Validator.isEmail(email))
                     {
                         AddError("telno", Validator.ERROR_IS_EMAIL);
+                        valid = false;
                     }
                     break;
                 case "companyName":
                     if (Validator.isEmpty(companyName))
                     {
                         AddError("companyName", Validator.ERROR_IS_EMPTY);
+                        valid = false;
                     }
                     break;
                 case "vatNo":
                     if (Validator.isVatNum(vatNo))
                     {
                         AddError("vatNo", Validator.ERROR_IS_VAT_NUM);
+                        valid = false;
                     }
                     break;
             }
-
+            return valid;
         }
 
         public static DataTable getCustomers()
