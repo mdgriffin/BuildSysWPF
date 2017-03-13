@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:BuildSys"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
         <x:Array x:Key="Counties" Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
             <sys:String>Kerry</sys:String>
             <sys:String>Antrim</sys:String>
@@ -46,5 +47,14 @@
             <sys:String>Ms</sys:String>
             <sys:String>Miss</sys:String>
         </x:Array>
+
+        <ControlTemplate x:Key="inputError">
+            <WrapPanel>
+                <AdornedElementPlaceholder x:Name="textBox"/>
+                <TextBlock Text="{Binding ErrorContent}" Foreground="White" Background="Red"/>
+            </WrapPanel>
+        </ControlTemplate>
+
     </Application.Resources>
+
 </Application>

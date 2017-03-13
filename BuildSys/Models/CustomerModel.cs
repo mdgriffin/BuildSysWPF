@@ -1,20 +1,48 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Windows.Controls;
 
 namespace BuildSys
 {
     public class CustomerModel : BaseModel, INotifyDataErrorInfo
     {
         public int customerId { get; set; }
-        public String companyName { get; set; }
-        public String title { get; set; }
 
-        private string _firstname;
+        public String _companyName;
+        public String companyName
+        {
+            get
+            {
+                return this._companyName;
+            }
+            set
+            {
+                if (value != _companyName)
+                {
+                    this._companyName = value;
+                    NotifyPropertyChanged("companyName");
+                }
+            }
+        }
+
+        public String _title;
+        public String title
+        {
+            get
+            {
+                return this._title;
+            }
+            set
+            {
+                if (value != _title)
+                {
+                    this._title = value;
+                    NotifyPropertyChanged("title");
+                }
+            }
+        }
+
+        private String _firstname;
         public String firstname
         {
             get
@@ -31,48 +59,169 @@ namespace BuildSys
             }
         }
 
-        public String surname { get; set; }
-        public String street { get; set; }
-        public String town { get; set; }
-        public String county { get; set; }
-        public String telno { get; set; }
-        public String email { get; set; }
-        public String vatNo { get; set; }
-        public char accountType { get; set; }
+        private String _surname;
+        public String surname
+        {
+            get
+            {
+                return this._surname;
+            }
+            set
+            {
+                if (value != _surname)
+                {
+                    this._surname = value;
+                    NotifyPropertyChanged("surname");
+                }
+            }
+        }
 
+        public String _street;
+        public String street
+        {
+            get
+            {
+                return this._street;
+            }
+            set
+            {
+                if (value != _street)
+                {
+                    this._street = value;
+                    NotifyPropertyChanged("street");
+                }
+            }
+        }
 
+        public String _town;
+        public String town
+        {
+            get
+            {
+                return this._town;
+            }
+            set
+            {
+                if (value != _town)
+                {
+                    this._town = value;
+                    NotifyPropertyChanged("town");
+                }
+            }
+        }
 
-        //public Dictionary<String, String> errors;
+        public String _county;
+        public String county
+        {
+            get
+            {
+                return this._county;
+            }
+            set
+            {
+                if (value != _county)
+                {
+                    this._county = value;
+                    NotifyPropertyChanged("county");
+                }
+            }
+        }
+
+        public String _telno;
+        public String telno
+        {
+            get
+            {
+                return this._telno;
+            }
+            set
+            {
+                if (value != _telno)
+                {
+                    this._telno = value;
+                    NotifyPropertyChanged("telno");
+                }
+            }
+        }
+
+        public String _email;
+
+        public String email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                if (value != _email)
+                {
+                    this._email = value;
+                    NotifyPropertyChanged("email");
+                }
+            }
+        }
+
+        public String _vatNo;
+        public String vatNo
+        {
+            get
+            {
+                return this._vatNo;
+            }
+            set
+            {
+                if (value != _vatNo)
+                {
+                    this._vatNo = value;
+                    NotifyPropertyChanged("vatno");
+                }
+            }
+        }
+
+        public char _accountType;
+        public char accountType
+        {
+            get
+            {
+                return this._accountType;
+            }
+            set
+            {
+                if (value != _accountType)
+                {
+                    this._accountType = value;
+                    NotifyPropertyChanged("accountType");
+                }
+            }
+        }
 
         public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType, String companyName, String vatNo)
         {
             this.customerId = getNextCustomerId();
-            this.companyName = companyName;
-            this.title = title;
-            this.firstname = firstname;
-            this.surname = surname;
-            this.street = street;
-            this.town = town;
-            this.county = county;
-            this.telno = telno;
-            this.email = email;
-            this.vatNo = vatNo;
-            this.accountType = accountType;
+            this._companyName = companyName;
+            this._title = title;
+            this._firstname = firstname;
+            this._surname = surname;
+            this._street = street;
+            this._town = town;
+            this._county = county;
+            this._telno = telno;
+            this._email = email;
+            this._vatNo = vatNo;
+            this._accountType = accountType;
 
             // Disable the Errors from bwing shown on first load
-            propErrors.Clear();
+            //propErrors.Clear();
         }
 
         public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
 
         public CustomerModel() : this("", "", "", "", "", "", "", "", '\n', "", "") { }
 
+        /*
         protected override void validate()
         {
-            //Boolean valid = true;
-
-            //propErrors = new Dictionary<string, string>();
-
             if (Validator.isEmpty(firstname))
             {
                 AddError("firstname", Validator.ERROR_IS_EMPTY);
@@ -81,31 +230,32 @@ namespace BuildSys
                 RemoveError("firstname");
             }
 
-            /*
             if (Validator.isEmpty(surname))
             {
-                errors.Add("surname", Validator.ERROR_IS_EMPTY);
+                AddError("surname", Validator.ERROR_IS_EMPTY);
             }
 
             if (Validator.isEmpty(street))
             {
-                errors.Add("street", Validator.ERROR_IS_EMPTY);
+                AddError("street", Validator.ERROR_IS_EMPTY);
             }
 
             if (Validator.isEmpty(town))
             {
-                errors.Add("town", Validator.ERROR_IS_EMPTY);
+                AddError("town", Validator.ERROR_IS_EMPTY);
             }
 
             if (!Validator.isNumeric(telno))
             {
-                errors.Add("telno", Validator.ERROR_IS_NUMERIC);
+                AddError("telno", Validator.ERROR_IS_NUMERIC);
             }
 
             if (!Validator.isEmail(email))
             {
-                errors.Add("telno", Validator.ERROR_IS_EMAIL);
+                AddError("telno", Validator.ERROR_IS_EMAIL);
             }
+            
+            /*
 
             // TODO: Handle Saving of business customers
             if (accountType != 'P')
@@ -120,14 +270,64 @@ namespace BuildSys
                     errors.Add("vatNo", Validator.ERROR_IS_VAT_NUM);
                 }
             }
+        }
+        */
 
-            if (errors.Count() > 0)
+        protected override void validateProp (String propertyName)
+        {
+            
+            switch (propertyName)
             {
-                valid = false;
+                case "firstname":
+                    if (Validator.isEmpty(firstname))
+                    {
+                        AddError("firstname", Validator.ERROR_IS_EMPTY);
+                    }
+                    break;
+                case "surname":
+                    if (Validator.isEmpty(surname))
+                    {
+                        AddError("surname", Validator.ERROR_IS_EMPTY);
+                    }
+                    break;
+                case "street":
+                    if (Validator.isEmpty(street))
+                    {
+                        AddError("street", Validator.ERROR_IS_EMPTY);
+                    }
+                    break;
+                case "town":
+                    if (Validator.isEmpty(town))
+                    {
+                        AddError("town", Validator.ERROR_IS_EMPTY);
+                    }
+                    break;
+                case "telno":
+                    if (!Validator.isNumeric(telno))
+                    {
+                        AddError("telno", Validator.ERROR_IS_NUMERIC);
+                    }
+                    break;
+                case "email":
+                    if (!Validator.isEmail(email))
+                    {
+                        AddError("telno", Validator.ERROR_IS_EMAIL);
+                    }
+                    break;
+                case "companyName":
+                    if (Validator.isEmpty(companyName))
+                    {
+                        AddError("companyName", Validator.ERROR_IS_EMPTY);
+                    }
+                    break;
+                case "vatNo":
+                    if (Validator.isVatNum(vatNo))
+                    {
+                        AddError("vatNo", Validator.ERROR_IS_VAT_NUM);
+                    }
+                    break;
             }
-            */
 
-            //return valid;
         }
 
         public static DataTable getCustomers()

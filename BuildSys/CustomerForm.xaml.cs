@@ -45,7 +45,6 @@ namespace BuildSys
                 // TODO: Replace with with better error handling
                 MessageBox.Show("Form has errors");
             }
-                
         }
 
         private void radAccType_Checked(object sender, RoutedEventArgs e)
@@ -65,7 +64,6 @@ namespace BuildSys
                     wpVatNumber.Visibility = Visibility.Visible;
                 }
             }
-
         }
 
         private void clearForm()
@@ -80,8 +78,9 @@ namespace BuildSys
             txtEmail.Text = "";
             txtCompanyName.Text = "";
             txtVatNumber.Text = "";
+            // TODO: After registering a customer, the form errors are shown again
+            //customer = new CustomerModel();
         }
-
 
     }
 }

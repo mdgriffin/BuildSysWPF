@@ -22,7 +22,7 @@ namespace BuildSys
 
         public static Boolean isEmpty (String textVal)
         {
-            return textVal.Length == 0;
+            return String.IsNullOrEmpty(textVal);
         }
 
         public static Boolean isMinLength (String textVal, int minLength)
