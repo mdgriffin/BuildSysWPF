@@ -39,5 +39,12 @@
             <sys:String>Wexford</sys:String>
             <sys:String>Wicklow</sys:String>
         </x:Array>
+
+        <x:Array x:Key="Titles" Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+            <sys:String>Mr</sys:String>
+            <sys:String>Mrs</sys:String>
+            <sys:String>Ms</sys:String>
+            <sys:String>Miss</sys:String>
+        </x:Array>
     </Application.Resources>
 </Application>
