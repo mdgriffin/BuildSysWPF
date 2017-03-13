@@ -19,7 +19,6 @@ namespace BuildSys
         {
             get
             {
-                System.Diagnostics.Debug.WriteLine("Callig firstname getter = " + _firstname);
                 return this._firstname;
             }
             set
@@ -28,7 +27,6 @@ namespace BuildSys
                 {
                     this._firstname = value;
                     NotifyPropertyChanged("firstname");
-                    System.Diagnostics.Debug.WriteLine("Callig firstname setter = " + _firstname);
                 }
             }
         }
@@ -60,6 +58,9 @@ namespace BuildSys
             this.email = email;
             this.vatNo = vatNo;
             this.accountType = accountType;
+
+            // Disable the Errors from bwing shown on first load
+            propErrors.Clear();
         }
 
         public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
@@ -75,6 +76,9 @@ namespace BuildSys
             if (Validator.isEmpty(firstname))
             {
                 AddError("firstname", Validator.ERROR_IS_EMPTY);
+            } else
+            {
+                RemoveError("firstname");
             }
 
             /*
@@ -128,66 +132,17 @@ namespace BuildSys
 
         public static DataTable getCustomers()
         {
-            // Open the DB connection
-            OracleConnection conn = new OracleConnection(CONNECTION_STRING);
-            conn.Open();
-
-            OracleCommand cmd = new OracleCommand("SELECT * FROM Customers", conn);
-
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-
-            // Create an empty data set
-            DataSet ds = new DataSet();
-
-            da.Fill(ds, "customers");
-
-            // Close Database
-            conn.Close();
-
-            return ds.Tables["customers"];
+            return select("SELECT * FROM Customers");
         }
 
         public static int getNextCustomerId()
         {
-            int nextCustomerNo;
-
-            // Open the DB connection
-            OracleConnection conn = new OracleConnection(CONNECTION_STRING);
-            conn.Open();
-
-            String selectMaxStmt = "SELECT MAX(customer_id) FROM Customers";
-
-            OracleCommand cmd = new OracleCommand(selectMaxStmt, conn);
-
-            OracleDataReader dr = cmd.ExecuteReader();
-
-            // Read the first (only) value returned from the query
-            // If first stockNo, assign value of 1, otherwise add 1
-            dr.Read();
-
-            if (dr.IsDBNull(0))
-            {
-                nextCustomerNo = 1;
-            }
-            else
-            {
-                nextCustomerNo = Convert.ToInt32(dr.GetValue(0)) + 1;
-            }
-
-            // Close Database
-            conn.Close();
-
-            return nextCustomerNo;
+            return getNextRowId("customer_id", "Customers");
         }
 
         public void insertBusinessCustomer()
         {
-            // Open the DB connection
-            OracleConnection conn = new OracleConnection(CONNECTION_STRING);
-            conn.Open();
-
-            // Define the SQL query and INSERT stock record
-            String insertStmt = "INSERT INTO Customers VALUES('" +
+            insert("INSERT INTO Customers VALUES('" +
                 customerId.ToString() + "','" +
                 companyName + "','" +
                 title + "','" +
@@ -200,31 +155,12 @@ namespace BuildSys
                 email + "','" +
                 vatNo + "','" +
                 accountType + "'" +
-            ")";
-
-            // Execute the command
-            try
-            {
-                OracleCommand cmd = new OracleCommand(insertStmt, conn);
-                cmd.ExecuteNonQuery();
-            }
-            catch (OracleException exc)
-            {
-                throw exc;
-            }
-
-            // Close the DB Connection
-            conn.Close();
+            ")");
         }
 
         public void insertPrivateCustomer()
         {
-            // Open the DB connection
-            OracleConnection conn = new OracleConnection(CONNECTION_STRING);
-            conn.Open();
-
-            // Define the SQL query and INSERT stock record
-            String insertStmt = "INSERT INTO Customers (customer_id, title, firstname, surname, street, town, county, telephone, email, account_type) VALUES('" +
+            insert("INSERT INTO Customers (customer_id, title, firstname, surname, street, town, county, telephone, email, account_type) VALUES('" +
                 customerId.ToString() + "','" +
                 title + "','" +
                 firstname + "','" +
@@ -235,14 +171,7 @@ namespace BuildSys
                 telno + "','" +
                 email + "','" +
                 accountType + "'" +
-            ")";
-
-            // Execute the command
-            OracleCommand cmd = new OracleCommand(insertStmt, conn);
-            cmd.ExecuteNonQuery();
-
-            // Close the DB Connection
-            conn.Close();
+            ")");
         }
     }
 }
