@@ -1,4 +1,5 @@
 ﻿using BuildSys.Models;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -21,7 +22,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(() => saveCustomer());
+                return new RelayCommand(() => saveCustomer(), () => canSaveCustomer());
             }
         }
 
@@ -30,6 +31,12 @@ namespace BuildSys.ViewModels
             MessageBox.Show("Now Save the Customer", "Information");
 
             // Return to the home page?
+        }
+
+        public Boolean canSaveCustomer ()
+        {
+            // TODO: Only enable button if all Customer Validates
+            return true;
         }
 
     }

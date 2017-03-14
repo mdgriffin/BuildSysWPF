@@ -14,8 +14,10 @@ namespace BuildSys
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
+
         private Action methodToExecute;
         private Func<bool> canExecuteEvaluator;
+
         public RelayCommand(Action methodToExecute, Func<bool> canExecuteEvaluator)
         {
             this.methodToExecute = methodToExecute;
