@@ -12,14 +12,16 @@
         <WrapPanel
             Margin="0,5">
             <Label Name="lblAccType" Content="Account Type" MinWidth="100"/>
-            <RadioButton VerticalAlignment="Center" Name="radAccType_personal" GroupName="radAccType" Content="Personal" IsChecked="True" />
-            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" IsChecked="False" Content="Business" />
+            <RadioButton VerticalAlignment="Center" Name="radAccType_personal" GroupName="radAccType" Content="Personal" IsChecked="{Binding accountType, Converter={StaticResource RadioButtonCheckedConverter},
+    ConverterParameter={StaticResource True}}"/>
+            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" IsChecked="{Binding accountType, Converter={StaticResource RadioButtonCheckedConverter},
+    ConverterParameter={StaticResource False}}" Content="Business" />
         </WrapPanel>
-        <WrapPanel Name="wpBusinessName" Margin="0,5" Visibility="Collapsed">
+        <WrapPanel Name="wpBusinessName" Margin="0,5" Visibility="{Binding showBusinessInputs }">
             <Label Name="lblCompanyName" Content="Company Name" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtCompanyName" Text="{Binding customer.companyName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
         </WrapPanel>
-        <WrapPanel Name="wpVatNumber" Margin="0,5" Visibility="Collapsed">
+        <WrapPanel Name="wpVatNumber" Margin="0,5" Visibility="{Binding showBusinessInputs }">
             <Label Name="lblVatNumber" Content="VAT Number" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtVatNumber"  Text="{Binding customer.vatNo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
         </WrapPanel>

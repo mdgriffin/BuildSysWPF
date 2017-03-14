@@ -299,6 +299,17 @@ namespace BuildSys.Models
             return getNextRowId("customer_id", "Customers");
         }
 
+        public void insertCustomer ()
+        {
+            if (accountType == 'B')
+            {
+                insertBusinessCustomer();
+            } else
+            {
+                insertPrivateCustomer();
+            }
+        }
+
         public void insertBusinessCustomer()
         {
             insert("INSERT INTO Customers VALUES('" +

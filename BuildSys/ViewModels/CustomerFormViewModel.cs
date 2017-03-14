@@ -16,10 +16,13 @@ namespace BuildSys.ViewModels
         public CustomerFormViewModel(MainViewModel parent)
         {
             customer = new CustomerModel();
+            showBusinessInputs = "Collapsed";
             this.parent = parent;
+            
         }
 
         public CustomerModel customer { get; set; }
+        public String showBusinessInputs { get; set; }
 
         public ICommand saveCustomerCommand
         {
@@ -31,10 +34,15 @@ namespace BuildSys.ViewModels
 
         public void saveCustomer ()
         {
-            MessageBox.Show("Now Save the Customer", "Information");
+            if (!customer.HasErrors)
+            {
+                customer.insertCustomer();
+                // Reset the form
+                parent.ViewModel = new CustomerFormViewModel(parent);
+            } else
+            {
 
-            // Reset the form
-            parent.ViewModel = new CustomerFormViewModel(parent);
+            }
         }
 
         public Boolean canSaveCustomer ()
