@@ -8,19 +8,31 @@ using System.Windows.Controls;
 
 namespace BuildSys.ViewModels
 {
-    class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
 
         public MainViewModel()
         {
             //CurrentView = new CustomerForm();
-            ViewModel = new CustomerFormViewModel();
+            ViewModel = new CustomerFormViewModel(this);
+
+            menuTitle = "Menu Item 1";
         }
 
-        //UserControl CurrentView { get; set; }
-        public BaseViewModel ViewModel { get; set; }
+        private BaseViewModel _ViewModel;
+        public BaseViewModel ViewModel
+        {
+            get
+            {
+                return _ViewModel;
+            }
+            set
+            {
+                _ViewModel = value;
+                NotifyPropertyChanged("ViewModel");
+            }
+        }
+
+        public String menuTitle;
     }
-
-
-    
 }

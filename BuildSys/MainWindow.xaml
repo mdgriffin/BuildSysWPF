@@ -17,7 +17,7 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Customer">
+            <MenuItem Header="Customers">
                 <MenuItem Header="_Register Customer" Click="CustomerReg_Click"/>
                 <MenuItem Header="_Manage Exisiting Customers" Click="CustomerList_Click"/>
             </MenuItem>
@@ -36,10 +36,7 @@
             </MenuItem>
         </Menu>
         <StackPanel></StackPanel>
-        <!--<ContentControl x:Name="LayoutRoot">
-            <local:CustomerForm />
-        </ContentControl>-->
-        
+
         <ContentControl Content="{Binding ViewModel}" />
     </DockPanel>
 

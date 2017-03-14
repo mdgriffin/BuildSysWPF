@@ -25,9 +25,6 @@ namespace BuildSys
         public MainWindow()
         {
             InitializeComponent();
-            //_mainFrame.Navigate(new CustomerForm());
-
-            //DataContext = this;
         }
 
 

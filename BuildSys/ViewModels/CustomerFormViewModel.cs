@@ -8,12 +8,15 @@ namespace BuildSys.ViewModels
     
     public class CustomerFormViewModel: BaseViewModel
     {
+       MainViewModel parent;
+        
         /// <summary>
         /// Initializes a new instance of the CustomerFormViewModel class.
         /// </summary>
-        public CustomerFormViewModel()
+        public CustomerFormViewModel(MainViewModel parent)
         {
             customer = new CustomerModel();
+            this.parent = parent;
         }
 
         public CustomerModel customer { get; set; }
@@ -30,7 +33,8 @@ namespace BuildSys.ViewModels
         {
             MessageBox.Show("Now Save the Customer", "Information");
 
-            // Return to the home page?
+            // Reset the form
+            parent.ViewModel = new CustomerFormViewModel(parent);
         }
 
         public Boolean canSaveCustomer ()
