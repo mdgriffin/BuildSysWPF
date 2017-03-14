@@ -55,6 +55,6 @@
             <Label Name="lblEmail" Content="Email" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtEmail" Text="{Binding customer.email, UpdateSourceTrigger=LostFocus, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
         </WrapPanel>
-        <Button Name="btnReg" Margin="0 10 0 0" ToolTip="Example Button">Register</Button>
+        <Button Name="btnReg" Margin="0 10 0 0" Command="{Binding saveCustomerCommand}" ToolTip="Register a Customer">Register</Button>
     </StackPanel>
 </UserControl>
