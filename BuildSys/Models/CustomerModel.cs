@@ -260,7 +260,7 @@ namespace BuildSys
                 case "email":
                     if (!Validator.isEmail(email))
                     {
-                        AddError("telno", Validator.ERROR_IS_EMAIL);
+                        AddError("email", Validator.ERROR_IS_EMAIL);
                         valid = false;
                     }
                     break;
