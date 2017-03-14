@@ -20,6 +20,7 @@ namespace BuildSys.Models
                 if (value != _companyName)
                 {
                     this._companyName = value;
+                    validateProp("companyName");
                     NotifyPropertyChanged("companyName");
                 }
             }
@@ -54,6 +55,7 @@ namespace BuildSys.Models
                 if (value != _firstname)
                 {
                     this._firstname = value;
+                    validateProp("firstname");
                     NotifyPropertyChanged("firstname");
                 }
             }
@@ -71,6 +73,7 @@ namespace BuildSys.Models
                 if (value != _surname)
                 {
                     this._surname = value;
+                    validateProp("surname");
                     NotifyPropertyChanged("surname");
                 }
             }
@@ -88,6 +91,7 @@ namespace BuildSys.Models
                 if (value != _street)
                 {
                     this._street = value;
+                    validateProp("street");
                     NotifyPropertyChanged("street");
                 }
             }
@@ -105,6 +109,7 @@ namespace BuildSys.Models
                 if (value != _town)
                 {
                     this._town = value;
+                    validateProp("town");
                     NotifyPropertyChanged("town");
                 }
             }
@@ -122,6 +127,7 @@ namespace BuildSys.Models
                 if (value != _county)
                 {
                     this._county = value;
+                    validateProp("county");
                     NotifyPropertyChanged("county");
                 }
             }
@@ -139,6 +145,7 @@ namespace BuildSys.Models
                 if (value != _telno)
                 {
                     this._telno = value;
+                    validateProp("telno");
                     NotifyPropertyChanged("telno");
                 }
             }
@@ -157,6 +164,7 @@ namespace BuildSys.Models
                 if (value != _email)
                 {
                     this._email = value;
+                    validateProp("email");
                     NotifyPropertyChanged("email");
                 }
             }
@@ -174,6 +182,7 @@ namespace BuildSys.Models
                 if (value != _vatNo)
                 {
                     this._vatNo = value;
+                    validateProp("vatno");
                     NotifyPropertyChanged("vatno");
                 }
             }
@@ -216,70 +225,68 @@ namespace BuildSys.Models
 
         public CustomerModel() : this("", "", "", "", "", "", "", "", '\n', "", "") { }
 
-        protected override bool validateProp (String propertyName)
+        protected void validateProp (String propertyName)
         {
-            bool valid = true;
+            String errorMessage = "";
 
             switch (propertyName)
             {
                 case "firstname":
                     if (Validator.isEmpty(firstname))
                     {
-                        AddError("firstname", Validator.ERROR_IS_EMPTY);
-                        valid = false;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
                 case "surname":
                     if (Validator.isEmpty(surname))
                     {
-                        AddError("surname", Validator.ERROR_IS_EMPTY);
-                        valid = false;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
                 case "street":
                     if (Validator.isEmpty(street))
                     {
-                        AddError("street", Validator.ERROR_IS_EMPTY);
-                        valid = false;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
                 case "town":
                     if (Validator.isEmpty(town))
                     {
-                        AddError("town", Validator.ERROR_IS_EMPTY);
-                        valid = false;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
                 case "telno":
                     if (!Validator.isNumeric(telno))
                     {
-                        AddError("telno", Validator.ERROR_IS_NUMERIC);
-                        valid = false;
+                        errorMessage = Validator.ERROR_IS_NUMERIC;
                     }
                     break;
                 case "email":
                     if (!Validator.isEmail(email))
                     {
-                        AddError("email", Validator.ERROR_IS_EMAIL);
-                        valid = false;
+                        errorMessage = Validator.ERROR_IS_EMAIL;
                     }
                     break;
                 case "companyName":
                     if (Validator.isEmpty(companyName))
                     {
-                        AddError("companyName", Validator.ERROR_IS_EMPTY);
-                        valid = false;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
                 case "vatNo":
                     if (Validator.isVatNum(vatNo))
                     {
-                        AddError("vatNo", Validator.ERROR_IS_VAT_NUM);
-                        valid = false;
+                        errorMessage = Validator.ERROR_IS_VAT_NUM;
                     }
                     break;
             }
-            return valid;
+            if (errorMessage != "")
+            {
+                AddError(propertyName, errorMessage);
+            } else
+            {
+                RemoveError(propertyName);
+            }
         }
 
         public static DataTable getCustomers()

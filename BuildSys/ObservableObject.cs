@@ -14,18 +14,7 @@ namespace BuildSys
 
         protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-
-            /*
-            // Todo: Refigure out validation :(
-            if (this.validateProp(propertyName))
-            {
-                RemoveError(propertyName);
-            }
-            */
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }
