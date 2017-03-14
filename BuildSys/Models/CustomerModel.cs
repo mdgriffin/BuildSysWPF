@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Data;
 
-namespace BuildSys
+namespace BuildSys.Models
 {
     public class CustomerModel : BaseModel, INotifyDataErrorInfo
     {

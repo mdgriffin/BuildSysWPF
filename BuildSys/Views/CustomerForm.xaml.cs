@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BuildSys
+namespace BuildSys.Views
 {
     /// <summary>
     /// Interaction logic for CustomerForm.xaml
@@ -14,15 +16,15 @@ namespace BuildSys
         {
             InitializeComponent();
 
-            customer = new CustomerModel();
+            //customer = new CustomerModel();
 
-            DataContext = this;
+            //DataContext = this;
+            //DataContext = new CustomerFormViewModel();
         }
 
-        public List<String> Counties { get; set; }
-        public List<String> Titles { get; set; }
-        public CustomerModel customer { get; set; }
+        //public CustomerModel customer { get; set; }
 
+        /*
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
             char accountType = radAccType_business.IsChecked.Value ? 'B' : 'P';
@@ -39,14 +41,16 @@ namespace BuildSys
                 }
 
                 MessageBox.Show("Successfully Registered A New Customer");
-                clearForm();
+                // TODO: Reset the view to a new CustomerForm
             } else
             {
                 // TODO: Replace with with better error handling
                 MessageBox.Show("Form has errors");
             }
         }
+        */
 
+        /*
         private void radAccType_Checked(object sender, RoutedEventArgs e)
         {
             if (radAccType_business != null)
@@ -65,22 +69,6 @@ namespace BuildSys
                 }
             }
         }
-
-        private void clearForm()
-        {
-            cmbTitle.SelectedIndex = 0;
-            txtFirstname.Text = "";
-            txtSurname.Text = "";
-            txtStreet.Text = "";
-            txtTown.Text = "";
-            cmbCounty.SelectedIndex = 0;
-            txtTel.Text = "";
-            txtEmail.Text = "";
-            txtCompanyName.Text = "";
-            txtVatNumber.Text = "";
-            // TODO: After registering a customer, the form errors are shown again
-            //customer = new CustomerModel();
-        }
-
+        */
     }
 }

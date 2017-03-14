@@ -5,10 +5,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:local="clr-namespace:BuildSys"
+    xmlns:viewModels="clr-namespace:BuildSys.ViewModels"
     mc:Ignorable="d"
     Title="BuildSys"
     Height="600"
     Width="525">
+
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -31,9 +36,11 @@
             </MenuItem>
         </Menu>
         <StackPanel></StackPanel>
-        <ContentControl x:Name="LayoutRoot">
+        <!--<ContentControl x:Name="LayoutRoot">
             <local:CustomerForm />
-        </ContentControl>
+        </ContentControl>-->
+        
+        <ContentControl Content="{Binding ViewModel}" />
     </DockPanel>
 
 </Window>

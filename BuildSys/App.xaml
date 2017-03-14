@@ -2,7 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:BuildSys"
+             xmlns:viewModels="clr-namespace:BuildSys.ViewModels"
+             xmlns:views="clr-namespace:BuildSys.Views"
              StartupUri="MainWindow.xaml">
+    
     <Application.Resources>
         
         <x:Array x:Key="Counties" Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -54,6 +57,10 @@
                 <TextBlock Text="{Binding ErrorContent}" Foreground="White" Background="Red"/>
             </WrapPanel>
         </ControlTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:CustomerFormViewModel}">
+            <views:CustomerForm />
+        </DataTemplate>
 
     </Application.Resources>
 

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="BuildSys.CustomerForm"
+﻿<UserControl x:Class="BuildSys.Views.CustomerForm"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BuildSys"
+             xmlns:local="clr-namespace:BuildSys.Views"
              mc:Ignorable="d" 
              d:DesignHeight="500"
              d:DesignWidth="500">
@@ -12,8 +12,8 @@
         <WrapPanel
             Margin="0,5">
             <Label Name="lblAccType" Content="Account Type" MinWidth="100"/>
-            <RadioButton VerticalAlignment="Center" Name="radAccType_personal" GroupName="radAccType" Content="Personal" IsChecked="True" Checked="radAccType_Checked"/>
-            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" IsChecked="False" Content="Business" Checked="radAccType_Checked"/>
+            <RadioButton VerticalAlignment="Center" Name="radAccType_personal" GroupName="radAccType" Content="Personal" IsChecked="True" />
+            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" IsChecked="False" Content="Business" />
         </WrapPanel>
         <WrapPanel Name="wpBusinessName" Margin="0,5" Visibility="Collapsed">
             <Label Name="lblCompanyName" Content="Company Name" MinWidth="100"/>
@@ -55,6 +55,6 @@
             <Label Name="lblEmail" Content="Email" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtEmail" Text="{Binding customer.email, UpdateSourceTrigger=LostFocus, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
         </WrapPanel>
-        <Button Name="btnReg" Click="btnReg_Click" Margin="0 10 0 0" ToolTip="Example Button">Register</Button>
+        <Button Name="btnReg" Margin="0 10 0 0" ToolTip="Example Button">Register</Button>
     </StackPanel>
 </UserControl>
