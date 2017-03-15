@@ -12,10 +12,11 @@
         <WrapPanel
             Margin="0,5">
             <Label Name="lblAccType" Content="Account Type" MinWidth="100"/>
-            <RadioButton VerticalAlignment="Center" Name="radAccType_personal" GroupName="radAccType" Content="Personal" IsChecked="{Binding accountType, Converter={StaticResource RadioButtonCheckedConverter},
-    ConverterParameter={StaticResource True}}"/>
-            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" IsChecked="{Binding accountType, Converter={StaticResource RadioButtonCheckedConverter},
-    ConverterParameter={StaticResource False}}" Content="Business" />
+            <RadioButton VerticalAlignment="Center" Name="radAccType_personal" GroupName="radAccType" Content="Personal" IsChecked="{Binding customer.accountType, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource RadioButtonCheckedConverter},
+    ConverterParameter={StaticResource PerChar}}"/>
+            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" IsChecked="{Binding customer.accountType, Converter={StaticResource RadioButtonCheckedConverter},
+    ConverterParameter={StaticResource BusChar
+                }}" Content="Business" />
         </WrapPanel>
         <WrapPanel Name="wpBusinessName" Margin="0,5" Visibility="{Binding showBusinessInputs }">
             <Label Name="lblCompanyName" Content="Company Name" MinWidth="100"/>

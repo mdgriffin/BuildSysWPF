@@ -4,10 +4,14 @@
              xmlns:local="clr-namespace:BuildSys"
              xmlns:viewModels="clr-namespace:BuildSys.ViewModels"
              xmlns:views="clr-namespace:BuildSys.Views"
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     
     <Application.Resources>
-        
+
+        <s:Char x:Key="PerChar">P</s:Char>
+        <s:Char x:Key="BusChar">B</s:Char>
+
         <x:Array x:Key="Counties" Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
             <sys:String>Kerry</sys:String>
             <sys:String>Antrim</sys:String>
@@ -61,6 +65,8 @@
         <DataTemplate DataType="{x:Type viewModels:CustomerFormViewModel}">
             <views:CustomerForm />
         </DataTemplate>
+
+        <local:RadioAccountTypeConverter x:Key="RadioButtonCheckedConverter" />
 
     </Application.Resources>
 
