@@ -12,7 +12,7 @@
         <WrapPanel
             Margin="0,5">
             <Label Name="lblAccType" Content="Account Type" MinWidth="100"/>
-            <RadioButton VerticalAlignment="Center" Name="radAccType_personal" GroupName="radAccType" Content="Personal" IsChecked="{Binding customer.accountType, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource RadioButtonCheckedConverter},
+            <RadioButton VerticalAlignment="Center" Name="radAccType_personal" GroupName="radAccType" Content="Personal" IsChecked="{Binding customer.accountType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RadioButtonCheckedConverter},
     ConverterParameter={StaticResource PerChar}}"/>
             <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" Name="radAccType_business" GroupName="radAccType" IsChecked="{Binding customer.accountType, Converter={StaticResource RadioButtonCheckedConverter},
     ConverterParameter={StaticResource BusChar

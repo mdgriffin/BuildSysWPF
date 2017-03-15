@@ -1,5 +1,6 @@
 ﻿using BuildSys.Models;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,9 +17,27 @@ namespace BuildSys.ViewModels
         public CustomerFormViewModel(MainViewModel parent)
         {
             customer = new CustomerModel();
+
+            customer.PropertyChanged += onCustomerPropertyChanged;
             showBusinessInputs = "Collapsed";
             this.parent = parent;
             
+        }
+
+        public void onCustomerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+
+            if (e.PropertyName.Equals("accountType"))
+            {
+                if (customer.accountType == 'B')
+                {
+                    showBusinessInputs = "Visible";
+                } else
+                {
+                    showBusinessInputs = "Collapsed";
+                }
+                NotifyPropertyChanged("showBusinessInputs");
+            }
         }
 
         public CustomerModel customer { get; set; }
