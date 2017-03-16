@@ -11,19 +11,13 @@ using BuildSys.Models;
 namespace BuildSys.Views
 {
     /// <summary>
-    /// Interaction logic for CustomerList.xaml
+    /// Interaction logic for CustomerManage.xaml
     /// </summary>
-    public partial class CustomerList : UserControl
+    public partial class CustomerManage : UserControl
     {
-        public CustomerList()
+        public CustomerManage()
         {
             InitializeComponent();
-
-            Customers = CustomerModel.getCustomers();
-
-            DataContext = this;
         }
-
-        public DataTable Customers { get; }
     }
 }

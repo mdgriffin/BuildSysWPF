@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BuildSys.ViewModels
 {
@@ -13,10 +14,7 @@ namespace BuildSys.ViewModels
 
         public MainViewModel()
         {
-            //CurrentView = new CustomerForm();
             ViewModel = new CustomerFormViewModel(this);
-
-            menuTitle = "Menu Item 1";
         }
 
         private BaseViewModel _ViewModel;
@@ -33,6 +31,20 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public String menuTitle;
+        public ICommand goToListCustomer
+        {
+            get
+            {
+                return new RelayCommand(() => ViewModel = new CustomerManageViewModel(this), () => true);
+            }
+        }
+
+        public ICommand goToRegCustomer
+        {
+            get
+            {
+                return new RelayCommand(() => ViewModel = new CustomerFormViewModel(this), () => true);
+            }
+        }
     }
 }
