@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace BuildSys.ViewModels
 {
@@ -20,5 +22,13 @@ namespace BuildSys.ViewModels
         }
 
         public DataTable customers { get; set; }
+
+        public ICommand editCustomer
+        {
+            get
+            {
+                return new RelayCommand(() => MessageBox.Show("Find the Row ID!"), () => true);
+            }
+        }
     }
 }

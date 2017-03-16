@@ -14,7 +14,7 @@ namespace BuildSys.ViewModels
 
         public MainViewModel()
         {
-            ViewModel = new CustomerFormViewModel(this);
+            ViewModel = new CustomerManageViewModel(this);
         }
 
         private BaseViewModel _ViewModel;
