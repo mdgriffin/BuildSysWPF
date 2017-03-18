@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 
@@ -289,9 +290,18 @@ namespace BuildSys.Models
             }
         }
 
-        public static DataTable getCustomers()
+        public static ObservableCollection<CustomerModel> getCustomers()
         {
-            return select("SELECT * FROM Customers");
+            DataTable customersTable =  select("SELECT * FROM Customers");
+
+            ObservableCollection<CustomerModel>  CustomerList = new ObservableCollection<CustomerModel>();
+
+            foreach (DataRow row in customersTable.Rows)
+            {
+                CustomerList.Add(new CustomerModel(row["title"].ToString(), row["firstname"].ToString(), row["surname"].ToString(), row["street"].ToString(), row["town"].ToString(), row["county"].ToString(), row["telephone"].ToString(), row["email"].ToString(), row["account_type"].ToString().ToCharArray()[0]));
+            }
+
+            return CustomerList;
         }
 
         public static int getNextCustomerId()

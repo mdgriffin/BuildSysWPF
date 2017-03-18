@@ -19,23 +19,9 @@ namespace BuildSys.ViewModels
         {
             this.parent = parent;
 
-            //customers = CustomerModel.getCustomers().AsDataView();
-
-            DataTable customersTable = CustomerModel.getCustomers();
-
-            CustomerList = new ObservableCollection<CustomerModel>();
-            ObservableCollection<CustomerModel> tempCollection = new ObservableCollection<CustomerModel>();
-
-            foreach (DataRow row in customersTable.Rows)
-            {
-                tempCollection.Add(new CustomerModel(row["title"].ToString(), row["firstname"].ToString(), row["surname"].ToString(), row["street"].ToString(), row["town"].ToString(), row["county"].ToString(), row["telephone"].ToString(), row["email"].ToString(), row["account_type"].ToString().ToCharArray()[0]));
-            }
-
-            CustomerList = tempCollection;
+            CustomerList = CustomerModel.getCustomers();
 
         }
-
-        //public DataView customers { get; set; }
 
         private ObservableCollection<CustomerModel> _customerList = new ObservableCollection<CustomerModel>();
         public ObservableCollection<CustomerModel> CustomerList
