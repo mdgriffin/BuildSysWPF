@@ -42,5 +42,7 @@ namespace BuildSys.ViewModels
                 return new RelayCommand(() => MessageBox.Show("Find the Row ID!"), () => true);
             }
         }
+
     }
+
 }

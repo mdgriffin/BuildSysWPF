@@ -206,9 +206,10 @@ namespace BuildSys.Models
             }
         }
 
-        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType, String companyName, String vatNo)
+        public CustomerModel(int customerId, String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType, String companyName, String vatNo)
         {
-            this.customerId = getNextCustomerId();
+            //this.customerId = getNextCustomerId();
+            this.customerId = customerId;
             this._companyName = companyName;
             this._title = title;
             this._firstname = firstname;
@@ -222,9 +223,9 @@ namespace BuildSys.Models
             this._accountType = accountType;
         }
 
-        public CustomerModel(String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
+        public CustomerModel(int customerId, String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(getNextCustomerId(), title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
 
-        public CustomerModel() : this("", "", "", "", "", "", "", "", 'P', "", "") { }
+        public CustomerModel() : this(getNextCustomerId(), "", "", "", "", "", "", "", "", 'P', "", "") { }
 
         protected void validateProp (String propertyName)
         {
@@ -298,7 +299,7 @@ namespace BuildSys.Models
 
             foreach (DataRow row in customersTable.Rows)
             {
-                CustomerList.Add(new CustomerModel(row["title"].ToString(), row["firstname"].ToString(), row["surname"].ToString(), row["street"].ToString(), row["town"].ToString(), row["county"].ToString(), row["telephone"].ToString(), row["email"].ToString(), row["account_type"].ToString().ToCharArray()[0]));
+                CustomerList.Add(new CustomerModel(Int32.Parse(row["customer_id"].ToString()),row["title"].ToString(), row["firstname"].ToString(), row["surname"].ToString(), row["street"].ToString(), row["town"].ToString(), row["county"].ToString(), row["telephone"].ToString(), row["email"].ToString(), row["account_type"].ToString().ToCharArray()[0], row["company_name"].ToString(), row["vat_no"].ToString()));
             }
 
             return CustomerList;
