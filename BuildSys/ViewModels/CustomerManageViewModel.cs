@@ -1,6 +1,7 @@
 ﻿using BuildSys.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -18,10 +19,35 @@ namespace BuildSys.ViewModels
         {
             this.parent = parent;
 
-            customers = CustomerModel.getCustomers();
+            //customers = CustomerModel.getCustomers().AsDataView();
+
+            DataTable customersTable = CustomerModel.getCustomers();
+
+            CustomerList = new ObservableCollection<CustomerModel>();
+            ObservableCollection<CustomerModel> tempCollection = new ObservableCollection<CustomerModel>();
+
+            foreach (DataRow row in customersTable.Rows)
+            {
+                tempCollection.Add(new CustomerModel(row["title"].ToString(), row["firstname"].ToString(), row["surname"].ToString(), row["street"].ToString(), row["town"].ToString(), row["county"].ToString(), row["telephone"].ToString(), row["email"].ToString(), row["account_type"].ToString().ToCharArray()[0]));
+            }
+
+            CustomerList = tempCollection;
+
         }
 
-        public DataTable customers { get; set; }
+        //public DataView customers { get; set; }
+
+        private ObservableCollection<CustomerModel> _customerList = new ObservableCollection<CustomerModel>();
+        public ObservableCollection<CustomerModel> CustomerList
+        {
+            get { return _customerList ?? (_customerList = new ObservableCollection<CustomerModel>()); }
+            set
+            {
+                if (value == null) return;
+                _customerList = value;
+                NotifyPropertyChanged("CustomerList");
+            }
+        }
 
         public ICommand editCustomer
         {

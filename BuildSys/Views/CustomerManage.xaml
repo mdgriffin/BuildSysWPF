@@ -9,8 +9,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <Grid>
-        <!--<DataGrid Margin="20 20 20 20"  ItemsSource="{Binding customers}"/>-->
-        <DataGrid Margin="20 20 20 20"  ItemsSource="{Binding customers}" AutoGenerateColumns="False">
+        <!--<DataGrid Margin="20 20 20 20"  ItemsSource="{Binding customers}" IsReadOnly="True"/>-->
+        <DataGrid Margin="20 20 20 20"  ItemsSource="{Binding CustomerList}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -21,7 +21,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding firstname}" Header="Firstname" />
                 <DataGridTextColumn Binding="{Binding surname}" Header="Surname" />
-                <DataGridTextColumn Binding="{Binding semail}" Header="Email" />
+                <DataGridTextColumn Binding="{Binding email}" Header="Email" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
