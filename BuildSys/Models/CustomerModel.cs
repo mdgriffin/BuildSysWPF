@@ -208,7 +208,6 @@ namespace BuildSys.Models
 
         public CustomerModel(int customerId, String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType, String companyName, String vatNo)
         {
-            //this.customerId = getNextCustomerId();
             this.customerId = customerId;
             this._companyName = companyName;
             this._title = title;
@@ -223,7 +222,7 @@ namespace BuildSys.Models
             this._accountType = accountType;
         }
 
-        public CustomerModel(int customerId, String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(getNextCustomerId(), title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
+        public CustomerModel(int customerId, String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(customerId, title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
 
         public CustomerModel() : this(getNextCustomerId(), "", "", "", "", "", "", "", "", 'P', "", "") { }
 
@@ -378,6 +377,29 @@ namespace BuildSys.Models
                 email + "','" +
                 accountType + "'" +
             ")");
+        }
+
+        public void update ()
+        {
+            String sqlUpdate = "Update Customers SET " +
+                "firstname = '" + firstname + "', " +
+                "surname = '" + surname + "', " +
+                "street = '" + street + "', " +
+                "town = '" + town + "', " +
+                "county = '" + county + "', " +
+                "telephone = '" + telno + "', " +
+                "email = '" + email + "', " +
+                "account_type = '" + accountType + "'";
+                
+
+            if (accountType == 'B')
+            {
+                sqlUpdate += ", company_name = '" + companyName + "vat_no = '" + vatNo;
+            }
+
+            sqlUpdate += " WHERE customer_id = " + customerId;
+
+            update(sqlUpdate);
         }
     }
 }

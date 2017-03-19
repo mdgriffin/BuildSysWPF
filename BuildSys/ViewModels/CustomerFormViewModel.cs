@@ -79,10 +79,12 @@ namespace BuildSys.ViewModels
             {
                 if (btnText.Equals("Update Customer"))
                 {
-                    MessageBox.Show("Update Customer!");
-
                     // Update the Customer's record
-                    //customer.update();
+                    customer.update();
+
+                    MessageBox.Show("Customer Updated Successfully");
+
+                    parent.ViewModel = new CustomerManageViewModel(parent);
                 }
                 else
                 {
