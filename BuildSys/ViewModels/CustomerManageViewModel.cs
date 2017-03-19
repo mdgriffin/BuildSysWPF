@@ -1,11 +1,8 @@
 ﻿using BuildSys.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -20,7 +17,22 @@ namespace BuildSys.ViewModels
             this.parent = parent;
 
             CustomerList = CustomerModel.getCustomerList();
+        }
 
+        private String _customerFilter;
+        public String customerFilter {
+            get
+            {
+                return _customerFilter;
+            }
+            set
+            {
+                if (value != _customerFilter)
+                {
+                    _customerFilter = value;
+                    filterCustomers();
+                }
+            }
         }
 
         private ObservableCollection<CustomerModel> _customerList = new ObservableCollection<CustomerModel>();
@@ -66,6 +78,13 @@ namespace BuildSys.ViewModels
                 MessageBox.Show("Customer Deleted");
                 CustomerList.Where(cust => cust.customerId == customerId).ToList().All(i => CustomerList.Remove(i));
             }  
+        }
+
+        public void filterCustomers ()
+        {
+            // TODO: Need to have a copy of the whole area
+            //var myResult = CustomerList.Where(cust => cust.firstname.Equals(customerFilter));
+            //CustomerList.Where(cust => !cust.firstname).ToList().All(i => CustomerList.Remove(i));
         }
 
     }
