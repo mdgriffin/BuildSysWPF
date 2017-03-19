@@ -227,7 +227,24 @@ namespace BuildSys.Models
 
         public CustomerModel() : this(getNextCustomerId(), "", "", "", "", "", "", "", "", 'P', "", "") { }
 
-        protected void validateProp (String propertyName)
+        public override void validateAllProps()
+        {
+            validateProp("firstname");
+            validateProp("surname");
+            validateProp("street");
+            validateProp("town");
+            validateProp("telno");
+            validateProp("email");
+
+            // Only Validate the companyName and vatNo if this is a business account
+            if (accountType == 'B')
+            {
+                validateProp("companyName");
+                validateProp("vatNo");
+            }
+        }
+
+        public override void validateProp (String propertyName)
         {
             String errorMessage = "";
 
@@ -291,7 +308,7 @@ namespace BuildSys.Models
             }
         }
 
-        public static ObservableCollection<CustomerModel> getCustomers()
+        public static ObservableCollection<CustomerModel> getCustomerList()
         {
             DataTable customersTable =  select("SELECT * FROM Customers");
 
@@ -303,6 +320,14 @@ namespace BuildSys.Models
             }
 
             return CustomerList;
+        }
+
+        public static CustomerModel getCustomer (int customerId)
+        {
+            DataTable customersTable = select("SELECT * FROM Customers WHERE customer_id = " + customerId);
+            DataRow cust = customersTable.Rows[0];
+
+            return new CustomerModel(Int32.Parse(cust["customer_id"].ToString()), cust["title"].ToString(), cust["firstname"].ToString(), cust["surname"].ToString(), cust["street"].ToString(), cust["town"].ToString(), cust["county"].ToString(), cust["telephone"].ToString(), cust["email"].ToString(), cust["account_type"].ToString().ToCharArray()[0]);
         }
 
         public static int getNextCustomerId()

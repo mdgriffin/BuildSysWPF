@@ -11,17 +11,36 @@ namespace BuildSys.ViewModels
     {
        MainViewModel parent;
         
+        
         /// <summary>
         /// Initializes a new instance of the CustomerFormViewModel class.
         /// </summary>
         public CustomerFormViewModel(MainViewModel parent)
         {
             customer = new CustomerModel();
-
             customer.PropertyChanged += onCustomerPropertyChanged;
+
             showBusinessInputs = "Collapsed";
+
+            btnText = "Register Customer";
             this.parent = parent;
-            
+        }
+
+        public CustomerFormViewModel(MainViewModel parent, int customerId)
+        {
+            customer = CustomerModel.getCustomer(customerId);
+            customer.PropertyChanged += onCustomerPropertyChanged;
+
+            if (customer.accountType == 'B')
+            {
+                showBusinessInputs = "Visible";
+            } else
+            {
+                showBusinessInputs = "Collapsed";
+            }
+
+            btnText = "Update Customer";
+            this.parent = parent;
         }
 
         public void onCustomerPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -42,6 +61,7 @@ namespace BuildSys.ViewModels
 
         public CustomerModel customer { get; set; }
         public String showBusinessInputs { get; set; }
+        public String btnText { get; set; }
 
         public ICommand saveCustomerCommand
         {
@@ -53,14 +73,23 @@ namespace BuildSys.ViewModels
 
         public void saveCustomer ()
         {
+            customer.validateAllProps();
+
             if (!customer.HasErrors)
             {
-                customer.insertCustomer();
-                // Reset the form
-                parent.ViewModel = new CustomerFormViewModel(parent);
-            } else
-            {
+                if (btnText.Equals("Update Customer"))
+                {
+                    MessageBox.Show("Update Customer!");
 
+                    // Update the Customer's record
+                    //customer.update();
+                }
+                else
+                {
+                    customer.insertCustomer();
+                    // Reset the form
+                    parent.ViewModel = new CustomerFormViewModel(parent);
+                }
             }
         }
 

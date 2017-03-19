@@ -19,7 +19,7 @@ namespace BuildSys.ViewModels
         {
             this.parent = parent;
 
-            CustomerList = CustomerModel.getCustomers();
+            CustomerList = CustomerModel.getCustomerList();
 
         }
 
@@ -35,12 +35,17 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public ICommand editCustomer
+        public ICommand editCustomerCmd
         {
             get
             {
-                return new RelayCommand((customerId) => MessageBox.Show("Save Customer " + (int) customerId), param => true);
+                return new RelayCommand((customerId) => ediCustomer((int) customerId), param => true);
             }
+        }
+
+        public void ediCustomer (int customerId)
+        {
+            parent.ViewModel = new CustomerFormViewModel(parent, customerId);
         }
 
     }

@@ -17,7 +17,7 @@
                             <!--<Button Command="{Binding editCustomer}">Edit Customer</Button>-->
                             <Button
                                 Content="Edit Customer"
-                                Command="{Binding Path=DataContext.editCustomer,       
+                                Command="{Binding Path=DataContext.editCustomerCmd,       
                                 RelativeSource= {RelativeSource FindAncestor,
                                 AncestorType={x:Type DataGrid}}}"
                                 CommandParameter="{Binding customerId}">
