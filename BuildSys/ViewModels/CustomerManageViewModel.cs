@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
@@ -84,7 +85,7 @@ namespace BuildSys.ViewModels
         {
             // TODO: Need to have a copy of the whole area
             //var myResult = CustomerList.Where(cust => cust.firstname.Equals(customerFilter));
-            //CustomerList.Where(cust => !cust.firstname).ToList().All(i => CustomerList.Remove(i));
+            CustomerList.Where(cust => !Regex.IsMatch(cust.firstname, @"^" + customerFilter + @".+", RegexOptions.IgnoreCase)).ToList().All(i => CustomerList.Remove(i));
         }
 
     }
