@@ -58,8 +58,14 @@ namespace BuildSys.ViewModels
 
         public void deleteCustomer(int customerId)
         {
-            //parent.ViewModel = new CustomerFormViewModel(parent, customerId);
-            MessageBox.Show("Delete Customer " + customerId);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                CustomerModel.deleteCustomer(customerId);
+                MessageBox.Show("Customer Deleted");
+                CustomerList.Where(cust => cust.customerId == customerId).ToList().All(i => CustomerList.Remove(i));
+            }  
         }
 
     }

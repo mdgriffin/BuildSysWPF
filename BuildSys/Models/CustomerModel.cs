@@ -340,6 +340,11 @@ namespace BuildSys.Models
             return getNextRowId("customer_id", "Customers");
         }
 
+        public static void deleteCustomer (int customerId)
+        {
+            delete("DELETE FROM Customers WHERE customer_id = " + customerId);
+        }
+
         public void insertCustomer ()
         {
             if (accountType == 'B')
