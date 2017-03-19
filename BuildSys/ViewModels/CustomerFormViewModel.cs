@@ -47,7 +47,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(() => saveCustomer(), () => canSaveCustomer());
+                return new RelayCommand(param => saveCustomer(), param => canSaveCustomer());
             }
         }
 

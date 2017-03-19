@@ -35,7 +35,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(() => ViewModel = new CustomerManageViewModel(this), () => true);
+                return new RelayCommand(param => ViewModel = new CustomerManageViewModel(this), param => true);
             }
         }
 
@@ -43,7 +43,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(() => ViewModel = new CustomerFormViewModel(this), () => true);
+                return new RelayCommand(param => ViewModel = new CustomerFormViewModel(this), param => true);
             }
         }
     }

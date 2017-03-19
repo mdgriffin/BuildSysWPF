@@ -39,7 +39,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(() => MessageBox.Show("Find the Row ID!"), () => true);
+                return new RelayCommand((customerId) => MessageBox.Show("Save Customer " + (int) customerId), param => true);
             }
         }
 
