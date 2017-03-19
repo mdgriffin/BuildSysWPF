@@ -39,13 +39,27 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand((customerId) => ediCustomer((int) customerId), param => true);
+                return new RelayCommand((customerId) => editCustomer((int) customerId), param => true);
             }
         }
 
-        public void ediCustomer (int customerId)
+        public ICommand deleteCustomerCmd
+        {
+            get
+            {
+                return new RelayCommand((customerId) => deleteCustomer((int)customerId), param => true);
+            }
+        }
+
+        public void editCustomer (int customerId)
         {
             parent.ViewModel = new CustomerFormViewModel(parent, customerId);
+        }
+
+        public void deleteCustomer(int customerId)
+        {
+            //parent.ViewModel = new CustomerFormViewModel(parent, customerId);
+            MessageBox.Show("Delete Customer " + customerId);
         }
 
     }
