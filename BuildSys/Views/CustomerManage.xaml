@@ -8,15 +8,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <Grid>
-        <DataGrid Margin="20 20 20 20" ItemsSource="{Binding CustomerList}" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Actions">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <WrapPanel>
-                                
-                                <Button
+    <StackPanel>
+        <WrapPanel Width="300" Margin="0 25 0 0" HorizontalAlignment="Center">
+            <Label Content="Filter" Width="Auto"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" Text="{Binding customerFilter, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" />
+        </WrapPanel>
+        <Grid Width="Auto">
+            <DataGrid Margin="10" MaxHeight="450" ItemsSource="{Binding CustomerList}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Actions">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+
+                                    <Button
                                 Content="Edit"
                                 HorizontalAlignment="Center"
                                 Margin="2"
@@ -26,7 +31,7 @@
                                 AncestorType={x:Type DataGrid}}}"
                                 CommandParameter="{Binding customerId}" />
 
-                                <Button
+                                    <Button
                                 Content="Delete"
                                 HorizontalAlignment="Center"
                                 Margin="2"
@@ -35,15 +40,17 @@
                                 RelativeSource= {RelativeSource FindAncestor,
                                 AncestorType={x:Type DataGrid}}}"
                                 CommandParameter="{Binding customerId}" />
-                            
-                            </WrapPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding firstname}" Header="Firstname" />
-                <DataGridTextColumn Binding="{Binding surname}" Header="Surname" />
-                <DataGridTextColumn Binding="{Binding email}" Header="Email" />
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+
+                                </WrapPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding firstname}" Header="Firstname" />
+                    <DataGridTextColumn Binding="{Binding surname}" Header="Surname" />
+                    <DataGridTextColumn Binding="{Binding email}" Header="Email" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </StackPanel>
+    
 </UserControl>
