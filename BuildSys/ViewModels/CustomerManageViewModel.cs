@@ -83,8 +83,9 @@ namespace BuildSys.ViewModels
 
         public void filterCustomers ()
         {
-            // TODO: Need to have a copy of the whole area
-            //var myResult = CustomerList.Where(cust => cust.firstname.Equals(customerFilter));
+            // TODO: Need to have a copy of the whole array
+            // TODO: If the filter is empty, show all customers
+            // TODO: reset button
             CustomerList.Where(cust => !Regex.IsMatch(cust.firstname, @"^" + customerFilter + @".+", RegexOptions.IgnoreCase)).ToList().All(i => CustomerList.Remove(i));
         }
 
