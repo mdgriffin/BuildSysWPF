@@ -100,8 +100,7 @@ namespace BuildSys.ViewModels
 
         public Boolean canSaveCustomer ()
         {
-            // TODO: Only enable button if all Customer Validates
-            return true;
+            return !customer.HasErrors;
         }
 
     }

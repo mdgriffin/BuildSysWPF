@@ -92,8 +92,6 @@ namespace BuildSys.ViewModels
             CustomerList = new ObservableCollection<CustomerModel>(originalCustomerList);
             Regex matchName = new Regex(@"^" + customerFilter + @".+", RegexOptions.IgnoreCase);
 
-            // TODO: reset button
-
             if (customerFilter.Length > 0)
             {
                 CustomerList.Where(cust => !matchName.IsMatch(cust.firstname) && !matchName.IsMatch(cust.surname))
