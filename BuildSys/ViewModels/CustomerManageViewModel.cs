@@ -18,6 +18,9 @@ namespace BuildSys.ViewModels
             this.parent = parent;
 
             CustomerList = CustomerModel.getCustomerList();
+
+            // Keep a copy of the CustomerList so that we can restore the list after filtering
+            originalCustomerList = new ObservableCollection<CustomerModel>(CustomerList);
         }
 
         private String _customerFilter;
@@ -35,6 +38,8 @@ namespace BuildSys.ViewModels
                 }
             }
         }
+
+        private ObservableCollection<CustomerModel> originalCustomerList;
 
         private ObservableCollection<CustomerModel> _customerList = new ObservableCollection<CustomerModel>();
         public ObservableCollection<CustomerModel> CustomerList
@@ -78,15 +83,20 @@ namespace BuildSys.ViewModels
                 CustomerModel.deleteCustomer(customerId);
                 MessageBox.Show("Customer Deleted");
                 CustomerList.Where(cust => cust.customerId == customerId).ToList().All(i => CustomerList.Remove(i));
+                originalCustomerList.Where(cust => cust.customerId == customerId).ToList().All(i => CustomerList.Remove(i));
             }  
         }
 
         public void filterCustomers ()
         {
-            // TODO: Need to have a copy of the whole array
-            // TODO: If the filter is empty, show all customers
+            CustomerList = new ObservableCollection<CustomerModel>(originalCustomerList);
+
             // TODO: reset button
-            CustomerList.Where(cust => !Regex.IsMatch(cust.firstname, @"^" + customerFilter + @".+", RegexOptions.IgnoreCase)).ToList().All(i => CustomerList.Remove(i));
+
+            if (customerFilter.Length > 0)
+            {
+                CustomerList.Where(cust => !Regex.IsMatch(cust.firstname, @"^" + customerFilter + @".+", RegexOptions.IgnoreCase)).ToList().All(i => CustomerList.Remove(i));
+            }
         }
 
     }
