@@ -90,12 +90,15 @@ namespace BuildSys.ViewModels
         public void filterCustomers ()
         {
             CustomerList = new ObservableCollection<CustomerModel>(originalCustomerList);
+            Regex matchName = new Regex(@"^" + customerFilter + @".+", RegexOptions.IgnoreCase);
 
             // TODO: reset button
 
             if (customerFilter.Length > 0)
             {
-                CustomerList.Where(cust => !Regex.IsMatch(cust.firstname, @"^" + customerFilter + @".+", RegexOptions.IgnoreCase)).ToList().All(i => CustomerList.Remove(i));
+                CustomerList.Where(cust => !matchName.IsMatch(cust.firstname) && !matchName.IsMatch(cust.surname))
+                    .ToList()
+                    .All(i => CustomerList.Remove(i));
             }
         }
 
