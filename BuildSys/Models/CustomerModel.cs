@@ -274,6 +274,7 @@ namespace BuildSys.Models
                     }
                     break;
                 case "telno":
+                    // TODO: Allow spaces and a plus character
                     if (!Validator.isNumeric(telno))
                     {
                         errorMessage = Validator.ERROR_IS_NUMERIC;

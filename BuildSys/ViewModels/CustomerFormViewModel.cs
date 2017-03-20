@@ -89,6 +89,9 @@ namespace BuildSys.ViewModels
                 else
                 {
                     customer.insertCustomer();
+
+                    MessageBox.Show("Sucessfully Register a new customer");
+
                     // Reset the form
                     parent.ViewModel = new CustomerFormViewModel(parent);
                 }
