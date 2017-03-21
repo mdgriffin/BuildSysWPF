@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,6 +105,53 @@ namespace BuildSys.Models
             {
                 RemoveError(propertyName);
             }
+        }
+
+        public static ObservableCollection<MaterialModel> getMaterialList()
+        {
+            DataTable materialsTable = select("SELECT * FROM Materials");
+
+            ObservableCollection<MaterialModel> materialList = new ObservableCollection<MaterialModel>();
+
+            foreach (DataRow row in materialsTable.Rows)
+            {
+                materialList.Add(new MaterialModel(Int32.Parse(row["material_id"].ToString()), row["name"].ToString(), row["unit"].ToString(), Double.Parse(row["pricePerUnit"].ToString())));
+            }
+
+            return materialList;
+        }
+
+        public static MaterialModel getMaterial(int materialId)
+        {
+            DataTable materialsTable = select("SELECT * FROM Materials WHERE material_id = " + materialId);
+            DataRow material = materialsTable.Rows[0];
+
+            return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), Double.Parse(material["pricePerUnit"].ToString()));
+        }
+
+        public static void Material(int materialId)
+        {
+            delete("DELETE FROM Materials WHERE material_id = " + materialId);
+        }
+
+        public void insertMaterial()
+        {
+            insert("INSERT INTO Materials (name) VALUES('" +
+               name + "', '" +
+               unit + "', " +
+               pricePerUnit +
+            ")");
+        }
+
+        public void update()
+        {
+            String sqlUpdate = "Update Customers SET " +
+                "description = '" + name + "', ";
+
+
+            sqlUpdate += " WHERE material_id = " + materialId;
+
+            update(sqlUpdate);
         }
     }
 }
