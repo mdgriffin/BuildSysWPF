@@ -104,6 +104,9 @@ namespace BuildSys.Models
                     if (Validator.isEmpty(pricePerUnit))
                     {
                         errorMessage = Validator.ERROR_IS_VAT_NUM;
+                    } else if (Validator.isPrice(pricePerUnit))
+                    {
+                        errorMessage = Validator.ERROR_IS_PRICE;
                     }
                     break;
             }
