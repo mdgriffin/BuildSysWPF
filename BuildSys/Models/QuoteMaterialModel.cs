@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,5 +92,65 @@ namespace BuildSys.Models
         }
 
         public QuoteMaterialModel (int quoteId, int materialId) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", "") {  }
+
+        public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
+        {
+            DataTable quoteMaterialsTable = select("SELECT * FROM Quote_Materials");
+
+            ObservableCollection<QuoteMaterialModel> quoteMaterialsList = new ObservableCollection<QuoteMaterialModel>();
+
+            foreach (DataRow row in quoteMaterialsTable.Rows)
+            {
+                quoteMaterialsList.Add(new QuoteMaterialModel(
+                    Int32.Parse(row["quote_material_id"].ToString()),
+                    Int32.Parse(row["quote_id"].ToString()),
+                    Int32.Parse(row["material_id"].ToString()),
+                    row["description"].ToString(),
+                    row["price_per_unit"].ToString()
+                ));
+            }
+
+            return quoteMaterialsList;
+        }
+
+        public static QuoteMaterialModel getMaterial(int quoteMaterialId)
+        {
+            DataTable quoteMaterialsTable = select("SELECT * FROM Quote_Materials WHERE quote_material_id = " + quoteMaterialId);
+            DataRow quoteMat = quoteMaterialsTable.Rows[0];
+
+            return new QuoteMaterialModel(
+                Int32.Parse(quoteMat["quote_material_id"].ToString()),
+                Int32.Parse(quoteMat["quote_id"].ToString()),
+                Int32.Parse(quoteMat["material_id"].ToString()),
+                quoteMat["description"].ToString(),
+                quoteMat["price_per_unit"].ToString()
+            );
+        }
+
+        public static void delete(int quoteMaterialId)
+        {
+            delete("DELETE FROM Quote_Materials WHERE quote_material_id = " + quoteMaterialId);
+        }
+
+        public void insertMaterial()
+        {
+            insert("INSERT INTO Materials (name) VALUES('" +
+               quoteMaterialId + "', '" +
+               quoteId + "', '" +
+               materialId + "', '" +
+               description + "', " +
+               Double.Parse(pricePerUnit) +
+            ")");
+        }
+
+        public void update()
+        {
+            String sqlUpdate = "Update Quote_materials SET " +
+                "description = '" + description + "', " +
+                "price_per_unit = " + Double.Parse(pricePerUnit) +
+                " WHERE quote_material_id = " + quoteMaterialId;
+
+            update(sqlUpdate);
+        }
     }
 }
