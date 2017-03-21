@@ -9,7 +9,7 @@ namespace BuildSys.Models
 {
     class MaterialModel: BaseModel, INotifyDataErrorInfo
     {
-        public int materialId { get; set; }
+        private int materialId;
 
         public String _name;
         public String name
@@ -29,8 +29,52 @@ namespace BuildSys.Models
             }
         }
 
-        // TODO: All Props: Unit String, pricePerUnit double
-        // TODO: All Two constructors, a four arg, and a no arg
+        public String _unit;
+        public String unit
+        {
+            get
+            {
+                return _unit;
+            }
+            set
+            {
+                if (value != _unit)
+                {
+                    _unit = value;
+                    validateProp("unit");
+                    NotifyPropertyChanged("unit");
+                }
+            }
+        }
+
+        public double _pricePerUnit;
+        public double pricePerUnit
+        {
+            get
+            {
+                return _pricePerUnit;
+            }
+            set
+            {
+                if (value != _pricePerUnit)
+                {
+                    _pricePerUnit = value;
+                    validateProp("pricePerUnit");
+                    NotifyPropertyChanged("pricePerUnit");
+                }
+            }
+        }
+
+        public MaterialModel(int materialId, String name, String unit, double pricePerUnit)
+        {
+            this.materialId = materialId;
+            this._name = name;
+            this._unit = unit;
+            this._pricePerUnit = pricePerUnit;
+        }
+
+        public MaterialModel() : this(getNextRowId("material_id", "materials"), "", "", 0) { }
+
         // TODO: Add methods for saving, updating, inserting and deleting
 
         public override void validateAllProps()
