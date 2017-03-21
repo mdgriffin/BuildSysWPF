@@ -29,7 +29,7 @@ namespace BuildSys.Models
             }
         }
 
-        // TODO: All Props: UnitId int (foreign key to units), pricePerUnit double
+        // TODO: All Props: Unit String, pricePerUnit double
         // TODO: All Two constructors, a four arg, and a no arg
         // TODO: Add methods for saving, updating, inserting and deleting
 
@@ -45,7 +45,7 @@ namespace BuildSys.Models
             switch (propertyName)
             {
                 case "name":
-                    if (Validator.isEmpty(name)
+                    if (Validator.isEmpty(name))
                     {
                         errorMessage = Validator.ERROR_IS_VAT_NUM;
                     }

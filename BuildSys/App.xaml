@@ -48,6 +48,23 @@
             <sys:String>Wicklow</sys:String>
         </x:Array>
 
+        <x:Array x:Key="Units" Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+            <sys:String>Metres</sys:String>
+            <sys:String>Metres Squared</sys:String>
+            <sys:String>Metres Cubed</sys:String>
+            <sys:String>Yard</sys:String>
+            <sys:String>Square Yards</sys:String>
+            <sys:String>Yards Cubed</sys:String>
+            <sys:String>Feet</sys:String>
+            <sys:String>Square Feet</sys:String>
+            <sys:String>Cubed Feet</sys:String>
+            <sys:String>Inches</sys:String>
+            <sys:String>CM</sys:String>
+            <sys:String>Hours</sys:String>
+            <sys:String>Days</sys:String>
+            <sys:String>Blocks</sys:String>
+        </x:Array>
+
         <x:Array x:Key="Titles" Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
             <sys:String>Mr</sys:String>
             <sys:String>Mrs</sys:String>
