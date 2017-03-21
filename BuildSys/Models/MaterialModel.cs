@@ -49,8 +49,8 @@ namespace BuildSys.Models
             }
         }
 
-        public double _pricePerUnit;
-        public double pricePerUnit
+        public String _pricePerUnit;
+        public String pricePerUnit
         {
             get
             {
@@ -67,7 +67,7 @@ namespace BuildSys.Models
             }
         }
 
-        public MaterialModel(int materialId, String name, String unit, double pricePerUnit)
+        public MaterialModel(int materialId, String name, String unit, String pricePerUnit)
         {
             this.materialId = materialId;
             this._name = name;
@@ -75,9 +75,7 @@ namespace BuildSys.Models
             this._pricePerUnit = pricePerUnit;
         }
 
-        public MaterialModel() : this(getNextRowId("material_id", "materials"), "", "", 0) { }
-
-        // TODO: Add methods for saving, updating, inserting and deleting
+        public MaterialModel() : this(getNextRowId("material_id", "materials"), "", "", "") { }
 
         public override void validateAllProps()
         {
@@ -92,6 +90,18 @@ namespace BuildSys.Models
             {
                 case "name":
                     if (Validator.isEmpty(name))
+                    {
+                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                    }
+                    break;
+                case "unit":
+                    if (Validator.isEmpty(unit))
+                    {
+                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                    }
+                    break;
+                case "pricePerUnit":
+                    if (Validator.isEmpty(pricePerUnit))
                     {
                         errorMessage = Validator.ERROR_IS_VAT_NUM;
                     }
@@ -115,7 +125,7 @@ namespace BuildSys.Models
 
             foreach (DataRow row in materialsTable.Rows)
             {
-                materialList.Add(new MaterialModel(Int32.Parse(row["material_id"].ToString()), row["name"].ToString(), row["unit"].ToString(), Double.Parse(row["pricePerUnit"].ToString())));
+                materialList.Add(new MaterialModel(Int32.Parse(row["material_id"].ToString()), row["name"].ToString(), row["unit"].ToString(), row["pricePerUnit"].ToString()));
             }
 
             return materialList;
@@ -126,7 +136,7 @@ namespace BuildSys.Models
             DataTable materialsTable = select("SELECT * FROM Materials WHERE material_id = " + materialId);
             DataRow material = materialsTable.Rows[0];
 
-            return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), Double.Parse(material["pricePerUnit"].ToString()));
+            return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), material["pricePerUnit"].ToString());
         }
 
         public static void Material(int materialId)
@@ -139,17 +149,17 @@ namespace BuildSys.Models
             insert("INSERT INTO Materials (name) VALUES('" +
                name + "', '" +
                unit + "', " +
-               pricePerUnit +
+               Double.Parse(pricePerUnit) +
             ")");
         }
 
         public void update()
         {
-            String sqlUpdate = "Update Customers SET " +
-                "description = '" + name + "', ";
-
-
-            sqlUpdate += " WHERE material_id = " + materialId;
+            String sqlUpdate = "Update Materials SET " +
+                "name = '" + name + "', " +
+                "unit = '" + unit + "', " +
+                "price_per_unit = " + Double.Parse(pricePerUnit) +
+                " WHERE material_id = " + materialId;
 
             update(sqlUpdate);
         }
