@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BuildSys.Models
 {
-    class QuoteMaterialModel
+    class QuoteMaterialModel: BaseModel, INotifyDataErrorInfo
     {
         private int quoteMaterialId; // Primary Key
         private int quoteId; // Foreign key to quotes
@@ -28,8 +29,8 @@ namespace BuildSys.Models
             }
         }
 
-        public double _pricePerUnit;
-        public double pricePerUnit
+        public String _pricePerUnit;
+        public String pricePerUnit
         {
             get
             {
@@ -41,6 +42,41 @@ namespace BuildSys.Models
                 {
                     _pricePerUnit = value;
                 }
+            }
+        }
+
+        public override void validateAllProps()
+        {
+            validateProp("description");
+            validateProp("pricePerUnit");
+        }
+
+        public override void validateProp(String propertyName)
+        {
+            String errorMessage = "";
+
+            switch (propertyName)
+            {
+                case "description":
+                    if (Validator.isEmpty(description))
+                    {
+                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                    }
+                    break;
+                case "pricePerUnit":
+                    if (Validator.isEmpty(pricePerUnit))
+                    {
+                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                    }
+                    break;
+            }
+            if (errorMessage != "")
+            {
+                AddError(propertyName, errorMessage);
+            }
+            else
+            {
+                RemoveError(propertyName);
             }
         }
     }
