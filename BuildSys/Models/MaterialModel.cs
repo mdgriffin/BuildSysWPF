@@ -151,7 +151,7 @@ namespace BuildSys.Models
 
         public void insertMaterial()
         {
-            insert("INSERT INTO Materials (name) VALUES(" +
+            insert("INSERT INTO Materials VALUES(" +
                 materialId + ", '" +
                name + "', '" +
                unit + "', " +
