@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,52 +13,53 @@ namespace BuildSys.Models
     class QuoteModel : BaseModel, INotifyDataErrorInfo
     {
         private int quoteId; // Foreign key to quote table
+        private DateTime dateIssued;
         private int customerId; // Foreign key to customers table
 
         // TODO: Quote Should have a description as String
+        // TODO: Add date amended
 
         public override void validateAllProps() { }
 
         public override void validateProp(String propertyName) { }
 
-        public QuoteModel (int quoteId, int customerId)
+        public QuoteModel (int quoteId, DateTime dateIssued, int customerId)
         {
             this.quoteId = quoteId;
             this.customerId = customerId;
         }
 
-        public QuoteModel (int customerId) : this(getNextRowId("quote_id", "Quotes"), customerId) { }
-        /*
-        public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
+        public QuoteModel (int customerId) : this(getNextRowId("quote_id", "Quotes"), new DateTime(), customerId) { }
+
+        public static ObservableCollection<QuoteModel> getQuoteList()
         {
-            DataTable quoteMaterialsTable = select("SELECT * FROM Quote_Materials");
+            String format = "yy-MMM-dd hh.mm.ss.fffffff{0} tt";
+            DataTable quotesTable = select("SELECT * FROM Quotes");
 
-            ObservableCollection<QuoteMaterialModel> quoteMaterialsList = new ObservableCollection<QuoteMaterialModel>();
+            ObservableCollection<QuoteModel> quoteList = new ObservableCollection<QuoteModel>();
 
-            foreach (DataRow row in quoteMaterialsTable.Rows)
+            foreach (DataRow row in quotesTable.Rows)
             {
-                quoteMaterialsList.Add(new QuoteMaterialModel(
-                    Int32.Parse(row["quote_material_id"].ToString()),
+                quoteList.Add(new QuoteModel(
                     Int32.Parse(row["quote_id"].ToString()),
-                    Int32.Parse(row["material_id"].ToString()),
-                    row["description"].ToString(),
-                    row["price_per_unit"].ToString()
+                    DateTime.ParseExact(row["date_issued"].ToString(), format, new CultureInfo("en-US")),
+                    Int32.Parse(row["customer_id"].ToString())
                 ));
             }
 
-            return quoteMaterialsList;
+            return quoteList;
         }
 
         public static QuoteModel getQuote(int quoteId)
         {
-            DataTable quotesTable = select("SELECT * FROM Quotes WHERE quote_id = " + quotId);
+            DataTable quotesTable = select("SELECT * FROM Quotes WHERE quote_id = " + quoteId);
             DataRow quote = quotesTable.Rows[0];
 
-            //String format = "yy-MMM-dd hh:mm:ss:fffffff";
+            // TODO: Test that this parses date correctly
+            String format = "yy-MMM-dd hh.mm.ss.fffffff{0} tt";
 
-            return new QuoteModel(Int32.Parse(quote["quote_id"], DateTime.ParseExact(quote["date_issued"].ToString(), format), Int32.Parse(quote["customer_id"]));
+            return new QuoteModel(Int32.Parse(quote["quote_id"].ToString()), DateTime.ParseExact(quote["date_issued"].ToString(), format, new CultureInfo("en-US")), Int32.Parse(quote["customer_id"].ToString()));
         }
-        */
 
         public static void delete(int quoteId)
         {
@@ -65,9 +68,10 @@ namespace BuildSys.Models
 
         public void insertMaterial()
         {
+            // TODO: Test date formatting
             insert("INSERT INTO Quotes VALUES('" +
-               quoteId + 
-               "CURRENT_TIMESTAMP, " +
+               quoteId +
+               dateIssued.ToString("MM/dd/yyyy hh:mm:ss tt") + 
                customerId +
             ")");
         }
