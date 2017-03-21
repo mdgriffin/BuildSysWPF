@@ -18,6 +18,14 @@ namespace BuildSys.Models
 
         public override void validateProp(String propertyName) { }
 
+        public QuoteModel (int quoteId, int customerId)
+        {
+            this.quoteId = quoteId;
+            this.customerId = customerId;
+        }
+
+        public QuoteModel (int customerId) : this(getNextRowId("quote_id", "Quotes"), customerId) { }
+
 
     }
 }
