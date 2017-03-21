@@ -79,5 +79,16 @@ namespace BuildSys.Models
                 RemoveError(propertyName);
             }
         }
+
+        public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, String pricePerUnit)
+        {
+            this.quoteMaterialId = quoteMaterialId;
+            this.quoteId = quoteId;
+            this.materialId = materialId;
+            this._description = description;
+            this._pricePerUnit = pricePerUnit;
+        }
+
+        public QuoteMaterialModel (int quoteId, int materialId) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", "") {  }
     }
 }
