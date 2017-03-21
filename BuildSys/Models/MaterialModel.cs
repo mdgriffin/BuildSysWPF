@@ -80,6 +80,8 @@ namespace BuildSys.Models
         public override void validateAllProps()
         {
             validateProp("name");
+            validateProp("unit");
+            validateProp("pricePerUnit");
         }
 
         public override void validateProp(String propertyName)
