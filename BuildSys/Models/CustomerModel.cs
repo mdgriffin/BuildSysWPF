@@ -224,7 +224,7 @@ namespace BuildSys.Models
 
         public CustomerModel(int customerId, String title, String firstname, String surname, String street, String town, String county, String telno, String email, char accountType) : this(customerId, title, firstname, surname, street, town, county, telno, email, accountType, null, null) { }
 
-        public CustomerModel() : this(getNextCustomerId(), "", "", "", "", "", "", "", "", 'P', "", "") { }
+        public CustomerModel() : this(getNextRowId("customer_id", "Customers"), "", "", "", "", "", "", "", "", 'P', "", "") { }
 
         public override void validateAllProps()
         {
@@ -334,11 +334,6 @@ namespace BuildSys.Models
             {
                 return new CustomerModel(Int32.Parse(cust["customer_id"].ToString()), cust["title"].ToString(), cust["firstname"].ToString(), cust["surname"].ToString(), cust["street"].ToString(), cust["town"].ToString(), cust["county"].ToString(), cust["telephone"].ToString(), cust["email"].ToString(), cust["account_type"].ToString().ToCharArray()[0]);
             }
-        }
-
-        public static int getNextCustomerId()
-        {
-            return getNextRowId("customer_id", "Customers");
         }
 
         public static void deleteCustomer (int customerId)
