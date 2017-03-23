@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="BuildSys.Views.MaterialForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BuildSys.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <StackPanel Name="frmReg" Margin="20">
+        <WrapPanel Margin="0,5">
+            <Label Content="Material Name" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center"  Text="{Binding material.name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+        </WrapPanel>
+
+        <WrapPanel Margin="0,5">
+            <Label Content="Unit" MinWidth="100"/>
+            <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" ItemsSource="{StaticResource Units}" SelectedItem="{Binding material.unit}"/>
+        </WrapPanel>
+
+        <WrapPanel Margin="0,5">
+            <Label Content="Price Per Unit" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center"  Text="{Binding material.pricePerUnit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+        </WrapPanel>
+
+        <Button Name="btnReg" Margin="0 10 0 0" Content="{Binding btnText, Mode=OneTime}" Command="{Binding saveMaterialCommand}" ToolTip="{Binding btnText, Mode=OneTime}" />
+    </StackPanel>
+
+</UserControl>

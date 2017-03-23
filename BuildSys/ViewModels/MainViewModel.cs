@@ -46,5 +46,13 @@ namespace BuildSys.ViewModels
                 return new RelayCommand(param => ViewModel = new CustomerFormViewModel(this), param => true);
             }
         }
+
+        public ICommand goToRegMaterial
+        {
+            get
+            {
+                return new RelayCommand(param => ViewModel = new MaterialFormViewModel(this), param => true);
+            }
+        }
     }
 }

@@ -86,6 +86,11 @@
         <DataTemplate DataType="{x:Type viewModels:CustomerManageViewModel}">
             <views:CustomerManage />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:MaterialFormViewModel}">
+            <views:MaterialForm />
+        </DataTemplate>
+
         <local:RadioAccountTypeConverter x:Key="RadioButtonCheckedConverter" />
 
     </Application.Resources>

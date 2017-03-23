@@ -89,20 +89,20 @@ namespace BuildSys.Models
                 case "name":
                     if (Validator.isEmpty(name))
                     {
-                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
                 case "unit":
                     if (Validator.isEmpty(unit))
                     {
-                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
                 case "pricePerUnit":
                     if (Validator.isEmpty(pricePerUnit))
                     {
-                        errorMessage = Validator.ERROR_IS_VAT_NUM;
-                    } else if (Validator.isPrice(pricePerUnit))
+                        errorMessage = Validator.ERROR_IS_EMPTY;
+                    } else if (!Validator.isPrice(pricePerUnit))
                     {
                         errorMessage = Validator.ERROR_IS_PRICE;
                     }
