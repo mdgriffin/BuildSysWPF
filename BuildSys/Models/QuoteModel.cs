@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuildSys.Models
 {
@@ -14,22 +10,61 @@ namespace BuildSys.Models
     {
         private int quoteId; // Foreign key to quote table
         private DateTime dateIssued;
+        private DateTime dateAmmended;
         private int customerId; // Foreign key to customers table
 
-        // TODO: Quote Should have a description as String
-        // TODO: Add date amended
-
-        public override void validateAllProps() { }
-
-        public override void validateProp(String propertyName) { }
-
-        public QuoteModel (int quoteId, DateTime dateIssued, int customerId)
+        public String _description;
+        public String description
         {
-            this.quoteId = quoteId;
-            this.customerId = customerId;
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                if (value != _description)
+                {
+                    _description = value;
+                }
+            }
         }
 
-        public QuoteModel (int customerId) : this(getNextRowId("quote_id", "Quotes"), new DateTime(), customerId) { }
+        public override void validateAllProps() {
+
+        }
+
+        public override void validateProp(String propertyName) {
+            String errorMessage = "";
+
+            switch (propertyName)
+            {
+                case "description":
+                    if (Validator.isEmpty(description))
+                    {
+                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                    }
+                    break;
+            }
+            if (errorMessage != "")
+            {
+                AddError(propertyName, errorMessage);
+            }
+            else
+            {
+                RemoveError(propertyName);
+            }
+        }
+
+        public QuoteModel (int quoteId, DateTime dateIssued, int customerId, String description, DateTime dateAmmended)
+        {
+            this.quoteId = quoteId;
+            this.dateIssued = dateIssued;
+            this.customerId = customerId;
+            this._description = description;
+            this.dateAmmended = dateAmmended;
+        }
+
+        public QuoteModel (int customerId) : this(getNextRowId("quote_id", "Quotes"), new DateTime(), customerId, "", new DateTime()) { }
 
         public static ObservableCollection<QuoteModel> getQuoteList()
         {
@@ -43,7 +78,9 @@ namespace BuildSys.Models
                 quoteList.Add(new QuoteModel(
                     Int32.Parse(row["quote_id"].ToString()),
                     DateTime.ParseExact(row["date_issued"].ToString(), format, new CultureInfo("en-US")),
-                    Int32.Parse(row["customer_id"].ToString())
+                    Int32.Parse(row["customer_id"].ToString()),
+                    row["description"].ToString(),
+                    DateTime.ParseExact(row["date_ammended"].ToString(), format, new CultureInfo("en-US"))
                 ));
             }
 
@@ -58,29 +95,38 @@ namespace BuildSys.Models
             // TODO: Test that this parses date correctly
             String format = "yy-MMM-dd hh.mm.ss.fffffff{0} tt";
 
-            return new QuoteModel(Int32.Parse(quote["quote_id"].ToString()), DateTime.ParseExact(quote["date_issued"].ToString(), format, new CultureInfo("en-US")), Int32.Parse(quote["customer_id"].ToString()));
+            return new QuoteModel(
+                Int32.Parse(quote["quote_id"].ToString()),
+                DateTime.ParseExact(quote["date_issued"].ToString(), format, new CultureInfo("en-US")),
+                Int32.Parse(quote["customer_id"].ToString()),
+                quote["description"].ToString(),
+                DateTime.ParseExact(quote["date_ammended"].ToString(), format, new CultureInfo("en-US"))
+            );
         }
 
         public static void delete(int quoteId)
         {
+            // Change deleting to changing a status char
             delete("DELETE FROM Quotes WHERE quote_id = " + quoteId);
         }
 
-        public void insertMaterial()
+        public void insertQuote()
         {
             // TODO: Test date formatting
             insert("INSERT INTO Quotes VALUES('" +
                quoteId +
                dateIssued.ToString("MM/dd/yyyy hh:mm:ss tt") + 
                customerId +
+               description +
+               dateAmmended.ToString("MM/dd/yyyy hh:mm:ss tt") +
             ")");
         }
 
         public void update()
         {
             String sqlUpdate = "Update Quotes SET " +
-                "customer_id = " + customerId + ", " +
-                "date_issued = CURRENT_TIMESTAMP" +
+                "description = " + description + ", " +
+                "date_amended = CURRENT_TIMESTAMP" +
                 " WHERE quote_id = " + quoteId;
 
             update(sqlUpdate);
