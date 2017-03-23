@@ -310,7 +310,7 @@ namespace BuildSys.Models
 
         public static ObservableCollection<CustomerModel> getCustomerList()
         {
-            DataTable customersTable =  select("SELECT * FROM Customers");
+            DataTable customersTable =  select("SELECT * FROM Customers WHERE status = 'A'");
 
             ObservableCollection<CustomerModel>  CustomerList = new ObservableCollection<CustomerModel>();
 
@@ -324,7 +324,7 @@ namespace BuildSys.Models
 
         public static CustomerModel getCustomer (int customerId)
         {
-            DataTable customersTable = select("SELECT * FROM Customers WHERE customer_id = " + customerId);
+            DataTable customersTable = select("SELECT * FROM Customers WHERE status = 'A' && customer_id = " + customerId);
             DataRow cust = customersTable.Rows[0];
 
             if (cust["account_type"] != null && cust["account_type"].ToString() == "B")
@@ -338,7 +338,11 @@ namespace BuildSys.Models
 
         public static void deleteCustomer (int customerId)
         {
-            delete("DELETE FROM Customers WHERE customer_id = " + customerId);
+            String sqlDelete = "Update Customers SET " +
+                "status = 'I', " +
+                " WHERE customer_id = " + customerId;
+
+            update(sqlDelete);
         }
 
         public void insertCustomer ()
