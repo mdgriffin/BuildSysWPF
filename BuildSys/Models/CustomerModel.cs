@@ -339,7 +339,7 @@ namespace BuildSys.Models
         public static void deleteCustomer (int customerId)
         {
             String sqlDelete = "Update Customers SET " +
-                "status = 'I', " +
+                "status = 'I' " +
                 " WHERE customer_id = " + customerId;
 
             update(sqlDelete);

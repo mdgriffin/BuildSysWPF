@@ -107,7 +107,7 @@ namespace BuildSys.Models
         public static void delete(int quoteId)
         {
             String sqlDelete = "Update Quotes SET " +
-                "status = 'I', " +
+                "status = 'I' " +
                 "date_amended = CURRENT_TIMESTAMP" +
                 " WHERE quote_id = " + quoteId;
 

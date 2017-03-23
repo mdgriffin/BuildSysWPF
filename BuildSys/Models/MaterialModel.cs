@@ -143,7 +143,7 @@ namespace BuildSys.Models
         public static void Material(int materialId)
         {
             String sqlDelete = "Update Materials SET " +
-                "status = 'I', " +
+                "status = 'I' " +
                 " WHERE material_id = " + materialId;
 
             update(sqlDelete);
