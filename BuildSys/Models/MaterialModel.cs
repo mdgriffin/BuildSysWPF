@@ -151,12 +151,14 @@ namespace BuildSys.Models
 
         public void insertMaterial()
         {
-            insert("INSERT INTO Materials VALUES(" +
+            String insertStmt = "INSERT INTO Materials (material_id, name, unit, price_per_unit) VALUES(" +
                 materialId + ", '" +
                name + "', '" +
                unit + "', " +
                Double.Parse(pricePerUnit) +
-            ")");
+            ")";
+
+            insert(insertStmt);
         }
 
         public void update()

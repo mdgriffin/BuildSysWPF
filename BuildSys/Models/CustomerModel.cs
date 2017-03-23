@@ -358,7 +358,8 @@ namespace BuildSys.Models
 
         public void insertBusinessCustomer()
         {
-            insert("INSERT INTO Customers VALUES('" +
+            // TODO: Test
+            insert("INSERT INTO Customers (customer_id, company_name, title, firstname, surname, street, town, county, telephone, email, vat_no, account_type) VALUES('" +
                 customerId.ToString() + "','" +
                 companyName + "','" +
                 title + "','" +

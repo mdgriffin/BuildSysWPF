@@ -60,7 +60,7 @@ namespace BuildSys.ViewModels
                 {
                     material.insertMaterial();
 
-                    MessageBox.Show("Sucessfully Register a new customer");
+                    MessageBox.Show("Sucessfully Register a new Material");
 
                     // Reset the form
                     parent.ViewModel = new MaterialFormViewModel(parent);
