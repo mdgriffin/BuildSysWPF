@@ -22,24 +22,24 @@
                                 <WrapPanel>
 
                                     <Button
-                                Content="Edit"
-                                HorizontalAlignment="Center"
-                                Margin="2"
-                                Padding="7"
-                                Command="{Binding Path=DataContext.editCustomerCmd,       
-                                RelativeSource= {RelativeSource FindAncestor,
-                                AncestorType={x:Type DataGrid}}}"
-                                CommandParameter="{Binding customerId}" />
+                                        Content="Edit"
+                                        HorizontalAlignment="Center"
+                                        Margin="2"
+                                        Padding="7"
+                                        Command="{Binding Path=DataContext.editCustomerCmd,       
+                                        RelativeSource= {RelativeSource FindAncestor,
+                                        AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding customerId}" />
 
                                     <Button
-                                Content="Delete"
-                                HorizontalAlignment="Center"
-                                Margin="2"
-                                Padding="7"
-                                Command="{Binding Path=DataContext.deleteCustomerCmd,       
-                                RelativeSource= {RelativeSource FindAncestor,
-                                AncestorType={x:Type DataGrid}}}"
-                                CommandParameter="{Binding customerId}" />
+                                        Content="Delete"
+                                        HorizontalAlignment="Center"
+                                        Margin="2"
+                                        Padding="7"
+                                        Command="{Binding Path=DataContext.deleteCustomerCmd,       
+                                        RelativeSource= {RelativeSource FindAncestor,
+                                        AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding customerId}" />
 
                                 </WrapPanel>
                             </DataTemplate>
