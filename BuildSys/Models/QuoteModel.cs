@@ -69,7 +69,7 @@ namespace BuildSys.Models
         public static ObservableCollection<QuoteModel> getQuoteList()
         {
             String format = "yy-MMM-dd hh.mm.ss.fffffff{0} tt";
-            DataTable quotesTable = select("SELECT * FROM Quotes");
+            DataTable quotesTable = select("SELECT * FROM Quotes WHERE status = 'A'");
 
             ObservableCollection<QuoteModel> quoteList = new ObservableCollection<QuoteModel>();
 
@@ -89,7 +89,7 @@ namespace BuildSys.Models
 
         public static QuoteModel getQuote(int quoteId)
         {
-            DataTable quotesTable = select("SELECT * FROM Quotes WHERE quote_id = " + quoteId);
+            DataTable quotesTable = select("SELECT * FROM Quotes WHERE status = 'A' && quote_id = " + quoteId);
             DataRow quote = quotesTable.Rows[0];
 
             // TODO: Test that this parses date correctly
@@ -106,8 +106,12 @@ namespace BuildSys.Models
 
         public static void delete(int quoteId)
         {
-            // Change deleting to changing a status char
-            delete("DELETE FROM Quotes WHERE quote_id = " + quoteId);
+            String sqlUpdate = "Update Quotes SET " +
+                "status = 'I', " +
+                "date_amended = CURRENT_TIMESTAMP" +
+                " WHERE quote_id = " + quoteId;
+
+            update(sqlUpdate);
         }
 
         public void insertQuote()
