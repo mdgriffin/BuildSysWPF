@@ -124,7 +124,7 @@ namespace BuildSys.Models
 
         public static ObservableCollection<MaterialModel> getMaterialList()
         {
-            DataTable materialsTable = select("SELECT * FROM Materials");
+            DataTable materialsTable = select("SELECT * FROM Materials WHERE status = 'A'");
 
             ObservableCollection<MaterialModel> materialList = new ObservableCollection<MaterialModel>();
 
@@ -138,7 +138,7 @@ namespace BuildSys.Models
 
         public static MaterialModel getMaterial(int materialId)
         {
-            DataTable materialsTable = select("SELECT * FROM Materials WHERE material_id = " + materialId);
+            DataTable materialsTable = select("SELECT * FROM Materials WHERE status = 'A' && material_id = " + materialId);
             DataRow material = materialsTable.Rows[0];
 
             return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), material["pricePerUnit"].ToString());
@@ -146,7 +146,11 @@ namespace BuildSys.Models
 
         public static void Material(int materialId)
         {
-            delete("DELETE FROM Materials WHERE material_id = " + materialId);
+            String sqlDelete = "Update Materials SET " +
+                "status = 'I', " +
+                " WHERE material_id = " + materialId;
+
+            update(sqlDelete);
         }
 
         public void insertMaterial()
