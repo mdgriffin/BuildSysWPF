@@ -324,7 +324,7 @@ namespace BuildSys.Models
 
         public static CustomerModel getCustomer (int customerId)
         {
-            DataTable customersTable = select("SELECT * FROM Customers WHERE status = 'A' && customer_id = " + customerId);
+            DataTable customersTable = select("SELECT * FROM Customers WHERE customer_id = " + customerId);
             DataRow cust = customersTable.Rows[0];
 
             if (cust["account_type"] != null && cust["account_type"].ToString() == "B")

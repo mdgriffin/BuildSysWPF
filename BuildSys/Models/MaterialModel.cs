@@ -138,7 +138,7 @@ namespace BuildSys.Models
 
         public static MaterialModel getMaterial(int materialId)
         {
-            DataTable materialsTable = select("SELECT * FROM Materials WHERE status = 'A' && material_id = " + materialId);
+            DataTable materialsTable = select("SELECT * FROM Materials WHERE material_id = " + materialId);
             DataRow material = materialsTable.Rows[0];
 
             return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), material["pricePerUnit"].ToString());

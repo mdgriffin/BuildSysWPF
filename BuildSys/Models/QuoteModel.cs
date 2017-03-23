@@ -89,7 +89,7 @@ namespace BuildSys.Models
 
         public static QuoteModel getQuote(int quoteId)
         {
-            DataTable quotesTable = select("SELECT * FROM Quotes WHERE status = 'A' && quote_id = " + quoteId);
+            DataTable quotesTable = select("SELECT * FROM Quotes WHERE quote_id = " + quoteId);
             DataRow quote = quotesTable.Rows[0];
 
             // TODO: Test that this parses date correctly
