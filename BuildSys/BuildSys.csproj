@@ -70,6 +70,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\CustomerManageViewModel.cs" />
     <Compile Include="ViewModels\MaterialFormViewModel.cs" />
+    <Compile Include="ViewModels\MaterialManageViewModel.cs" />
     <Compile Include="Views\CustomerForm.xaml.cs">
       <DependentUpon>CustomerForm.xaml</DependentUpon>
     </Compile>
@@ -81,6 +82,9 @@
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="Views\MaterialForm.xaml.cs">
       <DependentUpon>MaterialForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MaterialManage.xaml.cs">
+      <DependentUpon>MaterialManage.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\CustomerForm.xaml">
       <SubType>Designer</SubType>
@@ -105,6 +109,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MaterialForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MaterialManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

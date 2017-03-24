@@ -5,9 +5,9 @@ using System.Data;
 
 namespace BuildSys.Models
 {
-    class MaterialModel: BaseModel, INotifyDataErrorInfo
+    public class MaterialModel: BaseModel, INotifyDataErrorInfo
     {
-        private int materialId;
+        public int materialId;
 
         public String _name;
         public String name
@@ -140,7 +140,7 @@ namespace BuildSys.Models
             return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), material["pricePerUnit"].ToString());
         }
 
-        public static void Material(int materialId)
+        public static void deleteMaterial(int materialId)
         {
             String sqlDelete = "Update Materials SET " +
                 "status = 'I' " +
