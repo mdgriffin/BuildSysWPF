@@ -68,6 +68,21 @@
 
                 <Label Content="I am in the second row first column" />
 
+                <WrapPanel Margin="0,5">
+                    <Label Content="Material Name" MinWidth="100"/>
+                    <TextBox MinWidth="150" VerticalAlignment="Center" IsEnabled="False"  Text="{Binding selectedMaterial.name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                </WrapPanel>
+
+                <WrapPanel Margin="0,5">
+                    <Label Content="Unit" MinWidth="100"/>
+                    <TextBox MinWidth="150" VerticalAlignment="Center" IsEnabled="False"  Text="{Binding selectedMaterial.unit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"/>
+                </WrapPanel>
+
+                <WrapPanel Margin="0,5">
+                    <Label Content="Price Per Unit" MinWidth="100"/>
+                    <TextBox MinWidth="150" VerticalAlignment="Center" IsEnabled="False"  Text="{Binding selectedMaterial.pricePerUnit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                </WrapPanel>
+
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="1">
