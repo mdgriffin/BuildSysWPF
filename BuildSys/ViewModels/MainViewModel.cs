@@ -14,7 +14,7 @@ namespace BuildSys.ViewModels
 
         public MainViewModel()
         {
-            ViewModel = new CustomerManageViewModel(this);
+            ViewModel = new QuoteFormViewModel(this);
         }
 
         private BaseViewModel _ViewModel;
@@ -60,6 +60,14 @@ namespace BuildSys.ViewModels
             get
             {
                 return new RelayCommand(param => ViewModel = new MaterialManageViewModel(this), param => true);
+            }
+        }
+
+        public ICommand goToRegQuote
+        {
+            get
+            {
+                return new RelayCommand(param => ViewModel = new QuoteFormViewModel(this), param => true);
             }
         }
     }

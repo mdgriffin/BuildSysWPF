@@ -9,6 +9,17 @@
     
     <Application.Resources>
 
+        <!-- App Styling -->
+        <Style x:Key="MainHeading" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Foreground" Value="Blue" />
+        </Style>
+        
+        <Style x:Key="SecondaryHeading" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Foreground" Value="CadetBlue" />
+        </Style>
+
         <s:Char x:Key="PerChar">P</s:Char>
         <s:Char x:Key="BusChar">B</s:Char>
 
@@ -93,6 +104,10 @@
 
         <DataTemplate DataType="{x:Type viewModels:MaterialManageViewModel}">
             <views:MaterialManage />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:QuoteFormViewModel}">
+            <views:QuoteForm />
         </DataTemplate>
 
         <local:RadioAccountTypeConverter x:Key="RadioButtonCheckedConverter" />
