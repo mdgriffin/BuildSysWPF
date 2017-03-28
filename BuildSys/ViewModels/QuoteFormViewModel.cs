@@ -80,9 +80,7 @@ namespace BuildSys.ViewModels
         public void addMaterial (int materialId)
         {
             selectedMaterial = MaterialModel.getMaterial(materialId);
-
-            // TODO: Replace with an actual Quote ID
-            quoteMaterial = new QuoteMaterialModel(1, materialId);
+            quoteMaterial = new QuoteMaterialModel(quote.quoteId, materialId);
         }
 
         public ICommand saveQuoteMaterialCmd
@@ -96,14 +94,13 @@ namespace BuildSys.ViewModels
 
         public void saveQuoteMaterial ()
         {
-            if (quoteMaterial != null && !quoteMaterial.HasErrors)
+            if (selectedMaterial != null && quoteMaterial != null && !quoteMaterial.HasErrors)
             {
                 quoteMaterial.insertMaterial();
 
                 // TODO: Add to the QuotMaterialsList
 
-                // TODO: Reset the form
-                //quoteMaterial = new QuoteMaterialModel();
+                quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId);
             }
             
         }

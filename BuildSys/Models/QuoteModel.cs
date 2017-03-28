@@ -8,7 +8,7 @@ namespace BuildSys.Models
 {
     class QuoteModel : BaseModel, INotifyDataErrorInfo
     {
-        private int quoteId; // Foreign key to quote table
+        public int quoteId { get; } // Foreign key to quote table
         private DateTime dateIssued;
         private DateTime dateAmmended;
         private int customerId; // Foreign key to customers table
