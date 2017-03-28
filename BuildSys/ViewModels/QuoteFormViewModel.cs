@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using BuildSys.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Windows;
 
 namespace BuildSys.ViewModels
 {
     class QuoteFormViewModel: BaseViewModel
     {
         MainViewModel parent;
+        int customerId;
 
         public QuoteFormViewModel (MainViewModel parent, int customerId)
         {
             this.parent = parent;
+            this.customerId = customerId;
 
             quote = new QuoteModel(customerId);
 
@@ -25,20 +28,27 @@ namespace BuildSys.ViewModels
             //material = new QuoteMaterialModel();
         }
 
-        public QuoteFormViewModel(MainViewModel parent)
-        {
-            this.parent = parent;
-
-            //quote = new QuoteModel(customerId);
-
-            materialList = MaterialModel.getMaterialList();
-
-            // TODO: Set the Quote Material when the customer clicks selects a material to add
-            //material = new QuoteMaterialModel();
-        }
+        // TODO: Add a constructor that accepts the quoteId    
 
         public QuoteModel quote { get; set; }
-        public QuoteMaterialModel material { get; set; }
+
+
+        private QuoteMaterialModel _quoteMaterial { get; set; }
+        public QuoteMaterialModel quoteMaterial
+        {
+            get
+            {
+                return _quoteMaterial;
+            }
+            set
+            {
+                if (value != _quoteMaterial)
+                {
+                    _quoteMaterial = value;
+                    NotifyPropertyChanged("quoteMaterial");
+                }
+            }
+        }
 
         public MaterialModel _selectedMaterial;
         public MaterialModel selectedMaterial {
@@ -62,7 +72,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(materialId => addMaterial((int) materialId), param => canAddMaterial());
+                return new RelayCommand(materialId => addMaterial((int) materialId), param => true);
             }
         }
 
@@ -70,12 +80,33 @@ namespace BuildSys.ViewModels
         public void addMaterial (int materialId)
         {
             selectedMaterial = MaterialModel.getMaterial(materialId);
+
+            // TODO: Replace with an actual Quote ID
+            quoteMaterial = new QuoteMaterialModel(1, materialId);
         }
 
-
-        public Boolean canAddMaterial ()
+        public ICommand saveQuoteMaterialCmd
         {
-            return true;
+            get
+            {
+                return new RelayCommand(param => saveQuoteMaterial(), param => true);
+            }
         }
+
+
+        public void saveQuoteMaterial ()
+        {
+            if (quoteMaterial != null && !quoteMaterial.HasErrors)
+            {
+                quoteMaterial.insertMaterial();
+
+                // TODO: Add to the QuotMaterialsList
+
+                // TODO: Reset the form
+                //quoteMaterial = new QuoteMaterialModel();
+            }
+            
+        }
+
     }
 }

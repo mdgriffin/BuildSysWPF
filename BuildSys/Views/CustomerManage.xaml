@@ -41,6 +41,16 @@
                                         AncestorType={x:Type DataGrid}}}"
                                         CommandParameter="{Binding customerId}" />
 
+                                    <Button
+                                        Content="Create Quote"
+                                        HorizontalAlignment="Center"
+                                        Margin="2"
+                                        Padding="7"
+                                        Command="{Binding Path=DataContext.createQuoteCmd,       
+                                        RelativeSource= {RelativeSource FindAncestor,
+                                        AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding customerId}" />
+
                                 </WrapPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

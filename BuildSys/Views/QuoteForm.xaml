@@ -83,6 +83,18 @@
                     <TextBox MinWidth="150" VerticalAlignment="Center" IsEnabled="False"  Text="{Binding selectedMaterial.pricePerUnit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
                 </WrapPanel>
 
+                <WrapPanel Margin="0,5">
+                    <Label Content="Description" MinWidth="100"/>
+                    <TextBox MinWidth="150" VerticalAlignment="Center" Text="{Binding quoteMaterial.description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+                </WrapPanel>
+
+                <WrapPanel Margin="0,5">
+                    <Label Content="Number of Units" MinWidth="100"/>
+                    <TextBox MinWidth="150" VerticalAlignment="Center" Text="{Binding quoteMaterial.numUnits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+                </WrapPanel>
+
+                <Button Margin="0 10 0 0" Content="Add Material To Quote" Command="{Binding saveQuoteMaterialCmd }" />
+
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="1">

@@ -26,7 +26,6 @@
                 <MenuItem Header="_Manage Existing Materials"  Command="{Binding goToManageMaterial}" />
             </MenuItem>
             <MenuItem Header="_Quotes">
-                <MenuItem Header="_Generate a Quote" Command="{Binding goToRegQuote}"/>
                 <MenuItem Header="_Manage Existing Quotes"/>
             </MenuItem>
             <MenuItem Header="_Reports">

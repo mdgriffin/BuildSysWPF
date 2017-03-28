@@ -100,6 +100,14 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand createQuoteCmd
+        {
+            get
+            {
+                return new RelayCommand((customerId) => parent.ViewModel = new QuoteFormViewModel(parent, (int) customerId), param => true);
+            }
+        }
+
     }
 
 }

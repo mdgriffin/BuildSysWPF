@@ -27,18 +27,18 @@ namespace BuildSys.Models
             }
         }
 
-        public String _pricePerUnit;
-        public String pricePerUnit
+        public int _numUnits;
+        public int numUnits
         {
             get
             {
-                return _pricePerUnit;
+                return _numUnits;
             }
             set
             {
-                if (value != _pricePerUnit)
+                if (value != _numUnits)
                 {
-                    _pricePerUnit = value;
+                    _numUnits = value;
                 }
             }
         }
@@ -46,7 +46,7 @@ namespace BuildSys.Models
         public override void validateAllProps()
         {
             validateProp("description");
-            validateProp("pricePerUnit");
+            validateProp("numUnits");
         }
 
         public override void validateProp(String propertyName)
@@ -58,13 +58,17 @@ namespace BuildSys.Models
                 case "description":
                     if (Validator.isEmpty(description))
                     {
-                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
-                case "pricePerUnit":
-                    if (Validator.isEmpty(pricePerUnit))
+                // TODO: Num Units should also be greater than zero
+                case "numUnits":
+                    if (Validator.isEmpty(numUnits.ToString()))
                     {
-                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
+                    } else if (!Validator.isNumeric(numUnits.ToString()))
+                    {
+                        errorMessage = Validator.ERROR_IS_NUMERIC;
                     }
                     break;
             }
@@ -78,16 +82,16 @@ namespace BuildSys.Models
             }
         }
 
-        public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, String pricePerUnit)
+        public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, int numUnits)
         {
             this.quoteMaterialId = quoteMaterialId;
             this.quoteId = quoteId;
             this.materialId = materialId;
             this._description = description;
-            this._pricePerUnit = pricePerUnit;
+            this._numUnits = numUnits;
         }
 
-        public QuoteMaterialModel (int quoteId, int materialId) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", "") {  }
+        public QuoteMaterialModel (int quoteId, int materialId) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", 0) {  }
 
         public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
         {
@@ -102,7 +106,7 @@ namespace BuildSys.Models
                     Int32.Parse(row["quote_id"].ToString()),
                     Int32.Parse(row["material_id"].ToString()),
                     row["description"].ToString(),
-                    row["price_per_unit"].ToString()
+                    Int32.Parse(row["num_units"].ToString())
                 ));
             }
 
@@ -119,7 +123,7 @@ namespace BuildSys.Models
                 Int32.Parse(quoteMat["quote_id"].ToString()),
                 Int32.Parse(quoteMat["material_id"].ToString()),
                 quoteMat["description"].ToString(),
-                quoteMat["price_per_unit"].ToString()
+                Int32.Parse(quoteMat["num_units"].ToString())
             );
         }
 
@@ -135,7 +139,7 @@ namespace BuildSys.Models
                quoteId + "', '" +
                materialId + "', '" +
                description + "', " +
-               Double.Parse(pricePerUnit) +
+               numUnits +
             ")");
         }
 
@@ -143,7 +147,7 @@ namespace BuildSys.Models
         {
             String sqlUpdate = "Update Quote_materials SET " +
                 "description = '" + description + "', " +
-                "price_per_unit = " + Double.Parse(pricePerUnit) +
+                "price_per_unit = " + numUnits +
                 " WHERE quote_material_id = " + quoteMaterialId;
 
             update(sqlUpdate);
