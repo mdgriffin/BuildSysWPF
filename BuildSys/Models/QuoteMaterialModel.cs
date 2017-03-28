@@ -89,6 +89,8 @@ namespace BuildSys.Models
             this.materialId = materialId;
             this._description = description;
             this._numUnits = numUnits;
+
+            // TODO: Add pricePerUnit, name and totalCost 
         }
 
         public QuoteMaterialModel (int quoteId, int materialId) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", 0) {  }
