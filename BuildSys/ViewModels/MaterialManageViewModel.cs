@@ -72,7 +72,7 @@ namespace BuildSys.ViewModels
 
         public void editMaterial(int materialId)
         {
-            parent.ViewModel = new CustomerFormViewModel(parent, materialId);
+            parent.ViewModel = new MaterialFormViewModel(parent, materialId);
         }
 
         public void deleteMaterial(int materialId)

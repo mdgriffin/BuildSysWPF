@@ -7,7 +7,7 @@ namespace BuildSys.Models
 {
     public class MaterialModel: BaseModel, INotifyDataErrorInfo
     {
-        public int materialId;
+        public int materialId { get; set; }
 
         public String _name;
         public String name
@@ -137,7 +137,7 @@ namespace BuildSys.Models
             DataTable materialsTable = select("SELECT * FROM Materials WHERE material_id = " + materialId);
             DataRow material = materialsTable.Rows[0];
 
-            return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), material["pricePerUnit"].ToString());
+            return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), material["price_per_unit"].ToString());
         }
 
         public static void deleteMaterial(int materialId)
