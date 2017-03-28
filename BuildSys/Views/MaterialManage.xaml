@@ -12,7 +12,7 @@
             <TextBox MinWidth="150" VerticalAlignment="Center" Text="{Binding materialFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         </WrapPanel>
         <Grid Width="Auto">
-            <DataGrid Margin="10" MaxHeight="450" ItemsSource="{Binding MaterialList}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid Margin="10" MaxHeight="450" ItemsSource="{Binding materialList}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Actions">
                         <DataGridTemplateColumn.CellTemplate>

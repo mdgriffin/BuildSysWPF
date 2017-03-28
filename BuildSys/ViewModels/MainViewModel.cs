@@ -31,7 +31,7 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public ICommand goToListCustomer
+        public ICommand goToManageCustomer
         {
             get
             {
@@ -52,6 +52,14 @@ namespace BuildSys.ViewModels
             get
             {
                 return new RelayCommand(param => ViewModel = new MaterialFormViewModel(this), param => true);
+            }
+        }
+
+        public ICommand goToManageMaterial
+        {
+            get
+            {
+                return new RelayCommand(param => ViewModel = new MaterialManageViewModel(this), param => true);
             }
         }
     }

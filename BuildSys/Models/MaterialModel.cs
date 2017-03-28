@@ -126,7 +126,7 @@ namespace BuildSys.Models
 
             foreach (DataRow row in materialsTable.Rows)
             {
-                materialList.Add(new MaterialModel(Int32.Parse(row["material_id"].ToString()), row["name"].ToString(), row["unit"].ToString(), row["pricePerUnit"].ToString()));
+                materialList.Add(new MaterialModel(Int32.Parse(row["material_id"].ToString()), row["name"].ToString(), row["unit"].ToString(), row["price_per_unit"].ToString()));
             }
 
             return materialList;
