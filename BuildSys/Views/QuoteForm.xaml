@@ -58,15 +58,9 @@
 
             </StackPanel>
 
-            <StackPanel Grid.Row="0" Grid.Column="1">
+            <StackPanel Margin="10" Grid.Row="0" Grid.Column="1">
 
-                <Label Content="I am in the first row second column" />
-
-            </StackPanel>
-
-            <StackPanel Grid.Row="1" Grid.Column="0">
-
-                <Label Content="I am in the second row first column" />
+                <Label Content="Material Details" Style="{StaticResource SecondaryHeading}"/>
 
                 <WrapPanel Margin="0,5">
                     <Label Content="Material Name" MinWidth="100"/>
@@ -94,12 +88,41 @@
                 </WrapPanel>
 
                 <Button Margin="0 10 0 0" Content="Add Material To Quote" Command="{Binding saveQuoteMaterialCmd }" />
-
+                
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
 
-                <Label Content="I am in the second row second column" />
+                <Label Content="Quote" Style="{StaticResource SecondaryHeading}" />
+
+                <DataGrid Margin="10" MaxHeight="450" ItemsSource="{Binding quoteMaterialList}" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Actions">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+
+                                        <Button
+                                            Content="Remove From Quote"
+                                            HorizontalAlignment="Center"
+                                            Margin="2"
+                                            Padding="7"
+                                            Command="{Binding Path=DataContext.removeQuoteMaterial,       
+                                            RelativeSource= {RelativeSource FindAncestor,
+                                            AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding quoteMaterialId}" />
+
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding name}" Header="Name" />
+                        <DataGridTextColumn Binding="{Binding name}" Header="Description" />
+                        <DataGridTextColumn Binding="{Binding pricePerUnit}" Header="pricePerUnit" />
+                        <DataGridTextColumn Binding="{Binding numUnits}" Header="NumUnits" />
+                        <DataGridTextColumn Binding="{Binding numUnits}" Header="totalCost" />
+                    </DataGrid.Columns>
+                </DataGrid>
 
             </StackPanel>
 
