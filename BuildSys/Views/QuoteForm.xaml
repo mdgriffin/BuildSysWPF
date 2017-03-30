@@ -74,7 +74,7 @@
 
                 <WrapPanel Margin="0,5">
                     <Label Content="Price Per Unit" MinWidth="100"/>
-                    <TextBox MinWidth="150" VerticalAlignment="Center" IsEnabled="False"  Text="{Binding selectedMaterial.pricePerUnit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                    <TextBox MinWidth="150" VerticalAlignment="Center" Text="{Binding quoteMaterial.pricePerUnit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}" />
                 </WrapPanel>
 
                 <WrapPanel Margin="0,5">
