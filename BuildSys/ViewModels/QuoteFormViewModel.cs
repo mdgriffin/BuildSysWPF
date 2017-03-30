@@ -24,9 +24,14 @@ namespace BuildSys.ViewModels
 
             materialList = MaterialModel.getMaterialList();
 
+            quoteMaterialList = new ObservableCollection<QuoteMaterialModel>();
+
             // TODO: Set the Quote Material when the customer clicks selects a material to add
             //material = new QuoteMaterialModel();
         }
+
+
+        public ObservableCollection<QuoteMaterialModel> quoteMaterialList { get; set; }
 
         // TODO: Add a constructor that accepts the quoteId    
 
@@ -96,11 +101,14 @@ namespace BuildSys.ViewModels
         {
             if (selectedMaterial != null && quoteMaterial != null && !quoteMaterial.HasErrors)
             {
-                quoteMaterial.insertMaterial();
+                //quoteMaterial.insertMaterial();
 
                 // TODO: Add to the QuotMaterialsList
 
                 quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit);
+
+                quoteMaterialList.Add(quoteMaterial);
+
             }
             
         }

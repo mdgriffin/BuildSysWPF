@@ -155,11 +155,12 @@ namespace BuildSys.Models
 
         public void insertMaterial()
         {
-            insert("INSERT INTO Materials VALUES('" +
-               quoteMaterialId + "', '" +
-               quoteId + "', '" +
-               materialId + "', '" +
+            insert("INSERT INTO Quote_Materials VALUES(" +
+               quoteMaterialId + ", " +
+               quoteId + ", " +
+               materialId + ", '" +
                description + "', " +
+               pricePerUnit + ", " +
                numUnits +
             ")");
         }
