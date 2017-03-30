@@ -23,6 +23,7 @@ namespace BuildSys.Models
                 if (value != _description)
                 {
                     _description = value;
+                    validateProp("description");
                 }
             }
         }
@@ -39,6 +40,23 @@ namespace BuildSys.Models
                 if (value != _numUnits)
                 {
                     _numUnits = value;
+                    validateProp("numUnits");
+                }
+            }
+        }
+
+        public String _pricePerUnit;
+        public String pricePerUnit
+        {
+            get
+            {
+                return _pricePerUnit;
+            }
+            set
+            {
+                if (value != _pricePerUnit)
+                {
+                    _pricePerUnit = value;
                 }
             }
         }
@@ -82,18 +100,17 @@ namespace BuildSys.Models
             }
         }
 
-        public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, int numUnits)
+        public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, String pricePerUnit, int numUnits)
         {
             this.quoteMaterialId = quoteMaterialId;
             this.quoteId = quoteId;
             this.materialId = materialId;
             this._description = description;
             this._numUnits = numUnits;
-
-            // TODO: Add pricePerUnit, name and totalCost 
+            this._pricePerUnit = pricePerUnit;
         }
 
-        public QuoteMaterialModel (int quoteId, int materialId) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", 0) {  }
+        public QuoteMaterialModel (int quoteId, int materialId, String pricePerUnit) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", pricePerUnit, 0) {  }
 
         public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
         {
@@ -108,6 +125,7 @@ namespace BuildSys.Models
                     Int32.Parse(row["quote_id"].ToString()),
                     Int32.Parse(row["material_id"].ToString()),
                     row["description"].ToString(),
+                    row["price_per_unit"].ToString(),
                     Int32.Parse(row["num_units"].ToString())
                 ));
             }
@@ -125,6 +143,7 @@ namespace BuildSys.Models
                 Int32.Parse(quoteMat["quote_id"].ToString()),
                 Int32.Parse(quoteMat["material_id"].ToString()),
                 quoteMat["description"].ToString(),
+                quoteMat["price_per_unit"].ToString(),
                 Int32.Parse(quoteMat["num_units"].ToString())
             );
         }
