@@ -10,7 +10,7 @@ namespace BuildSys.Models
         private int quoteMaterialId; // Primary Key
         private int quoteId; // Foreign key to quotes
         private int materialId; // Foreign key to materials
-        
+
         public String _description;
         public String description
         {
@@ -41,6 +41,7 @@ namespace BuildSys.Models
                 {
                     _numUnits = value;
                     validateProp("numUnits");
+                    this.totalCost = numUnits * Double.Parse(pricePerUnit);
                 }
             }
         }
@@ -57,9 +58,13 @@ namespace BuildSys.Models
                 if (value != _pricePerUnit)
                 {
                     _pricePerUnit = value;
+                    this.totalCost = numUnits * Double.Parse(pricePerUnit);
                 }
             }
         }
+
+        //private double _totalCost;
+        public double totalCost { get; set; }
 
         public override void validateAllProps()
         {
@@ -108,6 +113,7 @@ namespace BuildSys.Models
             this._description = description;
             this._numUnits = numUnits;
             this._pricePerUnit = pricePerUnit;
+            this.totalCost = numUnits * Double.Parse(pricePerUnit);
         }
 
         public QuoteMaterialModel (int quoteId, int materialId, String pricePerUnit) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", pricePerUnit, 0) {  }
