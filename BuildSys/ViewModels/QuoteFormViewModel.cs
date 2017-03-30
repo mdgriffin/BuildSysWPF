@@ -26,8 +26,27 @@ namespace BuildSys.ViewModels
 
             quoteMaterialList = new ObservableCollection<QuoteMaterialModel>();
 
+            updateTotalQuoteCost();
             // TODO: Set the Quote Material when the customer clicks selects a material to add
             //material = new QuoteMaterialModel();
+        }
+
+
+        private String _totalQuoteCost;
+        public String totalQuoteCost
+        {
+            get
+            {
+                return _totalQuoteCost;
+            }
+            set
+            {
+                if (value != _totalQuoteCost)
+                {
+                    _totalQuoteCost = value;
+                    NotifyPropertyChanged("totalQuoteCost");
+                }
+            }
         }
 
 
@@ -107,10 +126,24 @@ namespace BuildSys.ViewModels
 
                 quoteMaterialList.Add(quoteMaterial);
 
+                updateTotalQuoteCost();
+
                 quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit);
 
             }
             
+        }
+
+        public void updateTotalQuoteCost ()
+        {
+            double totalCost = 0;
+
+            foreach (QuoteMaterialModel quoteMaterial in quoteMaterialList)
+            {
+                totalCost += quoteMaterial.totalCost;
+            }
+
+            totalQuoteCost = "Total: €" + totalCost;
         }
 
     }
