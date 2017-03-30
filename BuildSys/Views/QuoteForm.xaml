@@ -116,11 +116,10 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding name}" Header="Name" />
-                        <DataGridTextColumn Binding="{Binding name}" Header="Description" />
+                        <DataGridTextColumn Binding="{Binding description}" Header="Description" />
                         <DataGridTextColumn Binding="{Binding pricePerUnit}" Header="pricePerUnit" />
                         <DataGridTextColumn Binding="{Binding numUnits}" Header="NumUnits" />
-                        <DataGridTextColumn Binding="{Binding numUnits}" Header="totalCost" />
+                        <DataGridTextColumn Binding="{Binding totalCost}" Header="totalCost" />
                     </DataGrid.Columns>
                 </DataGrid>
 

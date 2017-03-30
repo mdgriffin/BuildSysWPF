@@ -105,9 +105,9 @@ namespace BuildSys.ViewModels
 
                 // TODO: Add to the QuotMaterialsList
 
-                quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit);
-
                 quoteMaterialList.Add(quoteMaterial);
+
+                quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit);
 
             }
             
