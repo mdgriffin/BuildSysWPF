@@ -64,7 +64,23 @@ namespace BuildSys.Models
         }
 
         //private double _totalCost;
-        public double totalCost { get; set; }
+        private double _totalCost;
+
+        public double totalCost
+        {
+            get
+            {
+                return _totalCost;
+            }
+            set
+            {
+                if (value != _totalCost)
+                {
+                    _totalCost = value;
+                    NotifyPropertyChanged("totalCost");
+                }
+            }
+        }
 
         public override void validateAllProps()
         {
@@ -113,7 +129,7 @@ namespace BuildSys.Models
             this._description = description;
             this._numUnits = numUnits;
             this._pricePerUnit = pricePerUnit;
-            this.totalCost = numUnits * Double.Parse(pricePerUnit);
+            this._totalCost = numUnits * Double.Parse(pricePerUnit);
         }
 
         public QuoteMaterialModel (int quoteId, int materialId, String pricePerUnit) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", pricePerUnit, 0) {  }
