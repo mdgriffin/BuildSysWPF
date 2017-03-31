@@ -11,6 +11,7 @@ namespace BuildSys.ViewModels
         MainViewModel parent;
         int customerId;
 
+        // TODO: Add a constructor that accepts the quoteId  
         public QuoteFormViewModel (MainViewModel parent, int customerId)
         {
             this.parent = parent;
@@ -23,10 +24,7 @@ namespace BuildSys.ViewModels
             quoteMaterialList = new ObservableCollection<QuoteMaterialModel>();
 
             updateTotalQuoteCost();
-            // TODO: Set the Quote Material when the customer clicks selects a material to add
-            //material = new QuoteMaterialModel();
         }
-
 
         private String _totalQuoteCost;
         public String totalQuoteCost
@@ -45,13 +43,9 @@ namespace BuildSys.ViewModels
             }
         }
 
-
         public ObservableCollection<QuoteMaterialModel> quoteMaterialList { get; set; }
 
-        // TODO: Add a constructor that accepts the quoteId    
-
         public QuoteModel quote { get; set; }
-
 
         private QuoteMaterialModel _quoteMaterial { get; set; }
         public QuoteMaterialModel quoteMaterial

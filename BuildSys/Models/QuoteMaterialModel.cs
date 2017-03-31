@@ -137,9 +137,6 @@ namespace BuildSys.Models
 
         public QuoteMaterialModel(int quoteId, int materialId, String pricePerUnit) : this(0, quoteId, materialId, "", pricePerUnit, 0) { }
 
-        // TODO: remove quote material id from constructor, should only be added when inserting
-        //public QuoteMaterialModel (int quoteId, int materialId, String pricePerUnit) : this(quoteId, materialId, "", pricePerUnit, 0) {  }
-
         public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
         {
             DataTable quoteMaterialsTable = select("SELECT * FROM Quote_Materials");
