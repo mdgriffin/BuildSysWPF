@@ -112,7 +112,7 @@
                                             HorizontalAlignment="Center"
                                             Margin="2"
                                             Padding="7"
-                                            Command="{Binding Path=DataContext.removeQuoteMaterial,       
+                                            Command="{Binding Path=DataContext.removeQuoteMaterialCmd,       
                                             RelativeSource= {RelativeSource FindAncestor,
                                             AncestorType={x:Type DataGrid}}}"
                                             CommandParameter="{Binding quoteMaterialId}" />

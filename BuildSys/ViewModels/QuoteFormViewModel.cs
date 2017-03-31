@@ -7,6 +7,7 @@ using BuildSys.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BuildSys.ViewModels
 {
@@ -133,6 +134,23 @@ namespace BuildSys.ViewModels
             }
             
         }
+
+
+        public ICommand removeQuoteMaterialCmd
+        {
+            get
+            {
+                return new RelayCommand(quoteMaterialId => removeQuoteMaterial(quoteMaterialId), param => true);
+            }
+        }
+        
+
+        public void removeQuoteMaterial (Object obj)
+        {
+            MessageBox.Show(obj.GetType().ToString());
+            //MessageBox.Show("Row ID = " + rowId);
+        }
+
 
         public void updateTotalQuoteCost ()
         {

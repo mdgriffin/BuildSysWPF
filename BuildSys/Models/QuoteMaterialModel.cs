@@ -100,7 +100,6 @@ namespace BuildSys.Models
                         errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
-                // TODO: Num Units should also be greater than zero
                 case "numUnits":
                     if (Validator.isEmpty(numUnits.ToString()))
                     {
@@ -108,6 +107,9 @@ namespace BuildSys.Models
                     } else if (!Validator.isNumeric(numUnits.ToString()))
                     {
                         errorMessage = Validator.ERROR_IS_NUMERIC;
+                    } else if (numUnits > 0)
+                    {
+                        errorMessage = "Unit must be greater than 0";
                     }
                     break;
             }
@@ -132,6 +134,7 @@ namespace BuildSys.Models
             this._totalCost = numUnits * Double.Parse(pricePerUnit);
         }
 
+        // TODO: remove quote material id from constructor, should only be added when inserting
         public QuoteMaterialModel (int quoteId, int materialId, String pricePerUnit) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", pricePerUnit, 0) {  }
 
         public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
