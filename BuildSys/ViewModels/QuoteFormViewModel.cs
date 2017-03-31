@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BuildSys.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace BuildSys.ViewModels
 {
@@ -121,11 +116,9 @@ namespace BuildSys.ViewModels
         {
             if (selectedMaterial != null && quoteMaterial != null && !quoteMaterial.HasErrors)
             {
-                //quoteMaterial.insertMaterial();
-
-                // TODO: Add to the QuotMaterialsList
-
                 quoteMaterialList.Add(quoteMaterial);
+
+                quoteMaterial.listIndex = quoteMaterialList.IndexOf(quoteMaterial);
 
                 updateTotalQuoteCost();
 
@@ -135,19 +128,18 @@ namespace BuildSys.ViewModels
             
         }
 
-
         public ICommand removeQuoteMaterialCmd
         {
             get
             {
-                return new RelayCommand(quoteMaterialId => removeQuoteMaterial(quoteMaterialId), param => true);
+                return new RelayCommand(quoteMaterialListIndex => removeQuoteMaterial((int)quoteMaterialListIndex), param => true);
             }
         }
         
 
-        public void removeQuoteMaterial (Object obj)
+        public void removeQuoteMaterial (int quoteMaterialListIndex)
         {
-            MessageBox.Show(obj.GetType().ToString());
+            MessageBox.Show("List index: " + quoteMaterialListIndex);
             //MessageBox.Show("Row ID = " + rowId);
         }
 

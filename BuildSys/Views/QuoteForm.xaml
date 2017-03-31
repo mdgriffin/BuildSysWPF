@@ -115,7 +115,7 @@
                                             Command="{Binding Path=DataContext.removeQuoteMaterialCmd,       
                                             RelativeSource= {RelativeSource FindAncestor,
                                             AncestorType={x:Type DataGrid}}}"
-                                            CommandParameter="{Binding quoteMaterialId}" />
+                                            CommandParameter="{Binding listIndex}" />
 
                                     </WrapPanel>
                                 </DataTemplate>

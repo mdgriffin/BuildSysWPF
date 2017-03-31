@@ -11,6 +11,9 @@ namespace BuildSys.Models
         private int quoteId; // Foreign key to quotes
         private int materialId; // Foreign key to materials
 
+        // used in conjunction with the quote material list to get the specific index of a list item
+        public int listIndex { get; set; }
+
         public String _description;
         public String description
         {
@@ -63,9 +66,7 @@ namespace BuildSys.Models
             }
         }
 
-        //private double _totalCost;
         private double _totalCost;
-
         public double totalCost
         {
             get
@@ -107,7 +108,7 @@ namespace BuildSys.Models
                     } else if (!Validator.isNumeric(numUnits.ToString()))
                     {
                         errorMessage = Validator.ERROR_IS_NUMERIC;
-                    } else if (numUnits > 0)
+                    } else if (numUnits == 0)
                     {
                         errorMessage = "Unit must be greater than 0";
                     }
@@ -134,8 +135,10 @@ namespace BuildSys.Models
             this._totalCost = numUnits * Double.Parse(pricePerUnit);
         }
 
+        public QuoteMaterialModel(int quoteId, int materialId, String pricePerUnit) : this(0, quoteId, materialId, "", pricePerUnit, 0) { }
+
         // TODO: remove quote material id from constructor, should only be added when inserting
-        public QuoteMaterialModel (int quoteId, int materialId, String pricePerUnit) : this(getNextRowId("quote_material_id", "Quote_Materials"), quoteId, materialId, "", pricePerUnit, 0) {  }
+        //public QuoteMaterialModel (int quoteId, int materialId, String pricePerUnit) : this(quoteId, materialId, "", pricePerUnit, 0) {  }
 
         public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
         {
@@ -181,7 +184,7 @@ namespace BuildSys.Models
         public void insertMaterial()
         {
             insert("INSERT INTO Quote_Materials VALUES(" +
-               quoteMaterialId + ", " +
+               getNextRowId("quote_material_id", "Quote_Materials") + ", " +
                quoteId + ", " +
                materialId + ", '" +
                description + "', " +
