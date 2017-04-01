@@ -18,9 +18,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0">
+            <StackPanel Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+
+                <Label Content="Project Description" Style="{StaticResource SecondaryHeading}" />
+                <TextBox AcceptsReturn="True" Text="{Binding quote.description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="1" Grid.Column="0">
 
                 <Label Content="Select Material" Style="{StaticResource SecondaryHeading}" />
 
@@ -29,7 +37,7 @@
                     <TextBox MinWidth="150" VerticalAlignment="Center" Text="{Binding materialFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                 </WrapPanel>
 
-                <DataGrid Margin="10" MaxHeight="450" ItemsSource="{Binding materialList}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid  MaxHeight="450" ItemsSource="{Binding materialList}" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Actions">
                             <DataGridTemplateColumn.CellTemplate>
@@ -58,7 +66,7 @@
 
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="0" Grid.Column="1">
+            <StackPanel Margin="10" Grid.Row="1" Grid.Column="1">
 
                 <Label Content="Material Details" Style="{StaticResource SecondaryHeading}"/>
 
@@ -96,11 +104,11 @@
                 
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
+            <StackPanel Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
 
                 <Label Content="Quote" Style="{StaticResource SecondaryHeading}" />
 
-                <DataGrid Margin="10" MaxHeight="450" ItemsSource="{Binding quoteMaterialList}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid MaxHeight="450" ItemsSource="{Binding quoteMaterialList}" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Actions">
                             <DataGridTemplateColumn.CellTemplate>
@@ -127,7 +135,6 @@
                         <DataGridTextColumn Binding="{Binding totalCost}" Header="totalCost" />
                     </DataGrid.Columns>
                 </DataGrid>
-
 
                 <Label Content="{Binding totalQuoteCost}" />
 
