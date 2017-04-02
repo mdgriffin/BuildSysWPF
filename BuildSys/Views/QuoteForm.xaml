@@ -23,7 +23,7 @@
 
             <StackPanel Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 
-                <Label Content="Project Description" Style="{StaticResource SecondaryHeading}" />
+                <Label Content="Quote Description" Style="{StaticResource SecondaryHeading}" />
                 <TextBox AcceptsReturn="True" Height="Auto" TextWrapping="Wrap" Text="{Binding quote.description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
 
             </StackPanel>
@@ -139,6 +139,9 @@
                 <TextBlock Text="{Binding quote.subtotal, StringFormat=Subtotal: €{0}}" />
                 <TextBlock Text="{Binding quote.vat, StringFormat=VAT: €{0}}" />
                 <TextBlock Text="{Binding quote.total, StringFormat=Total: €{0}}" />
+
+
+                <Button Content="Save Quote" Command="{Binding saveQuoteCmd}" />
 
             </StackPanel>
 

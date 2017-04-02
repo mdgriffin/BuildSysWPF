@@ -162,5 +162,22 @@ namespace BuildSys.ViewModels
             quote.total = subtotal + vat;
         }
 
+        public ICommand saveQuotemd
+        {
+            get
+            {
+                // TODO: Button should e disabled if th selected material has erros
+                return new RelayCommand(param => saveQuote(), param => true);
+            }
+        }
+
+        public void saveQuote ()
+        {
+            // TODO: Check that there are materials in the list
+            // TODO: CHeck that there are no errors in quote
+            // TODO: Loop over quote materials and save each one
+            // TODO: Display confirmation
+        }
+
     }
 }
