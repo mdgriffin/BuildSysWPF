@@ -23,6 +23,9 @@
         <s:Char x:Key="PerChar">P</s:Char>
         <s:Char x:Key="BusChar">B</s:Char>
 
+        <s:Boolean x:Key="TrueBool">true</s:Boolean>
+        <s:Boolean x:Key="FalseBool">false</s:Boolean>
+
         <x:Array x:Key="Counties" Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
             <sys:String>Kerry</sys:String>
             <sys:String>Antrim</sys:String>
@@ -110,7 +113,8 @@
             <views:QuoteForm />
         </DataTemplate>
 
-        <local:RadioAccountTypeConverter x:Key="RadioButtonCheckedConverter" />
+        <local:RadioAccountTypeConverter x:Key="RadioAccountTypeConverter" />
+        <local:RadioIsServiceCheckedConverter x:Key="RadioIsServiceCheckedConverter" />
 
     </Application.Resources>
 

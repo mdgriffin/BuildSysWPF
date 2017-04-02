@@ -63,15 +63,34 @@ namespace BuildSys.Models
             }
         }
 
-        public MaterialModel(int materialId, String name, String unit, String pricePerUnit)
+
+        private Boolean _isService;
+        public Boolean isService
+        {
+            get
+            {
+                return _isService;
+            }
+            set
+            {
+                if (value != _isService)
+                {
+                    _isService = value;
+                    NotifyPropertyChanged("isService");
+                }
+            }
+        }
+
+        public MaterialModel(int materialId, String name, String unit, String pricePerUnit, Boolean isService)
         {
             this.materialId = materialId;
             this._name = name;
             this._unit = unit;
             this._pricePerUnit = pricePerUnit;
+            this._isService = isService;
         }
 
-        public MaterialModel() : this(getNextRowId("material_id", "materials"), "", "", "") { }
+        public MaterialModel() : this(getNextRowId("material_id", "materials"), "", "", "", false) { }
 
         public override void validateAllProps()
         {
@@ -126,7 +145,7 @@ namespace BuildSys.Models
 
             foreach (DataRow row in materialsTable.Rows)
             {
-                materialList.Add(new MaterialModel(Int32.Parse(row["material_id"].ToString()), row["name"].ToString(), row["unit"].ToString(), row["price_per_unit"].ToString()));
+                materialList.Add(new MaterialModel(Int32.Parse(row["material_id"].ToString()), row["name"].ToString(), row["unit"].ToString(), row["price_per_unit"].ToString(), row["is_service"].ToString().ToCharArray()[0] == '1'));
             }
 
             return materialList;
@@ -137,7 +156,7 @@ namespace BuildSys.Models
             DataTable materialsTable = select("SELECT * FROM Materials WHERE material_id = " + materialId);
             DataRow material = materialsTable.Rows[0];
 
-            return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), material["price_per_unit"].ToString());
+            return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), material["price_per_unit"].ToString(), material["is_service"].ToString().ToCharArray()[0] == '1');
         }
 
         public static void deleteMaterial(int materialId)
@@ -167,6 +186,7 @@ namespace BuildSys.Models
                 "name = '" + name + "', " +
                 "unit = '" + unit + "', " +
                 "price_per_unit = " + Double.Parse(pricePerUnit) +
+                "is_service = " + (isService? "1" : "0" ) + 
                 " WHERE material_id = " + materialId;
 
             update(sqlUpdate);

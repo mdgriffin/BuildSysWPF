@@ -23,6 +23,15 @@
             <TextBox MinWidth="150" VerticalAlignment="Center"  Text="{Binding material.pricePerUnit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
         </WrapPanel>
 
+        <WrapPanel
+            Margin="0,5">
+            <Label Content="Is Service" MinWidth="100"/>
+            <RadioButton VerticalAlignment="Center" GroupName="radIsService" Content="Yes" IsChecked="{Binding material.isService, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RadioIsServiceCheckedConverter},
+    ConverterParameter={StaticResource TrueBool}}"/>
+            <RadioButton VerticalAlignment="Center" Margin="10 0 0 0" GroupName="radIsService" Content="No" IsChecked="{Binding material.isService, UpdateSourceTrigger=PropertyChanged,  Converter={StaticResource RadioIsServiceCheckedConverter},
+    ConverterParameter={StaticResource FalseBool}}"  />
+        </WrapPanel>
+
         <Button Name="btnReg" Margin="0 10 0 0" Content="{Binding btnText, Mode=OneTime}" Command="{Binding saveMaterialCommand}" ToolTip="{Binding btnText, Mode=OneTime}" />
     </StackPanel>
 
