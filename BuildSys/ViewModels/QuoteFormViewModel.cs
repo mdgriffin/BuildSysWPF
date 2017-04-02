@@ -135,7 +135,8 @@ namespace BuildSys.ViewModels
 
         public void removeQuoteMaterial (int quoteMaterialListIndex)
         {
-            MessageBox.Show("List index: " + quoteMaterialListIndex);
+            quoteMaterialList.RemoveAt(quoteMaterialListIndex);
+            updateTotalQuoteCosts();
         }
 
 
