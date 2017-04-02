@@ -83,6 +83,23 @@ namespace BuildSys.Models
             }
         }
 
+        private Boolean _isService;
+        public Boolean isService
+        {
+            get
+            {
+                return _isService;
+            }
+            set
+            {
+                if (value != _isService)
+                {
+                    _isService = value;
+                    NotifyPropertyChanged("isService");
+                }
+            }
+        }
+
         public override void validateAllProps()
         {
             validateProp("description");
@@ -124,7 +141,7 @@ namespace BuildSys.Models
             }
         }
 
-        public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, String pricePerUnit, int numUnits)
+        public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, String pricePerUnit, int numUnits, Boolean isService)
         {
             this.quoteMaterialId = quoteMaterialId;
             this.quoteId = quoteId;
@@ -133,9 +150,10 @@ namespace BuildSys.Models
             this._numUnits = numUnits;
             this._pricePerUnit = pricePerUnit;
             this._totalCost = numUnits * Double.Parse(pricePerUnit);
+            this._isService = isService;
         }
 
-        public QuoteMaterialModel(int quoteId, int materialId, String pricePerUnit) : this(0, quoteId, materialId, "", pricePerUnit, 0) { }
+        public QuoteMaterialModel(int quoteId, int materialId, String pricePerUnit, Boolean isService) : this(0, quoteId, materialId, "", pricePerUnit, 0, isService) { }
 
         public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
         {
@@ -151,7 +169,8 @@ namespace BuildSys.Models
                     Int32.Parse(row["material_id"].ToString()),
                     row["description"].ToString(),
                     row["price_per_unit"].ToString(),
-                    Int32.Parse(row["num_units"].ToString())
+                    Int32.Parse(row["num_units"].ToString()),
+                    row["is_service"].ToString() == "1"
                 ));
             }
 
@@ -169,7 +188,8 @@ namespace BuildSys.Models
                 Int32.Parse(quoteMat["material_id"].ToString()),
                 quoteMat["description"].ToString(),
                 quoteMat["price_per_unit"].ToString(),
-                Int32.Parse(quoteMat["num_units"].ToString())
+                Int32.Parse(quoteMat["num_units"].ToString()),
+                quoteMat["is_service"].ToString() == "1"
             );
         }
 
@@ -186,8 +206,9 @@ namespace BuildSys.Models
                materialId + ", '" +
                description + "', " +
                pricePerUnit + ", " +
-               numUnits +
-            ")");
+               numUnits + ", " +
+               (isService? "1" : "0") +
+            " )");
         }
 
         public void update()
