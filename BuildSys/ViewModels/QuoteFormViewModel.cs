@@ -94,7 +94,7 @@ namespace BuildSys.ViewModels
         public void addMaterial (int materialId)
         {
             selectedMaterial = MaterialModel.getMaterial(materialId);
-            quoteMaterial = new QuoteMaterialModel(quote.quoteId, materialId, selectedMaterial.pricePerUnit);
+            quoteMaterial = new QuoteMaterialModel(quote.quoteId, materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
         }
 
         public ICommand saveQuoteMaterialCmd
@@ -116,7 +116,7 @@ namespace BuildSys.ViewModels
 
                 updateTotalQuoteCost();
 
-                quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit);
+                quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
 
             }
             
