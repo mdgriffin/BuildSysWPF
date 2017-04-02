@@ -94,7 +94,7 @@ namespace BuildSys.Models
                 case "description":
                     if (Validator.isEmpty(description))
                     {
-                        errorMessage = Validator.ERROR_IS_VAT_NUM;
+                        errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
                 case "total":
@@ -181,13 +181,15 @@ namespace BuildSys.Models
 
         public void insertQuote()
         {
-            // TODO: Test date formatting
-            insert("INSERT INTO Quotes VALUES('" +
-               quoteId +
-               dateIssued.ToString("MM/dd/yyyy hh:mm:ss tt") + 
-               customerId +
-               description +
-               dateAmmended.ToString("MM/dd/yyyy hh:mm:ss tt") +
+            insert("INSERT INTO Quotes VALUES(" +
+                quoteId + ", " +
+                "CURRENT_TIMESTAMP, " +
+                customerId + ", '" +
+                description + "', " +
+                "CURRENT_TIMESTAMP, " +
+                "'A'" + ", " +
+                subtotal + ", " +
+                vat +
             ")");
         }
 
@@ -196,6 +198,8 @@ namespace BuildSys.Models
             String sqlUpdate = "Update Quotes SET " +
                 "description = " + description + ", " +
                 "date_amended = CURRENT_TIMESTAMP" +
+                "subtotal = " + subtotal + ", " +
+                "vat = " + vat + ", " +
                 " WHERE quote_id = " + quoteId;
 
             update(sqlUpdate);

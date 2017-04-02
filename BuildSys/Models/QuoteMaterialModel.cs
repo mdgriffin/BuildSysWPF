@@ -7,7 +7,8 @@ namespace BuildSys.Models
 {
     class QuoteMaterialModel: BaseModel, INotifyDataErrorInfo
     {
-        private int quoteMaterialId; // Primary Key
+        // If a Quote Material has an id, it has already been saved
+        public int? quoteMaterialId; // Primary Key
         private int quoteId; // Foreign key to quotes
         private int materialId; // Foreign key to materials
 

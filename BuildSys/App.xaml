@@ -113,7 +113,7 @@
             <views:QuoteForm />
         </DataTemplate>
 
-        <local:RadioAccountTypeConverter x:Key="RadioAccountTypeConverter" />
+        <local:RadioAccountTypeConverter x:Key="RadioButtonCheckedConverter" />
         <local:RadioIsServiceCheckedConverter x:Key="RadioIsServiceCheckedConverter" />
 
     </Application.Resources>

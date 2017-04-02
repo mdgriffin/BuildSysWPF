@@ -49,7 +49,7 @@ namespace BuildSys.ViewModels
 
         public QuoteModel quote { get; set; }
 
-        private QuoteMaterialModel _quoteMaterial { get; set; }
+        private QuoteMaterialModel _quoteMaterial;
         public QuoteMaterialModel quoteMaterial
         {
             get
@@ -111,6 +111,8 @@ namespace BuildSys.ViewModels
 
         public void addMaterialToQuoteList()
         {
+            quoteMaterial.validateAllProps();
+
             if (selectedMaterial != null && quoteMaterial != null && !quoteMaterial.HasErrors)
             {
                 quoteMaterialList.Add(quoteMaterial);
@@ -120,6 +122,10 @@ namespace BuildSys.ViewModels
                 updateTotalQuoteCosts();
 
                 quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
+            }
+            else
+            {
+                MessageBox.Show("Material Form has Errors");
             }
             
         }
@@ -162,21 +168,54 @@ namespace BuildSys.ViewModels
             quote.total = subtotal + vat;
         }
 
-        public ICommand saveQuotemd
+        public ICommand saveQuoteCmd
         {
             get
             {
-                // TODO: Button should e disabled if th selected material has erros
                 return new RelayCommand(param => saveQuote(), param => true);
             }
         }
 
-        public void saveQuote ()
+        public void saveQuote()
         {
-            // TODO: Check that there are materials in the list
-            // TODO: CHeck that there are no errors in quote
-            // TODO: Loop over quote materials and save each one
-            // TODO: Display confirmation
+            //MessageBox.Show("Saving Quote!!");
+
+            if (materialList.Count > 0)
+            {
+                quote.validateAllProps();
+
+                if (!quote.HasErrors)
+                {
+                    // TODO: How do  know when to update?
+                    // TODO: Insert Quote Not Working
+                    quote.insertQuote();
+
+                    /*
+                    foreach (QuoteMaterialModel quoteMat in quoteMaterialList)
+                    {
+                        // TODO: Loop over quote materials and save each one
+                        // TODO: Display confirmation
+                        if (quoteMat.quoteMaterialId != null)
+                        {
+                            quoteMat.insertMaterial();
+                        }
+                        else
+                        {
+                            // TODO: Update the Quote Material
+                        }
+                    }
+                    */
+
+                    MessageBox.Show("Quote Saved");
+                } else
+                {
+                    MessageBox.Show("Quote has errors");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Add at least one material to the quote");
+            }
         }
 
     }
