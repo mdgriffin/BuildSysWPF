@@ -87,10 +87,10 @@
         </x:Array>
 
         <ControlTemplate x:Key="inputError">
-            <WrapPanel>
+            <StackPanel>
                 <AdornedElementPlaceholder x:Name="textBox"/>
-                <TextBlock Text="{Binding ErrorContent}" Foreground="White" Background="Red"/>
-            </WrapPanel>
+                <TextBlock Text="{Binding ErrorContent}" Foreground="Red"/>
+            </StackPanel>
         </ControlTemplate>
 
         <DataTemplate DataType="{x:Type viewModels:CustomerFormViewModel}">

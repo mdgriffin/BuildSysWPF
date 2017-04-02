@@ -31,8 +31,8 @@ namespace BuildSys.Models
             }
         }
 
-        public int _numUnits;
-        public int numUnits
+        public String _numUnits;
+        public String numUnits
         {
             get
             {
@@ -44,7 +44,10 @@ namespace BuildSys.Models
                 {
                     _numUnits = value;
                     validateProp("numUnits");
-                    this.totalCost = numUnits * Double.Parse(pricePerUnit);
+                    if (Validator.isNumeric(numUnits))
+                    {
+                        this.totalCost = Int32.Parse(numUnits) * Double.Parse(pricePerUnit);
+                    }
                 }
             }
         }
@@ -61,7 +64,12 @@ namespace BuildSys.Models
                 if (value != _pricePerUnit)
                 {
                     _pricePerUnit = value;
-                    this.totalCost = numUnits * Double.Parse(pricePerUnit);
+                    validateProp("pricePerUnit");
+                    if (Validator.isPrice(pricePerUnit))
+                    {
+                        this.totalCost = Int32.Parse(numUnits) * Double.Parse(pricePerUnit);
+                    }
+                    
                 }
             }
         }
@@ -118,14 +126,33 @@ namespace BuildSys.Models
                         errorMessage = Validator.ERROR_IS_EMPTY;
                     }
                     break;
+                case "pricePerUnit":
+                    if (Validator.isEmpty(pricePerUnit))
+                    {
+                        errorMessage = Validator.ERROR_IS_EMPTY;
+                    } else if (!Validator.isPrice(pricePerUnit))
+                    {
+                        errorMessage = Validator.ERROR_IS_PRICE;
+                    } else if (Double.Parse(pricePerUnit) == 0)
+                    {
+                        errorMessage = "Price Per Unit must be greater than 0";
+                    }
+                    break;
                 case "numUnits":
                     if (Validator.isEmpty(numUnits.ToString()))
                     {
                         errorMessage = Validator.ERROR_IS_EMPTY;
-                    } else if (!Validator.isNumeric(numUnits.ToString()))
+                    }
+                    else if (!Validator.isNumeric(numUnits.ToString()))
                     {
                         errorMessage = Validator.ERROR_IS_NUMERIC;
-                    } else if (numUnits == 0)
+
+                    }
+                    else if (!Validator.isNumeric(numUnits))
+                    {
+                        errorMessage = Validator.ERROR_IS_NUMERIC;
+                    }
+                    else if (Int32.Parse(numUnits) == 0)
                     {
                         errorMessage = "Unit must be greater than 0";
                     }
@@ -141,7 +168,7 @@ namespace BuildSys.Models
             }
         }
 
-        public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, String pricePerUnit, int numUnits, Boolean isService)
+        public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, String pricePerUnit, String numUnits, Boolean isService)
         {
             this.quoteMaterialId = quoteMaterialId;
             this.quoteId = quoteId;
@@ -149,11 +176,11 @@ namespace BuildSys.Models
             this._description = description;
             this._numUnits = numUnits;
             this._pricePerUnit = pricePerUnit;
-            this._totalCost = numUnits * Double.Parse(pricePerUnit);
+            this._totalCost = Int32.Parse(numUnits) * Double.Parse(pricePerUnit);
             this._isService = isService;
         }
 
-        public QuoteMaterialModel(int quoteId, int materialId, String pricePerUnit, Boolean isService) : this(0, quoteId, materialId, "", pricePerUnit, 0, isService) { }
+        public QuoteMaterialModel(int quoteId, int materialId, String pricePerUnit, Boolean isService) : this(0, quoteId, materialId, "", pricePerUnit, "0", isService) { }
 
         public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
         {
@@ -169,7 +196,7 @@ namespace BuildSys.Models
                     Int32.Parse(row["material_id"].ToString()),
                     row["description"].ToString(),
                     row["price_per_unit"].ToString(),
-                    Int32.Parse(row["num_units"].ToString()),
+                    row["num_units"].ToString(),
                     row["is_service"].ToString() == "1"
                 ));
             }
@@ -188,7 +215,7 @@ namespace BuildSys.Models
                 Int32.Parse(quoteMat["material_id"].ToString()),
                 quoteMat["description"].ToString(),
                 quoteMat["price_per_unit"].ToString(),
-                Int32.Parse(quoteMat["num_units"].ToString()),
+                quoteMat["num_units"].ToString(),
                 quoteMat["is_service"].ToString() == "1"
             );
         }

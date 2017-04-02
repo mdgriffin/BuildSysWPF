@@ -25,6 +25,7 @@ namespace BuildSys.Models
                 if (value != _description)
                 {
                     _description = value;
+                    validateProp("description");
                 }
             }
         }
@@ -81,7 +82,8 @@ namespace BuildSys.Models
         }
 
         public override void validateAllProps() {
-
+            validateProp("description");
+            validateProp("total");
         }
 
         public override void validateProp(String propertyName) {
@@ -93,6 +95,12 @@ namespace BuildSys.Models
                     if (Validator.isEmpty(description))
                     {
                         errorMessage = Validator.ERROR_IS_VAT_NUM;
+                    }
+                    break;
+                case "total":
+                    if (total == 0)
+                    {
+                        errorMessage = "Total must be greater than zero";
                     }
                     break;
             }
