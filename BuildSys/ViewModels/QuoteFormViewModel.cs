@@ -117,7 +117,6 @@ namespace BuildSys.ViewModels
                 updateTotalQuoteCost();
 
                 quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
-
             }
             
         }

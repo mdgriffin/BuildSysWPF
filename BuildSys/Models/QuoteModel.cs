@@ -29,6 +29,57 @@ namespace BuildSys.Models
             }
         }
 
+        private double _subtotal;
+        public double subtotal
+        {
+            get
+            {
+                return _subtotal;
+            }
+            set
+            {
+                if (_subtotal != value)
+                {
+                    _subtotal = value;
+                    NotifyPropertyChanged("subtotal");
+                }
+            }
+        }
+
+        private double _vat;
+        public double vat
+        {
+            get
+            {
+                return _vat;
+            }
+            set
+            {
+                if (_vat != value)
+                {
+                    _vat = value;
+                    NotifyPropertyChanged("vat");
+                }
+            }
+        }
+
+        private double _total;
+        public double total
+        {
+            get
+            {
+                return _total;
+            }
+            set
+            {
+                if (_total != value)
+                {
+                    _total = value;
+                    NotifyPropertyChanged("total");
+                }
+            }
+        }
+
         public override void validateAllProps() {
 
         }
@@ -55,16 +106,18 @@ namespace BuildSys.Models
             }
         }
 
-        public QuoteModel (int quoteId, DateTime dateIssued, int customerId, String description, DateTime dateAmmended)
+        public QuoteModel (int quoteId, DateTime dateIssued, int customerId, String description, DateTime dateAmmended, double vat, double subtotal)
         {
             this.quoteId = quoteId;
             this.dateIssued = dateIssued;
             this.customerId = customerId;
             this._description = description;
             this.dateAmmended = dateAmmended;
+            this._vat = vat;
+            this._subtotal = subtotal;
         }
 
-        public QuoteModel (int customerId) : this(getNextRowId("quote_id", "Quotes"), new DateTime(), customerId, "", new DateTime()) { }
+        public QuoteModel (int customerId) : this(getNextRowId("quote_id", "Quotes"), new DateTime(), customerId, "", new DateTime(), 0, 0) { }
 
         public static ObservableCollection<QuoteModel> getQuoteList()
         {
@@ -80,7 +133,9 @@ namespace BuildSys.Models
                     DateTime.ParseExact(row["date_issued"].ToString(), format, new CultureInfo("en-US")),
                     Int32.Parse(row["customer_id"].ToString()),
                     row["description"].ToString(),
-                    DateTime.ParseExact(row["date_ammended"].ToString(), format, new CultureInfo("en-US"))
+                    DateTime.ParseExact(row["date_ammended"].ToString(), format, new CultureInfo("en-US")),
+                    Double.Parse(row["vat"].ToString()),
+                    Double.Parse(row["subtotal"].ToString())
                 ));
             }
 
@@ -100,7 +155,9 @@ namespace BuildSys.Models
                 DateTime.ParseExact(quote["date_issued"].ToString(), format, new CultureInfo("en-US")),
                 Int32.Parse(quote["customer_id"].ToString()),
                 quote["description"].ToString(),
-                DateTime.ParseExact(quote["date_ammended"].ToString(), format, new CultureInfo("en-US"))
+                DateTime.ParseExact(quote["date_ammended"].ToString(), format, new CultureInfo("en-US")),
+                Double.Parse(quote["vat"].ToString()),
+                Double.Parse(quote["subtotal"].ToString())
             );
         }
 

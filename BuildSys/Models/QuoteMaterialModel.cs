@@ -66,23 +66,6 @@ namespace BuildSys.Models
             }
         }
 
-        private double _totalCost;
-        public double totalCost
-        {
-            get
-            {
-                return _totalCost;
-            }
-            set
-            {
-                if (value != _totalCost)
-                {
-                    _totalCost = value;
-                    NotifyPropertyChanged("totalCost");
-                }
-            }
-        }
-
         private Boolean _isService;
         public Boolean isService
         {
@@ -96,6 +79,23 @@ namespace BuildSys.Models
                 {
                     _isService = value;
                     NotifyPropertyChanged("isService");
+                }
+            }
+        }
+
+        private double _totalCost;
+        public double totalCost
+        {
+            get
+            {
+                return _totalCost;
+            }
+            set
+            {
+                if (value != _totalCost)
+                {
+                    _totalCost = value;
+                    NotifyPropertyChanged("totalCost");
                 }
             }
         }
