@@ -103,7 +103,8 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(param => saveQuoteMaterial(), param => true);
+                // TODO: Button should e disabled if th selected material has erros
+                return new RelayCommand(param => saveQuoteMaterial(), param => selectedMaterial != null && !selectedMaterial.HasErrors);
             }
         }
 
