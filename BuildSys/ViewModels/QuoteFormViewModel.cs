@@ -23,9 +23,10 @@ namespace BuildSys.ViewModels
 
             quoteMaterialList = new ObservableCollection<QuoteMaterialModel>();
 
-            updateTotalQuoteCost();
+            updateTotalQuoteCosts();
         }
 
+        /*
         private String _totalQuoteCost;
         public String totalQuoteCost
         {
@@ -42,6 +43,7 @@ namespace BuildSys.ViewModels
                 }
             }
         }
+        */
 
         public ObservableCollection<QuoteMaterialModel> quoteMaterialList { get; set; }
 
@@ -114,7 +116,7 @@ namespace BuildSys.ViewModels
 
                 quoteMaterial.listIndex = quoteMaterialList.IndexOf(quoteMaterial);
 
-                updateTotalQuoteCost();
+                updateTotalQuoteCosts();
 
                 quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
             }
@@ -133,20 +135,29 @@ namespace BuildSys.ViewModels
         public void removeQuoteMaterial (int quoteMaterialListIndex)
         {
             MessageBox.Show("List index: " + quoteMaterialListIndex);
-            //MessageBox.Show("Row ID = " + rowId);
         }
 
 
-        public void updateTotalQuoteCost ()
+        public void updateTotalQuoteCosts ()
         {
-            double totalCost = 0;
+            double subtotal = 0;
+            double vat = 0;
 
             foreach (QuoteMaterialModel quoteMaterial in quoteMaterialList)
             {
-                totalCost += quoteMaterial.totalCost;
+                subtotal += quoteMaterial.totalCost;
+                if (quoteMaterial.isService)
+                {
+                    vat += quoteMaterial.totalCost * 0.135;
+                } else
+                {
+                    vat += quoteMaterial.totalCost * 0.21;
+                }
             }
 
-            totalQuoteCost = "Total: €" + totalCost;
+            quote.subtotal = subtotal;
+            quote.vat = vat;
+            quote.total = subtotal + vat;
         }
 
     }

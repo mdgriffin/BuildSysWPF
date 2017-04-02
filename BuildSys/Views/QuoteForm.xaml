@@ -136,7 +136,9 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Label Content="{Binding totalQuoteCost}" />
+                <TextBlock Text="{Binding quote.subtotal, StringFormat=Subtotal: €{0}}" />
+                <TextBlock Text="{Binding quote.vat, StringFormat=VAT: €{0}}" />
+                <TextBlock Text="{Binding quote.total, StringFormat=Total: €{0}}" />
 
             </StackPanel>
 
