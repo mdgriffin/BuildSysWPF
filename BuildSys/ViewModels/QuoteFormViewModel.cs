@@ -99,17 +99,17 @@ namespace BuildSys.ViewModels
             quoteMaterial = new QuoteMaterialModel(quote.quoteId, materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
         }
 
-        public ICommand saveQuoteMaterialCmd
+        public ICommand addMaterialoToQuoteListCmd
         {
             get
             {
                 // TODO: Button should e disabled if th selected material has erros
-                return new RelayCommand(param => saveQuoteMaterial(), param => selectedMaterial != null && !selectedMaterial.HasErrors);
+                return new RelayCommand(param => addMaterialToQuoteList(), param => selectedMaterial != null && !selectedMaterial.HasErrors);
             }
         }
 
 
-        public void saveQuoteMaterial ()
+        public void addMaterialToQuoteList()
         {
             if (selectedMaterial != null && quoteMaterial != null && !quoteMaterial.HasErrors)
             {
