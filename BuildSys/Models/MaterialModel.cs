@@ -170,11 +170,12 @@ namespace BuildSys.Models
 
         public void insertMaterial()
         {
-            String insertStmt = "INSERT INTO Materials (material_id, name, unit, price_per_unit) VALUES(" +
+            String insertStmt = "INSERT INTO Materials (material_id, name, unit, price_per_unit, is_serice) VALUES(" +
                 materialId + ", '" +
-               name + "', '" +
-               unit + "', " +
-               Double.Parse(pricePerUnit) +
+                name + "', '" +
+                unit + "', " +
+                Double.Parse(pricePerUnit) + "', " +
+                (isService? "1" : "0") +
             ")";
 
             insert(insertStmt);
