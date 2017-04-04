@@ -48,6 +48,8 @@
                     <DataGridTextColumn Binding="{Binding description}" Header="Description" />
                     <DataGridTextColumn Binding="{Binding subtotal}" Header="Subtotal" />
                     <DataGridTextColumn Binding="{Binding vat}" Header="VAT" />
+                    <DataGridTextColumn Binding="{Binding customer.firstname}" Header="Customer First Name" />
+                    <DataGridTextColumn Binding="{Binding customer.surname}" Header="Customer Surname" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

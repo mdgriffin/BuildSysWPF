@@ -11,7 +11,10 @@ namespace BuildSys.Models
         public int quoteId { get; } // Foreign key to quote table
         private DateTime dateIssued;
         private DateTime dateAmmended;
-        private int customerId; // Foreign key to customers table
+        //private int customerId; // Foreign key to customers table
+
+        // The Customer that the quote is created for
+        public CustomerModel customer { get; set; }
 
         public String _description;
         public String description
@@ -118,11 +121,13 @@ namespace BuildSys.Models
         {
             this.quoteId = quoteId;
             this.dateIssued = dateIssued;
-            this.customerId = customerId;
+            //this.customerId = customerId;
             this._description = description;
             this.dateAmmended = dateAmmended;
             this._vat = vat;
             this._subtotal = subtotal;
+            // Add the associated customer to the quot
+            this.customer = CustomerModel.getCustomer(customerId);
         }
 
         public QuoteModel (int customerId) : this(getNextRowId("quote_id", "Quotes"), new DateTime(), customerId, "", new DateTime(), 0, 0) { }
@@ -135,7 +140,7 @@ namespace BuildSys.Models
 
             foreach (DataRow row in quotesTable.Rows)
             {
-                quoteList.Add(new QuoteModel(
+                QuoteModel nextQuote = new QuoteModel(
                     Int32.Parse(row["quote_id"].ToString()),
                     DateTime.Parse(row["date_issued"].ToString()),
                     Int32.Parse(row["customer_id"].ToString()),
@@ -143,7 +148,9 @@ namespace BuildSys.Models
                     DateTime.Parse(row["date_ammended"].ToString()),
                     Double.Parse(row["vat"].ToString()),
                     Double.Parse(row["subtotal"].ToString())
-                ));
+                );
+
+                quoteList.Add(nextQuote);
             }
 
             return quoteList;
@@ -183,7 +190,7 @@ namespace BuildSys.Models
             insert("INSERT INTO Quotes VALUES(" +
                 quoteId + ", " +
                 "CURRENT_TIMESTAMP, " +
-                customerId + ", '" +
+                customer.customerId + ", '" +
                 description + "', " +
                 "CURRENT_TIMESTAMP, " +
                 "'A'" + ", " +
