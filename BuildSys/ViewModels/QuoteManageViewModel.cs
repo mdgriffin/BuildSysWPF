@@ -39,7 +39,7 @@ namespace BuildSys.ViewModels
                 if (value != _quoteFilter)
                 {
                     _quoteFilter = value;
-                    //filterQuotes();
+                    filterQuotes();
                 }
             }
         }
@@ -95,7 +95,7 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public void filterQuote()
+        public void filterQuotes()
         {
             quoteList = new ObservableCollection<QuoteModel>(originalQuoteList);
             Regex matchDescription = new Regex(@"^" + quoteFilter + @".+", RegexOptions.IgnoreCase);
