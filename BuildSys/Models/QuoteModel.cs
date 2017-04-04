@@ -129,7 +129,6 @@ namespace BuildSys.Models
 
         public static ObservableCollection<QuoteModel> getQuoteList()
         {
-            String format = "yy-MMM-dd hh.mm.ss.fffffff{0} tt";
             DataTable quotesTable = select("SELECT * FROM Quotes WHERE status = 'A'");
 
             ObservableCollection<QuoteModel> quoteList = new ObservableCollection<QuoteModel>();
@@ -138,10 +137,10 @@ namespace BuildSys.Models
             {
                 quoteList.Add(new QuoteModel(
                     Int32.Parse(row["quote_id"].ToString()),
-                    DateTime.ParseExact(row["date_issued"].ToString(), format, new CultureInfo("en-US")),
+                    DateTime.Parse(row["date_issued"].ToString()),
                     Int32.Parse(row["customer_id"].ToString()),
                     row["description"].ToString(),
-                    DateTime.ParseExact(row["date_ammended"].ToString(), format, new CultureInfo("en-US")),
+                    DateTime.Parse(row["date_ammended"].ToString()),
                     Double.Parse(row["vat"].ToString()),
                     Double.Parse(row["subtotal"].ToString())
                 ));

@@ -63,5 +63,13 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand goToManageQuotes
+        {
+            get
+            {
+                return new RelayCommand(param => ViewModel = new QuoteManageViewModel(this), param => true);
+            }
+        }
+
     }
 }
