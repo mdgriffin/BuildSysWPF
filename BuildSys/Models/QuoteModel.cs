@@ -10,7 +10,7 @@ namespace BuildSys.Models
     {
         public int quoteId { get; } // Foreign key to quote table
         private DateTime dateIssued;
-        private DateTime dateAmmended;
+        private DateTime dateAmended;
         //private int customerId; // Foreign key to customers table
 
         // The Customer that the quote is created for
@@ -117,13 +117,13 @@ namespace BuildSys.Models
             }
         }
 
-        public QuoteModel (int quoteId, DateTime dateIssued, int customerId, String description, DateTime dateAmmended, double vat, double subtotal)
+        public QuoteModel (int quoteId, DateTime dateIssued, int customerId, String description, DateTime dateAmended, double vat, double subtotal)
         {
             this.quoteId = quoteId;
             this.dateIssued = dateIssued;
             //this.customerId = customerId;
             this._description = description;
-            this.dateAmmended = dateAmmended;
+            this.dateAmended = dateAmended;
             this._vat = vat;
             this._subtotal = subtotal;
             // Add the associated customer to the quot
@@ -145,7 +145,7 @@ namespace BuildSys.Models
                     DateTime.Parse(row["date_issued"].ToString()),
                     Int32.Parse(row["customer_id"].ToString()),
                     row["description"].ToString(),
-                    DateTime.Parse(row["date_ammended"].ToString()),
+                    DateTime.Parse(row["date_amended"].ToString()),
                     Double.Parse(row["vat"].ToString()),
                     Double.Parse(row["subtotal"].ToString())
                 );
@@ -166,16 +166,16 @@ namespace BuildSys.Models
                 DateTime.Parse(quote["date_issued"].ToString()),
                 Int32.Parse(quote["customer_id"].ToString()),
                 quote["description"].ToString(),
-                DateTime.Parse(quote["date_ammended"].ToString()),
+                DateTime.Parse(quote["date_amended"].ToString()),
                 Double.Parse(quote["vat"].ToString()),
                 Double.Parse(quote["subtotal"].ToString())
             );
         }
 
-        public static void delete(int quoteId)
+        public static void deleteQuote(int quoteId)
         {
             String sqlDelete = "Update Quotes SET " +
-                "status = 'I' " +
+                "status = 'I', " +
                 "date_amended = CURRENT_TIMESTAMP" +
                 " WHERE quote_id = " + quoteId;
 

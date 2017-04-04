@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace BuildSys.ViewModels
 {
@@ -19,8 +22,8 @@ namespace BuildSys.ViewModels
 
             quoteList = QuoteModel.getQuoteList();
 
-            // Keep a copy of the materialList so that we can restore the list after filtering
-            originaQuoteList = new ObservableCollection<QuoteModel>(quoteList);
+            // Keep a copy of the quoteList so that we can restore the list after filtering
+            originalQuoteList = new ObservableCollection<QuoteModel>(quoteList);
 
 
         }
@@ -41,7 +44,7 @@ namespace BuildSys.ViewModels
             }
         }
 
-        private ObservableCollection<QuoteModel> originaQuoteList;
+        private ObservableCollection<QuoteModel> originalQuoteList;
 
         private ObservableCollection<QuoteModel> _quoteList = new ObservableCollection<QuoteModel>();
         public ObservableCollection<QuoteModel> quoteList
@@ -58,53 +61,51 @@ namespace BuildSys.ViewModels
             }
         }
 
-        /*
-        public ICommand editMaterialCmd
+        public ICommand editQuoteCmd
         {
             get
             {
-                return new RelayCommand((materialId) => editMaterial((int)materialId), param => true);
+                return new RelayCommand((quoteId) => editQuote((int)quoteId), param => true);
             }
         }
 
-        public ICommand deleteMaterialCmd
+        public ICommand deleteQuoteCmd
         {
             get
             {
-                return new RelayCommand((materialId) => deleteMaterial((int)materialId), param => true);
+                return new RelayCommand((quoteId) => deleteQuote((int)quoteId), param => true);
             }
         }
 
-        public void editMaterial(int materialId)
+        public void editQuote(int quoteId)
         {
-            parent.ViewModel = new MaterialFormViewModel(parent, materialId);
+            parent.ViewModel = new QuoteFormViewModel(parent, quoteId);
         }
 
-        public void deleteMaterial(int materialId)
+        public void deleteQuote(int quoteId)
         {
             MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
 
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-                MaterialModel.deleteMaterial(materialId);
-                MessageBox.Show("Material Deleted");
-                materialList.Where(mat => mat.materialId == materialId).ToList().All(i => materialList.Remove(i));
-                originalMaterialList.Where(mat => mat.materialId == materialId).ToList().All(i => materialList.Remove(i));
+                QuoteModel.deleteQuote(quoteId);
+                MessageBox.Show("Quote Deleted");
+                quoteList.Where(quote => quote.quoteId == quoteId).ToList().All(i => quoteList.Remove(i));
+                originalQuoteList.Where(quote => quote.quoteId == quoteId).ToList().All(i => quoteList.Remove(i));
             }
         }
 
-        public void filterMaterials()
+        public void filterQuote()
         {
-            materialList = new ObservableCollection<MaterialModel>(originalMaterialList);
-            Regex matchName = new Regex(@"^" + materialFilter + @".+", RegexOptions.IgnoreCase);
+            quoteList = new ObservableCollection<QuoteModel>(originalQuoteList);
+            Regex matchDescription = new Regex(@"^" + quoteFilter + @".+", RegexOptions.IgnoreCase);
 
-            if (materialFilter.Length > 0)
+            if (quoteFilter.Length > 0)
             {
-                materialList.Where(mat => !matchName.IsMatch(mat.name))
+                quoteList.Where(cust => !matchDescription.IsMatch(cust.description))
                     .ToList()
-                    .All(i => materialList.Remove(i));
+                    .All(i => quoteList.Remove(i));
             }
         }
-        */
     }
 }
