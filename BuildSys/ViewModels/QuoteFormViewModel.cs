@@ -10,6 +10,7 @@ namespace BuildSys.ViewModels
     {
         MainViewModel parent;
         int customerId;
+        Boolean editing;
 
         // TODO: Add a constructor that accepts the quoteId  
         public QuoteFormViewModel (MainViewModel parent, int customerId)
@@ -26,24 +27,19 @@ namespace BuildSys.ViewModels
             updateTotalQuoteCosts();
         }
 
-        /*
-        private String _totalQuoteCost;
-        public String totalQuoteCost
+        public QuoteFormViewModel(MainViewModel parent, int quoteId, Boolean editing)
         {
-            get
-            {
-                return _totalQuoteCost;
-            }
-            set
-            {
-                if (value != _totalQuoteCost)
-                {
-                    _totalQuoteCost = value;
-                    NotifyPropertyChanged("totalQuoteCost");
-                }
-            }
+            this.parent = parent;
+            this.editing = true;
+
+            this.quote = QuoteModel.getQuote(quoteId);
+            this.customerId = quote.customer.customerId;
+
+            materialList = MaterialModel.getMaterialList();
+            quoteMaterialList = QuoteMaterialModel.getQuoteMaterialList(quoteId);
+
+            updateTotalQuoteCosts();
         }
-        */
 
         public ObservableCollection<QuoteMaterialModel> quoteMaterialList { get; set; }
 

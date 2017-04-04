@@ -183,9 +183,9 @@ namespace BuildSys.Models
 
         public QuoteMaterialModel(int quoteId, int materialId, String pricePerUnit, Boolean isService) : this(0, quoteId, materialId, "", pricePerUnit, "0", isService) { }
 
-        public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList()
+        public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList(int quoteId)
         {
-            DataTable quoteMaterialsTable = select("SELECT * FROM Quote_Materials");
+            DataTable quoteMaterialsTable = select("SELECT * FROM Quote_Materials WHERE quote_id = " + quoteId);
 
             ObservableCollection<QuoteMaterialModel> quoteMaterialsList = new ObservableCollection<QuoteMaterialModel>();
 
