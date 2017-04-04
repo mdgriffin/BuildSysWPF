@@ -187,10 +187,8 @@ namespace BuildSys.ViewModels
                 if (!quote.HasErrors)
                 {
                     // TODO: How do  know when to update?
-                    // TODO: Insert Quote Not Working
                     quote.insertQuote();
 
-                    /*
                     foreach (QuoteMaterialModel quoteMat in quoteMaterialList)
                     {
                         // TODO: Loop over quote materials and save each one
@@ -204,7 +202,6 @@ namespace BuildSys.ViewModels
                             // TODO: Update the Quote Material
                         }
                     }
-                    */
 
                     MessageBox.Show("Quote Saved");
                 } else
