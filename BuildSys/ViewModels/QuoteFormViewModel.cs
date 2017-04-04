@@ -103,7 +103,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                // TODO: Button should e disabled if th selected material has erros
+                // TODO: Button should disabled if the selected material has errors
                 return new RelayCommand(param => addMaterialToQuoteList(), param => selectedMaterial != null && !selectedMaterial.HasErrors);
             }
         }
@@ -191,8 +191,6 @@ namespace BuildSys.ViewModels
 
                     foreach (QuoteMaterialModel quoteMat in quoteMaterialList)
                     {
-                        // TODO: Loop over quote materials and save each one
-                        // TODO: Display confirmation
                         if (quoteMat.quoteMaterialId != null)
                         {
                             quoteMat.insertMaterial();

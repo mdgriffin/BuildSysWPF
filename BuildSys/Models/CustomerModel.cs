@@ -274,10 +274,9 @@ namespace BuildSys.Models
                     }
                     break;
                 case "telno":
-                    // TODO: Allow spaces and a plus character
-                    if (!Validator.isNumeric(telno))
+                    if (!Validator.isTelNum(telno))
                     {
-                        errorMessage = Validator.ERROR_IS_NUMERIC;
+                        errorMessage = Validator.ERROR_IS_TEL_NUM;
                     }
                     break;
                 case "email":
@@ -358,7 +357,6 @@ namespace BuildSys.Models
 
         public void insertBusinessCustomer()
         {
-            // TODO: Test
             insert("INSERT INTO Customers (customer_id, company_name, title, firstname, surname, street, town, county, telephone, email, vat_no, account_type) VALUES('" +
                 customerId.ToString() + "','" +
                 companyName + "','" +

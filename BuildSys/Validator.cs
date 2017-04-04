@@ -19,6 +19,7 @@ namespace BuildSys
         public const String ERROR_IS_ALPHA = "Please enter alphabetic values only";
         public const String ERROR_IS_EMAIL = "Please enter a valid email address";
         public const String ERROR_IS_VAT_NUM = "Please enter a valid VAT Number";
+        public const String ERROR_IS_TEL_NUM = "Please enter a valid Telephone Number";
 
         public static Boolean isEmpty (String textVal)
         {
@@ -97,6 +98,11 @@ namespace BuildSys
             }
 
             return valid;
+        }
+
+        public static Boolean isTelNum(String textVal)
+        {
+            return Regex.Match(textVal, @"\+?\d+$").Success;
         }
 
     }

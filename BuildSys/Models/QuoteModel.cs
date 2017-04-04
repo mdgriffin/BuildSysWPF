@@ -161,15 +161,12 @@ namespace BuildSys.Models
             DataTable quotesTable = select("SELECT * FROM Quotes WHERE quote_id = " + quoteId);
             DataRow quote = quotesTable.Rows[0];
 
-            // TODO: Test that this parses date correctly
-            String format = "yy-MMM-dd hh.mm.ss.fffffff{0} tt";
-
             return new QuoteModel(
                 Int32.Parse(quote["quote_id"].ToString()),
-                DateTime.ParseExact(quote["date_issued"].ToString(), format, new CultureInfo("en-US")),
+                DateTime.Parse(quote["date_issued"].ToString()),
                 Int32.Parse(quote["customer_id"].ToString()),
                 quote["description"].ToString(),
-                DateTime.ParseExact(quote["date_ammended"].ToString(), format, new CultureInfo("en-US")),
+                DateTime.Parse(quote["date_ammended"].ToString()),
                 Double.Parse(quote["vat"].ToString()),
                 Double.Parse(quote["subtotal"].ToString())
             );
