@@ -141,7 +141,7 @@
                 <TextBlock Text="{Binding quote.total, StringFormat=Total: €{0}}" />
 
 
-                <Button Content="Save Quote" Command="{Binding saveQuoteCmd}" />
+                <Button Content="{Binding btnText}" Command="{Binding saveQuoteCmd}" />
 
             </StackPanel>
 

@@ -239,7 +239,7 @@ namespace BuildSys.Models
             " )");
         }
 
-        public void update()
+        public void updateMaterial()
         {
             String sqlUpdate = "Update Quote_materials SET " +
                 "description = '" + description + "', " +

@@ -10,12 +10,17 @@ namespace BuildSys.ViewModels
     {
         MainViewModel parent;
         int customerId;
-        Boolean editing;
+        // Set to true when the form has saved and we are updating not registering
+        Boolean updating;
 
         // TODO: Add a constructor that accepts the quoteId  
         public QuoteFormViewModel (MainViewModel parent, int customerId)
         {
             this.parent = parent;
+            // this is a new quote
+            this.updating = false;
+            btnText = "Create Qoute";
+
             this.customerId = customerId;
 
             quote = new QuoteModel(customerId);
@@ -27,10 +32,12 @@ namespace BuildSys.ViewModels
             updateTotalQuoteCosts();
         }
 
-        public QuoteFormViewModel(MainViewModel parent, int quoteId, Boolean editing)
+        public QuoteFormViewModel(MainViewModel parent, int quoteId, Boolean updating)
         {
             this.parent = parent;
-            this.editing = true;
+            // will be set to true
+            this.updating = updating;
+            btnText = "Update Quote";
 
             this.quote = QuoteModel.getQuote(quoteId);
             this.customerId = quote.customer.customerId;
@@ -44,6 +51,7 @@ namespace BuildSys.ViewModels
         public ObservableCollection<QuoteMaterialModel> quoteMaterialList { get; set; }
 
         public QuoteModel quote { get; set; }
+        public String btnText { get; set; }
 
         private QuoteMaterialModel _quoteMaterial;
         public QuoteMaterialModel quoteMaterial
@@ -174,26 +182,30 @@ namespace BuildSys.ViewModels
 
         public void saveQuote()
         {
-            //MessageBox.Show("Saving Quote!!");
-
             if (materialList.Count > 0)
             {
                 quote.validateAllProps();
 
                 if (!quote.HasErrors)
                 {
-                    // TODO: How do  know when to update?
-                    quote.insertQuote();
-
+                    if (updating)
+                    {
+                        quote.updateQuote();
+                    }
+                    else
+                    {
+                        quote.insertQuote();
+                    }
+                    
                     foreach (QuoteMaterialModel quoteMat in quoteMaterialList)
                     {
-                        if (quoteMat.quoteMaterialId != null)
+                        if (quoteMat.quoteMaterialId != 0)
                         {
-                            quoteMat.insertMaterial();
+                            quoteMat.updateMaterial();
                         }
                         else
                         {
-                            // TODO: Update the Quote Material
+                            quoteMat.insertMaterial();
                         }
                     }
 

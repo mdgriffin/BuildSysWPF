@@ -196,13 +196,13 @@ namespace BuildSys.Models
             ")");
         }
 
-        public void update()
+        public void updateQuote()
         {
             String sqlUpdate = "Update Quotes SET " +
-                "description = " + description + ", " +
-                "date_amended = CURRENT_TIMESTAMP" +
+                "description = '" + description + "', " +
+                "date_amended = CURRENT_TIMESTAMP ," +
                 "subtotal = " + subtotal + ", " +
-                "vat = " + vat + ", " +
+                "vat = " + vat +
                 " WHERE quote_id = " + quoteId;
 
             update(sqlUpdate);
