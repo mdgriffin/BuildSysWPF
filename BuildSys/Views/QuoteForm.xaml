@@ -8,7 +8,7 @@
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto">
     
-        <Grid Width="Auto">
+        <Grid Name="quoteFrm" Width="Auto">
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -21,14 +21,16 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <StackPanel Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel Name="spFilter" Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+
+                <Button Content="Print Quote" Click="btnPrint_Click" />
 
                 <Label Content="Quote Description" Style="{StaticResource SecondaryHeading}" />
                 <TextBox AcceptsReturn="True" Height="Auto" TextWrapping="Wrap" Text="{Binding quote.description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
 
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="1" Grid.Column="0">
+            <StackPanel Name="spGrdMtrial" Margin="10" Grid.Row="1" Grid.Column="0">
 
                 <Label Content="Select Material" Style="{StaticResource SecondaryHeading}" />
                <!-- TODO: Filter Materials by name -->
@@ -66,7 +68,7 @@
 
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="1" Grid.Column="1">
+            <StackPanel Name="spMaterialFom" Margin="10" Grid.Row="1" Grid.Column="1">
 
                 <Label Content="Material Details" Style="{StaticResource SecondaryHeading}"/>
 
@@ -104,7 +106,7 @@
                 
             </StackPanel>
 
-            <StackPanel Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+            <StackPanel Name="grdQuote" Margin="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
 
                 <Label Content="Quote" Style="{StaticResource SecondaryHeading}" />
 

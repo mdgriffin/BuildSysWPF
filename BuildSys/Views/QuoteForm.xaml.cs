@@ -24,5 +24,23 @@ namespace BuildSys.Views
         {
             InitializeComponent();
         }
+
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                
+                spFilter.Visibility = Visibility.Collapsed;
+                spGrdMtrial.Visibility = Visibility.Collapsed;
+                spMaterialFom.Visibility = Visibility.Collapsed;
+
+                printDialog.PrintVisual(quoteFrm, "My First Print Job");
+
+                spFilter.Visibility = Visibility.Visible;
+                spGrdMtrial.Visibility = Visibility.Visible;
+                spMaterialFom.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
