@@ -9,6 +9,8 @@
              d:DesignWidth="500">
 
     <StackPanel Name="frmReg" Margin="20">
+        <Label Content="{Binding btnText, Mode=OneTime}" Style="{StaticResource MainHeading}" />
+
         <WrapPanel
             Margin="0,5">
             <Label Name="lblAccType" Content="Account Type" MinWidth="100"/>

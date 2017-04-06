@@ -8,6 +8,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <StackPanel Name="frmReg" Margin="20">
+        <Label Content="{Binding btnText, Mode=OneTime}" Style="{StaticResource MainHeading}" />
+
         <WrapPanel Margin="0,5">
             <Label Content="Material Name" MinWidth="100"/>
             <TextBox MinWidth="150" VerticalAlignment="Center"  Text="{Binding material.name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
