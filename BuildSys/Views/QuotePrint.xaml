@@ -8,7 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="QuotePrint">
 
-    <UserControl.Resources>
+    <Page.Resources>
         <Style x:Key="printHeadingStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontSize" Value="24" />
@@ -38,16 +38,56 @@
             <Setter Property="Padding" Value="20 5" />
             <Setter Property="Background" Value="White" />
         </Style>
-    </UserControl.Resources>
+    </Page.Resources>
 
     <Grid Name="viewQuotePrint" Margin="20">
 
-        <StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
 
             <TextBlock Text="Quote" Style="{StaticResource printHeadingStyle}" />
 
+            <Separator />
+
+        </StackPanel >
+
+        <StackPanel Grid.Row="1" Grid.Column="0" >
+            
+            <TextBlock Text="Quote Issued To:" />
             <TextBlock Text="{Binding customer.firstname }" />
-        
+            <TextBlock Text="{Binding customer.surname }" />
+            <TextBlock Text="{Binding customer.street }" />
+            <TextBlock Text="{Binding customer.town }" />
+            <TextBlock Text="{Binding customer.county }" />
+            <TextBlock Text="{Binding customer.telno }" />
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" >
+
+            <TextBlock Text="Quote Issued By:"  />
+            <TextBlock Text="John A." />
+            <TextBlock Text="Doe Ltd." />
+            <TextBlock Text="12 Example Street" />
+            <TextBlock Text="Tralee" />
+            <TextBlock Text="Co. Kerry" />
+            <TextBlock Text="066 5848 343" />
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+
             <DataGrid ItemsSource="{Binding quoteMaterialList}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding description}" Header="Description" />
@@ -56,6 +96,14 @@
                     <DataGridTextColumn Binding="{Binding totalCost}" Header="totalCost" />
                 </DataGrid.Columns>
             </DataGrid>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+
+            <TextBlock Text="Subtotal" />
+            <TextBlock Text="VAT" />
+            <TextBlock Text="Total" />
 
         </StackPanel>
 
