@@ -187,7 +187,7 @@ namespace BuildSys.Models
                 "name = '" + name + "', " +
                 "unit = '" + unit + "', " +
                 "price_per_unit = " + Double.Parse(pricePerUnit) +
-                "is_service = " + (isService? "1" : "0" ) + 
+                ", is_service = " + (isService? "1" : "0" ) + 
                 " WHERE material_id = " + materialId;
 
             update(sqlUpdate);

@@ -132,6 +132,7 @@ namespace BuildSys.Models
 
         public QuoteModel (int customerId) : this(getNextRowId("quote_id", "Quotes"), new DateTime(), customerId, "", new DateTime(), 0, 0) { }
 
+        // TODO: Should not get quote for delete customers (use a not in statement)
         public static ObservableCollection<QuoteModel> getQuoteList()
         {
             DataTable quotesTable = select("SELECT * FROM Quotes WHERE status = 'A'");

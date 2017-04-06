@@ -53,8 +53,7 @@ namespace BuildSys.ViewModels
 
                     MessageBox.Show("Material Updated Successfully");
 
-                    //parent.ViewModel = new CustomerManageViewModel(parent);
-                    // TODO: Show the manage materials view
+                    parent.ViewModel = new MaterialManageViewModel(parent);
                 }
                 else
                 {

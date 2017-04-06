@@ -15,7 +15,6 @@ namespace BuildSys.ViewModels
         // Set to true when the form has saved and we are updating not registering
         Boolean updating;
 
-        // TODO: Add a constructor that accepts the quoteId  
         public QuoteFormViewModel (MainViewModel parent, int customerId)
         {
             this.parent = parent;
