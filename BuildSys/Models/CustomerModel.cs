@@ -412,13 +412,5 @@ namespace BuildSys.Models
             update(sqlUpdate);
         }
 
-        // TODO: Add a method to retrive all of a customers quotes
-        //public ObservableCollection<QuoteModel> getQuoteList();
-        // public static ObservableCollection<QuoteModel> getQuoteList(int customerId);
-
-        //TODO: Add a method to delete all of a customers quotes
-        //public void deleteQuotes();
-        //public static void deleteQuotes(int customerId);
-
     }
 }
