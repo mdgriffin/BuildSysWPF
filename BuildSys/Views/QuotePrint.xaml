@@ -8,15 +8,39 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="QuotePrint">
 
-    <Page.Resources>
+    <UserControl.Resources>
         <Style x:Key="printHeadingStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontSize" Value="24" />
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
-    </Page.Resources>
 
-    <Grid Name="viewQuotePrint">
+        <Style  TargetType="DataGrid">
+            <Setter Property="RowHeaderWidth" Value="0" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style  TargetType="DataGridColumnHeader">
+            <Setter Property="SeparatorBrush" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="0 0 1 1" />
+            <Setter Property="Padding" Value="20 5" />
+        </Style>
+
+        <Style  TargetType="DataGridRow">
+            <Setter Property="Padding" Value="20 5" />
+            <Setter Property="Background" Value="White" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Name="viewQuotePrint" Margin="20">
 
         <StackPanel>
 
