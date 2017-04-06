@@ -26,17 +26,5 @@ namespace BuildSys
         {
             InitializeComponent();
         }
-
-
-        private void CustomerReg_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Ensure that this is not the current page
-            //LayoutRoot.Content = new CustomerForm();
-        }
-
-        private void CustomerList_Click(object sender, RoutedEventArgs e)
-        {
-            //LayoutRoot.Content = new CustomerList();
-        }
     }
 }
