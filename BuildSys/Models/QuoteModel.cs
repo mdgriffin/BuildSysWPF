@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace BuildSys.Models
 {
-    class QuoteModel : BaseModel, INotifyDataErrorInfo
+    public class QuoteModel : BaseModel, INotifyDataErrorInfo
     {
         public int quoteId { get; } // Foreign key to quote table
         private DateTime dateIssued;

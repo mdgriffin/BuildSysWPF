@@ -23,7 +23,7 @@
 
             <StackPanel Name="spFilter" Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 
-                <Button Content="Print Quote" Click="btnPrint_Click" />
+                <Button Content="Print Quote" Command="{Binding printQuoteCmd}" />
 
                 <Label Content="Quote Description" Style="{StaticResource SecondaryHeading}" />
                 <TextBox AcceptsReturn="True" Height="Auto" TextWrapping="Wrap" Text="{Binding quote.description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>

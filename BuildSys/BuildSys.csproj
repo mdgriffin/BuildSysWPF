@@ -95,6 +95,9 @@
     <Compile Include="Views\QuoteManage.xaml.cs">
       <DependentUpon>QuoteManage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\QuotePrint.xaml.cs">
+      <DependentUpon>QuotePrint.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\CustomerForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +136,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\QuotePrint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -160,7 +167,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Views\App.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

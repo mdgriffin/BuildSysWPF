@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
+using BuildSys.Views;
 
 namespace BuildSys.ViewModels
 {
@@ -219,6 +220,24 @@ namespace BuildSys.ViewModels
             else
             {
                 MessageBox.Show("Add at least one material to the quote");
+            }
+        }
+
+
+        public ICommand printQuoteCmd
+        {
+            get
+            {
+                return new RelayCommand(param => printQuote(), param => true);
+            }
+        }
+
+        private void printQuote ()
+        {
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(new QuotePrint(quote), "My First Print Job");
             }
         }
 

@@ -5,7 +5,7 @@ using System.Data;
 
 namespace BuildSys.Models
 {
-    class QuoteMaterialModel: BaseModel, INotifyDataErrorInfo
+    public class QuoteMaterialModel: BaseModel, INotifyDataErrorInfo
     {
         // If a Quote Material has an id, it has already been saved
         public int? quoteMaterialId; // Primary Key
