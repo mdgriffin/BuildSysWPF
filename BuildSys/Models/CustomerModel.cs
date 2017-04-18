@@ -226,6 +226,8 @@ namespace BuildSys.Models
 
         public CustomerModel() : this(getNextRowId("customer_id", "Customers"), "", "", "", "", "", "", "", "", 'P', "", "") { }
 
+
+        // TODO: Validate that a title has been selected
         public override void validateAllProps()
         {
             validateProp("firstname");

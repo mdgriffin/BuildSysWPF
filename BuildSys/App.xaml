@@ -77,6 +77,12 @@
             <sys:String>Hours</sys:String>
             <sys:String>Days</sys:String>
             <sys:String>Blocks</sys:String>
+            <sys:String>Units</sys:String>
+            <sys:String>Gram</sys:String>
+            <sys:String>Kilogram</sys:String>
+            <sys:String>Tonne</sys:String>
+            <sys:String>Litre</sys:String>
+            <sys:String>Gallon</sys:String>
         </x:Array>
 
         <x:Array x:Key="Titles" Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
