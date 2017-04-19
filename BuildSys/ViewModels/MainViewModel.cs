@@ -71,5 +71,13 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand goToQuoteAnalysis
+        {
+            get
+            {
+                return new RelayCommand(param => ViewModel = new QuoteAnalysisViewModel(this), param => true);
+            }
+        }
+
     }
 }

@@ -123,6 +123,10 @@
             <views:QuoteManage />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModels:QuoteAnalysisViewModel}">
+            <views:QuoteAnalysis />
+        </DataTemplate>
+
         <local:RadioAccountTypeConverter x:Key="RadioButtonCheckedConverter" />
         <local:RadioIsServiceCheckedConverter x:Key="RadioIsServiceCheckedConverter" />
 

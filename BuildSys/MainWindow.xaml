@@ -30,7 +30,7 @@
             </MenuItem>
             <MenuItem Header="_Reports">
                 <MenuItem Header="_Customer Reports"/>
-                <MenuItem Header="_Quote Reports"/>
+                <MenuItem Header="_Quote Reports" Command="{Binding goToQuoteAnalysis}"/>
                 <MenuItem Header="_Material Reports"/>
             </MenuItem>
         </Menu>
