@@ -17,26 +17,6 @@ namespace BuildSys.ViewModels
         // Set to true when the form has saved and we are updating not registering
         Boolean updating;
 
-        public QuoteFormViewModel(BaseViewModel parent)
-        {
-            this.parent = parent;
-            // this is a new quote
-            this.updating = false;
-            btnText = "Create Qoute";
-
-            // TODO: Find the last customer that was used
-            this.customerId = 1;
-
-            quote = new QuoteModel(customerId);
-
-            materialList = MaterialModel.getMaterialList();
-            originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
-
-            quoteMaterialList = new ObservableCollection<QuoteMaterialModel>();
-
-            updateTotalQuoteCosts();
-        }
-
         public QuoteFormViewModel (BaseViewModel parent, int customerId)
         {
             this.parent = parent;
