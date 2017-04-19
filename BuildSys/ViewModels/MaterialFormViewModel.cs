@@ -58,7 +58,7 @@ namespace BuildSys.ViewModels
 
                     MessageBox.Show("Material Updated Successfully");
 
-                    parent.ViewModel = new MaterialManageViewModel(parent);
+                    navigateTo(new MaterialManageViewModel(parent));
                 }
                 else
                 {

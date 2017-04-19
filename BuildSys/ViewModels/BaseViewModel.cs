@@ -8,7 +8,6 @@ namespace BuildSys.ViewModels
 {
     public abstract class BaseViewModel: ObservableObject
     {
-
         protected BaseViewModel parent;
 
         private BaseViewModel _ViewModel;
@@ -27,7 +26,7 @@ namespace BuildSys.ViewModels
 
         public abstract BaseViewModel getInstance(BaseViewModel parent);
 
-        Stack<BaseViewModel> NavigationStack;
+        private Stack<BaseViewModel> NavigationStack;
 
         public BaseViewModel ()
         {

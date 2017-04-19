@@ -76,7 +76,7 @@ namespace BuildSys.ViewModels
 
         public void editCustomer (int customerId)
         {
-            parent.ViewModel = new CustomerFormViewModel(parent, customerId);
+            navigateTo(new CustomerFormViewModel(parent, customerId));
         }
 
         public void deleteCustomer(int customerId)

@@ -89,7 +89,7 @@ namespace BuildSys.ViewModels
 
                     MessageBox.Show("Customer Updated Successfully");
 
-                    parent.ViewModel = new CustomerManageViewModel(parent);
+                    navigateTo(new CustomerManageViewModel(parent));
                 }
                 else
                 {

@@ -85,7 +85,7 @@ namespace BuildSys.ViewModels
 
         public void editQuote(int quoteId)
         {
-            parent.ViewModel = new QuoteFormViewModel(parent, quoteId, true);
+            navigateTo(new QuoteFormViewModel(parent, quoteId, true));
         }
 
         public void deleteQuote(int quoteId)
