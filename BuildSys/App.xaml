@@ -127,6 +127,10 @@
             <views:QuoteAnalysis />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModels:CustomerAnalysisViewModel}">
+            <views:CustomerAnalysis />
+        </DataTemplate>
+
         <local:RadioAccountTypeConverter x:Key="RadioButtonCheckedConverter" />
         <local:RadioIsServiceCheckedConverter x:Key="RadioIsServiceCheckedConverter" />
 

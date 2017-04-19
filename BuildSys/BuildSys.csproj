@@ -76,6 +76,7 @@
     <Compile Include="RadioAccountTypeConverter.cs" />
     <Compile Include="RadioIsServiceCheckedConverter.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModels\CustomerAnalysisViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\CustomerManageViewModel.cs" />
     <Compile Include="ViewModels\MaterialFormViewModel.cs" />
@@ -83,6 +84,9 @@
     <Compile Include="ViewModels\QuoteAnalysisViewModel.cs" />
     <Compile Include="ViewModels\QuoteFormViewModel.cs" />
     <Compile Include="ViewModels\QuoteManageViewModel.cs" />
+    <Compile Include="Views\CustomerAnalysis.xaml.cs">
+      <DependentUpon>CustomerAnalysis.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CustomerForm.xaml.cs">
       <DependentUpon>CustomerForm.xaml</DependentUpon>
     </Compile>
@@ -110,6 +114,10 @@
     <Compile Include="Views\QuotePrint.xaml.cs">
       <DependentUpon>QuotePrint.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\CustomerAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CustomerForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

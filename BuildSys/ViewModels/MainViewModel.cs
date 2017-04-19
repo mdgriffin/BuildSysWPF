@@ -79,5 +79,13 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand goToCustomerAnalysis
+        {
+            get
+            {
+                return new RelayCommand(param => ViewModel = new CustomerAnalysisViewModel(this), param => true);
+            }
+        }
+
     }
 }
