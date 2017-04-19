@@ -11,9 +11,9 @@ namespace BuildSys.ViewModels
 {
     public class MaterialManageViewModel : BaseViewModel
     {
-        MainViewModel parent;
+        //MainViewModel parent;
 
-        public MaterialManageViewModel(MainViewModel parent)
+        public MaterialManageViewModel(BaseViewModel parent)
         {
             this.parent = parent;
 
@@ -21,6 +21,11 @@ namespace BuildSys.ViewModels
 
             // Keep a copy of the materialList so that we can restore the list after filtering
             originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
+        }
+
+        public override BaseViewModel getInstance(BaseViewModel parent)
+        {
+            return new MaterialManageViewModel(parent);
         }
 
         private String _materialFilter;

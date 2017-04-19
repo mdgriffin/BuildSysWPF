@@ -11,9 +11,9 @@ namespace BuildSys.ViewModels
 {
     public class CustomerManageViewModel: BaseViewModel
     {
-        MainViewModel parent;
+        //MainViewModel parent;
 
-        public CustomerManageViewModel (MainViewModel parent)
+        public CustomerManageViewModel (BaseViewModel parent)
         {
             this.parent = parent;
 
@@ -21,6 +21,11 @@ namespace BuildSys.ViewModels
 
             // Keep a copy of the CustomerList so that we can restore the list after filtering
             originalCustomerList = new ObservableCollection<CustomerModel>(CustomerList);
+        }
+
+        public override BaseViewModel getInstance(BaseViewModel parent)
+        {
+            return new CustomerManageViewModel(parent);
         }
 
         private String _customerFilter;
@@ -104,7 +109,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand((customerId) => parent.ViewModel = new QuoteFormViewModel(parent, (int) customerId), param => true);
+                return new RelayCommand((customerId) => navigateTo(new QuoteFormViewModel(parent, (int) customerId)) , param => true);
             }
         }
 

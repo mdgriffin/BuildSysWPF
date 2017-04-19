@@ -14,9 +14,9 @@ namespace BuildSys.ViewModels
     class QuoteManageViewModel: BaseViewModel
     {
 
-        MainViewModel parent;
+        //MainViewModel parent;
 
-        public QuoteManageViewModel(MainViewModel parent)
+        public QuoteManageViewModel(BaseViewModel parent)
         {
             this.parent = parent;
 
@@ -27,6 +27,12 @@ namespace BuildSys.ViewModels
 
 
         }
+
+        public override BaseViewModel getInstance(BaseViewModel parent)
+        {
+            return new QuoteManageViewModel(parent);
+        }
+
         private String _quoteFilter;
         public String quoteFilter
         {

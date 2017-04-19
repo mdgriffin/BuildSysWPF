@@ -11,10 +11,9 @@ namespace BuildSys.ViewModels
     class QuoteAnalysisViewModel : BaseViewModel
     {
 
-        MainViewModel parent;
+        //MainViewModel parent;
 
-
-        public QuoteAnalysisViewModel (MainViewModel parent)
+        public QuoteAnalysisViewModel (BaseViewModel parent)
         {
             this.parent = parent;
 
@@ -29,6 +28,11 @@ namespace BuildSys.ViewModels
 
             Labels = new[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             Formatter = value => value.ToString("N");
+        }
+
+        public override BaseViewModel getInstance(BaseViewModel parent)
+        {
+            return new QuoteAnalysisViewModel(parent);
         }
 
         public SeriesCollection GraphCollection { get; set; }

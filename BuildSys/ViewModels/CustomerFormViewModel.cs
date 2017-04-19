@@ -9,13 +9,13 @@ namespace BuildSys.ViewModels
     
     public class CustomerFormViewModel: BaseViewModel
     {
-       MainViewModel parent;
+       //MainViewModel parent;
         
         
         /// <summary>
         /// Initializes a new instance of the CustomerFormViewModel class.
         /// </summary>
-        public CustomerFormViewModel(MainViewModel parent)
+        public CustomerFormViewModel(BaseViewModel parent)
         {
             customer = new CustomerModel();
             customer.PropertyChanged += onCustomerPropertyChanged;
@@ -26,7 +26,7 @@ namespace BuildSys.ViewModels
             this.parent = parent;
         }
 
-        public CustomerFormViewModel(MainViewModel parent, int customerId)
+        public CustomerFormViewModel(BaseViewModel parent, int customerId)
         {
             customer = CustomerModel.getCustomer(customerId);
             customer.PropertyChanged += onCustomerPropertyChanged;
@@ -41,6 +41,11 @@ namespace BuildSys.ViewModels
 
             btnText = "Update Customer";
             this.parent = parent;
+        }
+
+        public override BaseViewModel getInstance(BaseViewModel parent)
+        {
+            return new CustomerFormViewModel(parent);
         }
 
         public void onCustomerPropertyChanged(object sender, PropertyChangedEventArgs e)

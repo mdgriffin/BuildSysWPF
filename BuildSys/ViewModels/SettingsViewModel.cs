@@ -12,9 +12,9 @@ namespace BuildSys.ViewModels
     class SettingsViewModel : BaseViewModel
     {
 
-        MainViewModel parent;
+        //MainViewModel parent;
 
-        public SettingsViewModel (MainViewModel parent)
+        public SettingsViewModel (BaseViewModel parent)
         {
             this.parent = parent;
 
@@ -26,6 +26,10 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public override BaseViewModel getInstance(BaseViewModel parent)
+        {
+            return new SettingsViewModel(parent);
+        }
 
         public SettingModel setting { get; set; }
         public ICommand saveSettingCommand

@@ -23,9 +23,17 @@
 
             <StackPanel Name="spFilter" Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 
-                <Button Content="Print Quote" Command="{Binding printQuoteCmd}" />
+                <WrapPanel HorizontalAlignment="Left">
+                    <Button Content="Print Quote" Command="{Binding printQuoteCmd}" />
+                    
+                </WrapPanel>
 
-                <Label Content="Quote Description" Style="{StaticResource SecondaryHeading}" />
+                <WrapPanel>
+                    <Button Content="&#x2190; Back" Margin="0 0 20 0" Height="25"  Background="Transparent" BorderBrush="Transparent" Command="{Binding backCmd}" />
+                    <Label Content="Quote Description" Style="{StaticResource SecondaryHeading}" />
+                </WrapPanel>
+                
+                
                 <TextBox AcceptsReturn="True" Height="Auto" TextWrapping="Wrap" Text="{Binding quote.description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
 
             </StackPanel>

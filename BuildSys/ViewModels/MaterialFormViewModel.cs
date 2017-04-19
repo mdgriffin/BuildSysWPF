@@ -12,21 +12,26 @@ namespace BuildSys.ViewModels
     class MaterialFormViewModel : BaseViewModel
     {
 
-        MainViewModel parent;
+        //MainViewModel parent;
 
-        public MaterialFormViewModel(MainViewModel parent)
+        public MaterialFormViewModel(BaseViewModel parent)
         {
             this.parent = parent;
             material = new MaterialModel();
             btnText = "Register Material";
         }
 
-        public MaterialFormViewModel(MainViewModel parent, int materalId)
+        public MaterialFormViewModel(BaseViewModel parent, int materalId)
         {
             this.parent = parent;
 
             material = MaterialModel.getMaterial(materalId);
             btnText = "Update Material";
+        }
+
+        public override BaseViewModel getInstance(BaseViewModel parent)
+        {
+            return new MaterialFormViewModel(parent);
         }
 
         public MaterialModel material { get; set; }

@@ -10,9 +10,9 @@ namespace BuildSys.ViewModels
 {
     class MaterialAnalysisViewModel : BaseViewModel
     {
-        MainViewModel parent;
+        //MainViewModel parent;
 
-        public MaterialAnalysisViewModel(MainViewModel parent)
+        public MaterialAnalysisViewModel(BaseViewModel parent)
         {
             this.parent = parent;
 
@@ -27,6 +27,11 @@ namespace BuildSys.ViewModels
 
             Labels = new[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             Formatter = value => value.ToString("N");
+        }
+
+        public override BaseViewModel getInstance(BaseViewModel parent)
+        {
+            return new MaterialAnalysisViewModel(parent);
         }
 
         public SeriesCollection GraphCollection { get; set; }

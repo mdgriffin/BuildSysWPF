@@ -14,28 +14,20 @@ namespace BuildSys.ViewModels
 
         public MainViewModel()
         {
+            this.parent = this;
             ViewModel = new CustomerManageViewModel(this);
         }
 
-        private BaseViewModel _ViewModel;
-        public BaseViewModel ViewModel
+        public override BaseViewModel getInstance (BaseViewModel parent)
         {
-            get
-            {
-                return _ViewModel;
-            }
-            set
-            {
-                _ViewModel = value;
-                NotifyPropertyChanged("ViewModel");
-            }
+            return new MainViewModel();
         }
 
         public ICommand goToManageCustomer
         {
             get
             {
-                return new RelayCommand(param => ViewModel = new CustomerManageViewModel(this), param => true);
+                return new RelayCommand(param => navigateTo(new CustomerManageViewModel(this)), param => true);
             }
         }
 
@@ -43,7 +35,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ViewModel = new CustomerFormViewModel(this), param => true);
+                return new RelayCommand(param => navigateTo(new CustomerFormViewModel(this)), param => true);
             }
         }
 
@@ -51,7 +43,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ViewModel = new MaterialFormViewModel(this), param => true);
+                return new RelayCommand(param => navigateTo(new MaterialFormViewModel(this)), param => true);
             }
         }
 
@@ -59,7 +51,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ViewModel = new MaterialManageViewModel(this), param => true);
+                return new RelayCommand(param => navigateTo(new MaterialManageViewModel(this)), param => true);
             }
         }
 
@@ -67,7 +59,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ViewModel = new QuoteManageViewModel(this), param => true);
+                return new RelayCommand(param => navigateTo(new QuoteManageViewModel(this)), param => true);
             }
         }
 
@@ -75,7 +67,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ViewModel = new QuoteAnalysisViewModel(this), param => true);
+                return new RelayCommand(param => navigateTo(new QuoteAnalysisViewModel(this)), param => true);
             }
         }
 
@@ -83,7 +75,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ViewModel = new CustomerAnalysisViewModel(this), param => true);
+                return new RelayCommand(param => navigateTo(new CustomerAnalysisViewModel(this)), param => true);
             }
         }
 
@@ -91,7 +83,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ViewModel = new MaterialAnalysisViewModel(this), param => true);
+                return new RelayCommand(param => navigateTo(new MaterialAnalysisViewModel(this)), param => true);
             }
         }
 
@@ -99,7 +91,7 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ViewModel = new SettingsViewModel(this), param => true);
+                return new RelayCommand(param => navigateTo(new SettingsViewModel(this)), param => true);
             }
         }
 
