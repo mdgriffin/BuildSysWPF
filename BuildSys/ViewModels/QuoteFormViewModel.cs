@@ -5,6 +5,8 @@ using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
 using BuildSys.Views;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace BuildSys.ViewModels
 {
@@ -27,6 +29,7 @@ namespace BuildSys.ViewModels
             quote = new QuoteModel(customerId);
 
             materialList = MaterialModel.getMaterialList();
+            originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
 
             quoteMaterialList = new ObservableCollection<QuoteMaterialModel>();
 
@@ -44,6 +47,8 @@ namespace BuildSys.ViewModels
             this.customerId = quote.customer.customerId;
 
             materialList = MaterialModel.getMaterialList();
+            originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
+
             quoteMaterialList = QuoteMaterialModel.getQuoteMaterialList(quoteId);
 
             updateTotalQuoteCosts();
@@ -87,7 +92,49 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public ObservableCollection<MaterialModel> materialList { get; set; }
+        private String _materialFilter;
+        public String materialFilter
+        {
+            get
+            {
+                return _materialFilter;
+            }
+            set
+            {
+                if (value != _materialFilter)
+                {
+                    _materialFilter = value;
+                    filterMaterials();
+                }
+            }
+        }
+
+        private ObservableCollection<MaterialModel> originalMaterialList;
+
+        private ObservableCollection<MaterialModel> _materialList = new ObservableCollection<MaterialModel>();
+        public ObservableCollection<MaterialModel> materialList
+        {
+            get { return _materialList ?? (_materialList = new ObservableCollection<MaterialModel>()); }
+            set
+            {
+                if (value == null) return;
+                _materialList = value;
+                NotifyPropertyChanged("materialList");
+            }
+        }
+
+        public void filterMaterials()
+        {
+            materialList = new ObservableCollection<MaterialModel>(originalMaterialList);
+            Regex matchName = new Regex(@"^" + materialFilter + @".+", RegexOptions.IgnoreCase);
+
+            if (materialFilter.Length > 0)
+            {
+                materialList.Where(mat => !matchName.IsMatch(mat.name))
+                    .ToList()
+                    .All(i => materialList.Remove(i));
+            }
+        }
 
         public ICommand addMaterialToQuoteCmd
         {

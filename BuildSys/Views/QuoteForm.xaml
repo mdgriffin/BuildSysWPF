@@ -33,7 +33,6 @@
             <StackPanel Name="spGrdMtrial" Margin="10" Grid.Row="1" Grid.Column="0">
 
                 <Label Content="Select Material" Style="{StaticResource SecondaryHeading}" />
-               <!-- TODO: Filter Materials by name -->
                 <WrapPanel Width="300" HorizontalAlignment="Center">
                     <Label Content="Filter" Width="Auto"/>
                     <TextBox MinWidth="150" VerticalAlignment="Center" Text="{Binding materialFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
