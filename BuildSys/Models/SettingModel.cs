@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuildSys.Models
 {
-    class SettingModel : BaseModel
+    class SettingModel : BaseModel, INotifyDataErrorInfo
     {
 
         public String _companyName;
@@ -138,7 +139,7 @@ namespace BuildSys.Models
         }
 
 
-        public SettingModel(String companyNam, String street, String town, String county, String telno, String email, String vatNo)
+        public SettingModel(String companyName, String street, String town, String county, String telno, String email, String vatNo)
         {
             this._companyName = companyName;
             this._street = street;
@@ -220,35 +221,60 @@ namespace BuildSys.Models
 
         public static SettingModel getSetting()
         {
+            SettingModel settingModel = null;
+           
             DataTable settingsTable = select("SELECT * FROM Settings WHERE setting_id = 1");
-            DataRow setting = settingsTable.Rows[0];
 
-            return new SettingModel(setting["company_name"].ToString(), setting["street"].ToString(), setting["town"].ToString(), setting["county"].ToString(),  setting["telephone"].ToString(), setting["email"].ToString(), setting["vat_no"].ToString());
+            if (settingsTable.Rows.Count > 0)
+            {
+                DataRow setting = settingsTable.Rows[0];
+                settingModel = new SettingModel(setting["company_name"].ToString(), setting["street"].ToString(), setting["town"].ToString(), setting["county"].ToString(), setting["telephone"].ToString(), setting["email"].ToString(), setting["vat_no"].ToString());
+            }
+
+            return settingModel;
         }
 
 
 
         public void insertSetting()
         {
-            insert("INSERT INTO Settings (setting_id, company_name,  street, town, county, telephone, email, vat_no, account_type) VALUES(1, " +
-                companyName + "','" +
-                street + "','" +
-                town + "','" +
-                county + "','" +
-                telno + "','" +
-                email + "','" +
-                vatNo +")");
+            if (getSetting() == null)
+            {
+                insert("INSERT INTO Settings (setting_id, company_name,  street, town, county, telephone, email, vat_no) VALUES(1, '" +
+                    companyName + "','" +
+                    street + "','" +
+                    town + "','" +
+                    county + "','" +
+                    telno + "','" +
+                    email + "','" +
+                    vatNo + "')");
+            }
+            else
+            {
+                updateSetting();
+            }
+            
         }
 
         public void updateSetting()
         {
-            update("Update Settings SET " +
-                "street = '" + street + "', " +
-                "town = '" + town + "', " +
-                "county = '" + county + "', " +
-                "telephone = '" + telno + "', " +
-                "email = '" + email + "' WHERE setting_id = 1"
-            );
+            if (getSetting() != null)
+            {
+                update("Update Settings SET " +
+                    "company_name = '" + companyName + "', " +
+                    "street = '" + street + "', " +
+                    "town = '" + town + "', " +
+                    "county = '" + county + "', " +
+                    "telephone = '" + telno + "', " +
+                    "email = '" + email + "', " +
+                    "vat_no = '" + vatNo + "' WHERE setting_id = 1"
+                );
+            }
+            else
+            {
+                insertSetting();
+            }
+            
 
         }
     }

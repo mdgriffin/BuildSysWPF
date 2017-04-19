@@ -6,7 +6,37 @@
              xmlns:local="clr-namespace:BuildSys.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <StackPanel  Margin="20">
         <Label Content="Settings" Style="{StaticResource MainHeading}" />
-    </Grid>
+
+        <WrapPanel Name="wpBusinessName" Margin="0,5">
+            <Label Name="lblCompanyName" Content="Company Name" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtCompanyName" Text="{Binding setting.companyName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+        </WrapPanel>
+        <WrapPanel Name="wpVatNumber" Margin="0,5">
+            <Label Name="lblVatNumber" Content="VAT Number" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" x:Name="txtVatNumber"  Text="{Binding setting.vatNo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,5">
+            <Label Name="lblStreet" Content="Street" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtStreet" Text="{Binding setting.street, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,5">
+            <Label Name="lblTown" Content="Town" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtTown" Text="{Binding setting.town, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,5">
+            <Label Name="lblCounty" Content="County" MinWidth="100"/>
+            <ComboBox HorizontalAlignment="Left" x:Name="cmbCounty" ItemsSource="{StaticResource Counties}"  SelectedItem="{Binding setting.county}" VerticalAlignment="Center" Width="120"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,5">
+            <Label Name="lblTel" Content="Telephone" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtTel" Text="{Binding setting.telno, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,5">
+            <Label Name="lblEmail" Content="Email" MinWidth="100"/>
+            <TextBox MinWidth="150" VerticalAlignment="Center" Name="txtEmail" Text="{Binding setting.email, UpdateSourceTrigger=LostFocus, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
+        </WrapPanel>
+        <Button Name="btnReg" Margin="0 10 0 0" Content="Save Setting" Command="{Binding saveSettingCommand}" ToolTip="Save Setting" />
+    </StackPanel>
 </UserControl>
