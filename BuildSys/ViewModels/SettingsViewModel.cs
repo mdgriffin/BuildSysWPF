@@ -26,11 +26,6 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public override BaseViewModel getInstance(BaseViewModel parent)
-        {
-            return new SettingsViewModel(parent);
-        }
-
         public SettingModel setting { get; set; }
         public ICommand saveSettingCommand
         {

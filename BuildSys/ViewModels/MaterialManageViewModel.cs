@@ -23,11 +23,6 @@ namespace BuildSys.ViewModels
             originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
         }
 
-        public override BaseViewModel getInstance(BaseViewModel parent)
-        {
-            return new MaterialManageViewModel(parent);
-        }
-
         private String _materialFilter;
         public String materialFilter
         {

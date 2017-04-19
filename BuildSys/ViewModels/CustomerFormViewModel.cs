@@ -43,11 +43,6 @@ namespace BuildSys.ViewModels
             this.parent = parent;
         }
 
-        public override BaseViewModel getInstance(BaseViewModel parent)
-        {
-            return new CustomerFormViewModel(parent);
-        }
-
         public void onCustomerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 

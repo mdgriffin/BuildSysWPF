@@ -28,11 +28,6 @@ namespace BuildSys.ViewModels
 
         }
 
-        public override BaseViewModel getInstance(BaseViewModel parent)
-        {
-            return new QuoteManageViewModel(parent);
-        }
-
         private String _quoteFilter;
         public String quoteFilter
         {

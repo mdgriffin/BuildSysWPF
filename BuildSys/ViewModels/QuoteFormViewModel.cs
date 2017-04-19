@@ -74,11 +74,6 @@ namespace BuildSys.ViewModels
             updateTotalQuoteCosts();
         }
 
-        public override BaseViewModel getInstance(BaseViewModel parent)
-        {
-            return new QuoteFormViewModel(parent);
-        }
-
         public ObservableCollection<QuoteMaterialModel> quoteMaterialList { get; set; }
 
         public QuoteModel quote { get; set; }

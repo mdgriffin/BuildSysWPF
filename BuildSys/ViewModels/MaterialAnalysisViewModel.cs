@@ -29,11 +29,6 @@ namespace BuildSys.ViewModels
             Formatter = value => value.ToString("N");
         }
 
-        public override BaseViewModel getInstance(BaseViewModel parent)
-        {
-            return new MaterialAnalysisViewModel(parent);
-        }
-
         public SeriesCollection GraphCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }

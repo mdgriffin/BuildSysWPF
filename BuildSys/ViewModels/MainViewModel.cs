@@ -18,11 +18,6 @@ namespace BuildSys.ViewModels
             ViewModel = new CustomerManageViewModel(this);
         }
 
-        public override BaseViewModel getInstance (BaseViewModel parent)
-        {
-            return new MainViewModel();
-        }
-
         public ICommand goToManageCustomer
         {
             get

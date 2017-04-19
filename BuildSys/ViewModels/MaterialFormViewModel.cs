@@ -29,11 +29,6 @@ namespace BuildSys.ViewModels
             btnText = "Update Material";
         }
 
-        public override BaseViewModel getInstance(BaseViewModel parent)
-        {
-            return new MaterialFormViewModel(parent);
-        }
-
         public MaterialModel material { get; set; }
         public String btnText { get; set; }
 

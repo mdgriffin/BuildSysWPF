@@ -24,8 +24,6 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public abstract BaseViewModel getInstance(BaseViewModel parent);
-
         private Stack<BaseViewModel> NavigationStack;
 
         public BaseViewModel ()

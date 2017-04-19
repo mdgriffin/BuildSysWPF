@@ -29,12 +29,6 @@ namespace BuildSys.ViewModels
             Formatter = value => value.ToString("N");
         }
 
-        // TODO: Remove all getInstance methods
-        public override BaseViewModel getInstance(BaseViewModel parent)
-        {
-            return new CustomerAnalysisViewModel(parent);
-        }
-
         public SeriesCollection GraphCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }

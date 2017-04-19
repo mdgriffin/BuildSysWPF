@@ -23,11 +23,6 @@ namespace BuildSys.ViewModels
             originalCustomerList = new ObservableCollection<CustomerModel>(CustomerList);
         }
 
-        public override BaseViewModel getInstance(BaseViewModel parent)
-        {
-            return new CustomerManageViewModel(parent);
-        }
-
         private String _customerFilter;
         public String customerFilter {
             get
