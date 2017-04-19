@@ -31,7 +31,9 @@
             <MenuItem Header="_Reports">
                 <MenuItem Header="_Customer Reports" Command="{Binding goToCustomerAnalysis}"/>
                 <MenuItem Header="_Quote Reports" Command="{Binding goToQuoteAnalysis}"/>
-                <MenuItem Header="_Material Reports"/>
+                <MenuItem Header="_Material Reports" Command="{Binding goToMaterialAnalysis}"/>
+            </MenuItem>
+            <MenuItem Header="_Settings"  Command="{Binding goToSettings}">
             </MenuItem>
         </Menu>
         <StackPanel></StackPanel>

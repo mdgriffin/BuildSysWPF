@@ -131,6 +131,14 @@
             <views:CustomerAnalysis />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModels:MaterialAnalysisViewModel}">
+            <views:MaterialAnalysis />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+            <views:Settings />
+        </DataTemplate>
+
         <local:RadioAccountTypeConverter x:Key="RadioButtonCheckedConverter" />
         <local:RadioIsServiceCheckedConverter x:Key="RadioIsServiceCheckedConverter" />
 

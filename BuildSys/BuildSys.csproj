@@ -79,11 +79,13 @@
     <Compile Include="ViewModels\CustomerAnalysisViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\CustomerManageViewModel.cs" />
+    <Compile Include="ViewModels\MaterialAnalysisViewModel.cs" />
     <Compile Include="ViewModels\MaterialFormViewModel.cs" />
     <Compile Include="ViewModels\MaterialManageViewModel.cs" />
     <Compile Include="ViewModels\QuoteAnalysisViewModel.cs" />
     <Compile Include="ViewModels\QuoteFormViewModel.cs" />
     <Compile Include="ViewModels\QuoteManageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\CustomerAnalysis.xaml.cs">
       <DependentUpon>CustomerAnalysis.xaml</DependentUpon>
     </Compile>
@@ -96,6 +98,9 @@
     <Compile Include="Validator.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
+    <Compile Include="Views\MaterialAnalysis.xaml.cs">
+      <DependentUpon>MaterialAnalysis.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MaterialForm.xaml.cs">
       <DependentUpon>MaterialForm.xaml</DependentUpon>
     </Compile>
@@ -113,6 +118,9 @@
     </Compile>
     <Compile Include="Views\QuotePrint.xaml.cs">
       <DependentUpon>QuotePrint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\CustomerAnalysis.xaml">
       <SubType>Designer</SubType>
@@ -140,6 +148,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MaterialAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MaterialForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QuotePrint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

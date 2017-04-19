@@ -87,5 +87,21 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand goToMaterialAnalysis
+        {
+            get
+            {
+                return new RelayCommand(param => ViewModel = new MaterialAnalysisViewModel(this), param => true);
+            }
+        }
+
+        public ICommand goToSettings
+        {
+            get
+            {
+                return new RelayCommand(param => ViewModel = new SettingsViewModel(this), param => true);
+            }
+        }
+
     }
 }
