@@ -72,6 +72,7 @@
     <Compile Include="Models\MaterialModel.cs" />
     <Compile Include="Models\QuoteMaterialModel.cs" />
     <Compile Include="Models\QuoteModel.cs" />
+    <Compile Include="Models\SettingModel.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="RadioAccountTypeConverter.cs" />
     <Compile Include="RadioIsServiceCheckedConverter.cs" />
