@@ -32,9 +32,14 @@ namespace BuildSys.Views
 
             customer = CustomerModel.getCustomer(quote.customer.customerId);
 
+            setting = SettingModel.getSetting();
+
+            this.quote = quote;
         }
 
         public CustomerModel customer { get; set; }
+        public SettingModel setting { get; set; }
+        public QuoteModel quote { get; set; }
         public Collection<QuoteMaterialModel> quoteMaterialList { get; set; }
     }
 }

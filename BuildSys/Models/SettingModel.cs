@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuildSys.Models
 {
-    class SettingModel : BaseModel, INotifyDataErrorInfo
+    public class SettingModel : BaseModel, INotifyDataErrorInfo
     {
 
         public String _companyName;
@@ -150,9 +150,7 @@ namespace BuildSys.Models
             this._vatNo = vatNo;
         }
 
-
         public SettingModel() : this("", "", "", "", "", "", "") { }
-
 
         public override void validateAllProps()
         {

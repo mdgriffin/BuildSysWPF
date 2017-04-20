@@ -9,6 +9,7 @@ namespace BuildSys.ViewModels
     public abstract class BaseViewModel: ObservableObject
     {
         protected BaseViewModel parent;
+        private static Stack<BaseViewModel> NavigationStack = new Stack<BaseViewModel>();
 
         private BaseViewModel _ViewModel;
         public BaseViewModel ViewModel
@@ -24,8 +25,6 @@ namespace BuildSys.ViewModels
             }
         }
 
-        private static Stack<BaseViewModel> NavigationStack = new Stack<BaseViewModel>();
-
         public ICommand backCmd
         {
             get
@@ -33,6 +32,8 @@ namespace BuildSys.ViewModels
                 return new RelayCommand(parent => navigateBack(), param => canNavigateBack());
             }
         }
+
+        // TODO: Fix Navigation
 
         public void navigateTo (BaseViewModel vm)
         {

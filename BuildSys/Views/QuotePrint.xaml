@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BuildSys.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="QuotePrint">
+      d:DesignHeight="415.231"
+      Title="QuotePrint" Width="628.613">
 
     <Page.Resources>
         <Style x:Key="printHeadingStyle" TargetType="TextBlock">
@@ -52,6 +52,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
@@ -62,8 +63,8 @@
 
         </StackPanel >
 
-        <StackPanel Grid.Row="1" Grid.Column="0" >
-            
+        <StackPanel Margin="0 20 0 20" Grid.Row="1" Grid.Column="0" >
+
             <TextBlock Text="Quote Issued To:" />
             <TextBlock Text="{Binding customer.firstname }" />
             <TextBlock Text="{Binding customer.surname }" />
@@ -74,21 +75,18 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" >
-
+        <StackPanel Margin="0 20 0 20" Grid.Row="1" Grid.Column="1" >
             <TextBlock Text="Quote Issued By:"  />
-            <TextBlock Text="John A." />
-            <TextBlock Text="Doe Ltd." />
-            <TextBlock Text="12 Example Street" />
-            <TextBlock Text="Tralee" />
-            <TextBlock Text="Co. Kerry" />
-            <TextBlock Text="066 5848 343" />
-
+            <TextBlock Text="{Binding setting.companyName}" />
+            <TextBlock Text="{Binding setting.street}" />
+            <TextBlock Text="{Binding setting.town}" />
+            <TextBlock Text="{Binding setting.county}" />
+            <TextBlock Text="{Binding setting.telno}" />
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
 
-            <DataGrid ItemsSource="{Binding quoteMaterialList}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid  ItemsSource="{Binding quoteMaterialList}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding description}" Header="Description" />
                     <DataGridTextColumn Binding="{Binding pricePerUnit}" Header="pricePerUnit" />
@@ -99,13 +97,16 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-
-            <TextBlock Text="Subtotal" />
-            <TextBlock Text="VAT" />
-            <TextBlock Text="Total" />
-
+        <StackPanel Margin="0 20 0 20" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock Text="{Binding quote.subtotal, StringFormat=Subtotal: €{0}}" />
+            <TextBlock Text="{Binding quote.vat, StringFormat=VAT: €{0}}" />
+            <Separator />
+            <TextBlock Text="{Binding quote.total, StringFormat=Total: €{0}}" FontWeight="Bold" />
         </StackPanel>
+
+        <WrapPanel  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding setting.vatNo, StringFormat=VAT Number: {0}}" />
+        </WrapPanel>
 
     </Grid>
 </Page>
