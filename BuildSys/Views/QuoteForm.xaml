@@ -12,7 +12,7 @@
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="400" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -28,8 +28,10 @@
                     <Button Content="Print Quote" Command="{Binding printQuoteCmd}" />
                 </WrapPanel>
 
+                <Label Content="Create Quote" Style="{StaticResource MainHeading}" />
+
                 <WrapPanel>
-                    <Label Content="Quote Description" Style="{StaticResource SecondaryHeading}" />
+                    <Label Content="Quote Description" />
                 </WrapPanel>
                 
                 

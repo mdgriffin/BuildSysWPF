@@ -9,24 +9,94 @@
     mc:Ignorable="d"
     Title="BuildSys"
     Height="600"
-    Width="800">
+    Width="1000">
 
     <Window.DataContext>
         <viewModels:MainViewModel />
     </Window.DataContext>
 
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
+
+        <StackPanel DockPanel.Dock="Left" Background="LightGray" Width="200">
+
+            <Label Content="Customers" FontWeight="Bold"/>
+
+            <Menu Margin="0 10 0 10">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="_Register Customer" Command="{Binding goToRegCustomer}"/>
+                <MenuItem Header="_Manage Customers" Command="{Binding goToManageCustomer}"/>
+            </Menu>
+
+            <Label Content="Materials" FontWeight="Bold" />
+
+            <Menu Margin="0 10 0 10">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="_Create Materials" Command="{Binding goToRegMaterial}"/>
+                <MenuItem Header="_Manage Materials"  Command="{Binding goToManageMaterial}" />
+            </Menu>
+
+            <Label Content="Quotes" FontWeight="Bold" />
+
+            <Menu Margin="0 10 0 10">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="_Manage Quotes"  Command="{Binding goToManageQuotes}"/>
+            </Menu>
+
+            <Label Content="Reports" FontWeight="Bold" />
+
+            <Menu Margin="0 10 0 10">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="_Customer Reports" Command="{Binding goToCustomerAnalysis}"/>
+                <MenuItem Header="_Quote Reports" Command="{Binding goToQuoteAnalysis}"/>
+                <MenuItem Header="_Material Reports" Command="{Binding goToMaterialAnalysis}"/>
+            </Menu>
+
+            <Menu Margin="0 10 0 10">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="_Settings"  Command="{Binding goToSettings}" />
+            </Menu>
+
+        </StackPanel>
+        
+
+        <!--<Menu DockPanel.Dock="Left">
+
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+
             <MenuItem Header="Customers">
                 <MenuItem Header="_Register Customer" Command="{Binding goToRegCustomer}"/>
-                <MenuItem Header="_Manage Exisiting Customers" Command="{Binding goToManageCustomer}"/>
+                <MenuItem Header="_Manage Customers" Command="{Binding goToManageCustomer}"/>
             </MenuItem>
             <MenuItem Header="_Materials">
                 <MenuItem Header="_Create Materials" Command="{Binding goToRegMaterial}"/>
-                <MenuItem Header="_Manage Existing Materials"  Command="{Binding goToManageMaterial}" />
+                <MenuItem Header="_Manage Materials"  Command="{Binding goToManageMaterial}" />
             </MenuItem>
             <MenuItem Header="_Quotes">
-                <MenuItem Header="_Manage Existing Quotes"  Command="{Binding goToManageQuotes}"/>
+                <MenuItem Header="_Manage Quotes"  Command="{Binding goToManageQuotes}"/>
             </MenuItem>
             <MenuItem Header="_Reports">
                 <MenuItem Header="_Customer Reports" Command="{Binding goToCustomerAnalysis}"/>
@@ -35,8 +105,10 @@
             </MenuItem>
             <MenuItem Header="_Settings"  Command="{Binding goToSettings}">
             </MenuItem>
-        </Menu>
-        <StackPanel></StackPanel>
+        </Menu>-->
+        
+            
+         <StackPanel></StackPanel>
 
         <ContentControl Content="{Binding ViewModel}" />
     </DockPanel>
