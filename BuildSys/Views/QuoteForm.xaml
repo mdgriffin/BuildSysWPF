@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BuildSys.Views"
-             mc:Ignorable="d" >
+             mc:Ignorable="d"
+             d:DesignHeight="600"
+             d:DesignWidth="800">
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto">
     
@@ -12,7 +14,7 @@
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -30,11 +32,7 @@
 
                 <Label Content="Create Quote" Style="{StaticResource MainHeading}" />
 
-                <WrapPanel>
-                    <Label Content="Quote Description" />
-                </WrapPanel>
-                
-                
+                <Label Content="Quote Description" />
                 <TextBox AcceptsReturn="True" Height="Auto" TextWrapping="Wrap" Text="{Binding quote.description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
 
             </StackPanel>
@@ -42,12 +40,10 @@
             <StackPanel Name="spGrdMtrial" Margin="10" Grid.Row="1" Grid.Column="0">
 
                 <Label Content="Select Material" Style="{StaticResource SecondaryHeading}" />
-                <WrapPanel Width="300" HorizontalAlignment="Center">
-                    <Label Content="Filter" Width="Auto"/>
-                    <TextBox MinWidth="150" VerticalAlignment="Center" Text="{Binding materialFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                </WrapPanel>
 
-                <DataGrid  MaxHeight="450" ItemsSource="{Binding materialList}" AutoGenerateColumns="False" IsReadOnly="True">
+                <TextBox MinWidth="150" Style="{StaticResource inputFilter}" Tag="Filter Materials" VerticalAlignment="Center" Text="{Binding materialFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                <DataGrid  MaxHeight="450" Margin="0 10 0 0"  ItemsSource="{Binding materialList}" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Actions">
                             <DataGridTemplateColumn.CellTemplate>
