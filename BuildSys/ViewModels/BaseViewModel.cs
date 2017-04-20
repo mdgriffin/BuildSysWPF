@@ -24,12 +24,7 @@ namespace BuildSys.ViewModels
             }
         }
 
-        private Stack<BaseViewModel> NavigationStack;
-
-        public BaseViewModel ()
-        {
-            NavigationStack = new Stack<BaseViewModel>();
-        }
+        private static Stack<BaseViewModel> NavigationStack = new Stack<BaseViewModel>();
 
         public ICommand backCmd
         {
@@ -39,19 +34,9 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public  void addToStack(BaseViewModel vm)
-        {
-            NavigationStack.Push(vm);
-        }
-
-        public BaseViewModel removeFromStack ()
-        {
-            return NavigationStack.Pop();
-        }
-
         public void navigateTo (BaseViewModel vm)
         {
-            addToStack(vm);
+            NavigationStack.Push(vm);
             parent.ViewModel = vm;
         }
 
@@ -59,13 +44,14 @@ namespace BuildSys.ViewModels
         {
             if (canNavigateBack())
             {
-                parent.ViewModel = removeFromStack();
+                NavigationStack.Pop();
+                parent.ViewModel = NavigationStack.Pop();
             }
         }
 
         public Boolean canNavigateBack()
         {
-            return NavigationStack.Count > 0;
+            return NavigationStack.Count > 1;
         }
     }
 }
