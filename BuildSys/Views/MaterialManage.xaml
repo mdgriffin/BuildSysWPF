@@ -20,7 +20,10 @@
         <Grid Width="Auto">
             <DataGrid Margin="0 10 0 0" MaxHeight="450" ItemsSource="{Binding materialList}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Actions">
+                    <DataGridTextColumn Binding="{Binding name}" Header="Name" />
+                    <DataGridTextColumn Binding="{Binding unit}" Header="Unit" />
+                    <DataGridTextColumn Binding="{Binding pricePerUnit}" Header="Price Per Unit" />
+                    <DataGridTemplateColumn Header="Actions" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <WrapPanel>
@@ -49,9 +52,6 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding name}" Header="Name" />
-                    <DataGridTextColumn Binding="{Binding unit}" Header="Unit" />
-                    <DataGridTextColumn Binding="{Binding pricePerUnit}" Header="pricePerUnit" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

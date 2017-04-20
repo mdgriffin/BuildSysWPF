@@ -19,8 +19,36 @@
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="Foreground" Value="CadetBlue" />
         </Style>
-        
-        
+
+        <Style TargetType="DataGrid">
+            <Setter Property="RowHeaderWidth" Value="0" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalGridLinesBrush" Value="Transparent"/>
+            <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="5 10" />
+        </Style>
+           
+        <Style  TargetType="DataGridRow">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Margin" Value="0 3 0 3" />
+            <!--<Setter Property="BorderBrush" Value="#eaeaea" />
+            <Setter Property="BorderThickness" Value="1" />-->
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
         <!--
         Text input style that places a placeholder text within input
         Source: http://stackoverflow.com/questions/11873378/adding-placeholder-text-to-textbox

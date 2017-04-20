@@ -20,7 +20,12 @@
         <Grid Width="Auto">
             <DataGrid  MaxHeight="450" Margin="0 10 0 0" ItemsSource="{Binding quoteList}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Actions">
+                    <DataGridTextColumn Binding="{Binding description}" Header="Description" />
+                    <DataGridTextColumn Binding="{Binding subtotal}" Header="Subtotal" />
+                    <DataGridTextColumn Binding="{Binding vat}" Header="VAT" />
+                    <DataGridTextColumn Binding="{Binding customer.firstname}" Header="Customer First Name" />
+                    <DataGridTextColumn Binding="{Binding customer.surname}" Header="Customer Surname" />
+                    <DataGridTemplateColumn Header="Actions" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <WrapPanel>
@@ -49,11 +54,6 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding description}" Header="Description" />
-                    <DataGridTextColumn Binding="{Binding subtotal}" Header="Subtotal" />
-                    <DataGridTextColumn Binding="{Binding vat}" Header="VAT" />
-                    <DataGridTextColumn Binding="{Binding customer.firstname}" Header="Customer First Name" />
-                    <DataGridTextColumn Binding="{Binding customer.surname}" Header="Customer Surname" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

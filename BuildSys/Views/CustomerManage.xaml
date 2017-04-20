@@ -21,11 +21,14 @@
         <Grid Width="Auto">
             <DataGrid Margin="0 10 0 0" MaxHeight="450" ItemsSource="{Binding CustomerList}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Actions">
+                    
+                    <DataGridTextColumn Binding="{Binding firstname}" Header="Firstname" />
+                    <DataGridTextColumn Binding="{Binding surname}" Header="Surname" />
+                    <DataGridTextColumn Binding="{Binding email}" Header="Email" />
+                    <DataGridTemplateColumn Header="Actions" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <WrapPanel>
-
                                     <Button
                                         Content="Edit"
                                         HorizontalAlignment="Center"
@@ -60,9 +63,6 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding firstname}" Header="Firstname" />
-                    <DataGridTextColumn Binding="{Binding surname}" Header="Surname" />
-                    <DataGridTextColumn Binding="{Binding email}" Header="Email" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
