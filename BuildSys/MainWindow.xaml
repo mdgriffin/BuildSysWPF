@@ -15,11 +15,32 @@
         <viewModels:MainViewModel />
     </Window.DataContext>
 
-    <DockPanel>
+    <Window.Resources>
+        <Style x:Key="navHeading" TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
 
-        <StackPanel DockPanel.Dock="Left" Background="LightGray" Width="200">
+        <Style x:Key="navItem" TargetType="MenuItem">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderThickness" Value="5 0 0 0" />
+            <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="Padding" Value="10 6" />
 
-            <Label Content="Customers" FontWeight="Bold"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#f4f4f4"/>
+                    <Setter Property="BorderThickness" Value="5 0 0 0" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <DockPanel Background="#f4f4f4">
+
+        <StackPanel DockPanel.Dock="Left" Background="White" Width="200">
+
+            <Label Content="Customers" Style="{StaticResource navHeading}"/>
 
             <Menu Margin="0 10 0 10">
                 <Menu.ItemsPanel>
@@ -27,11 +48,11 @@
                         <VirtualizingStackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <MenuItem Header="_Register Customer" Command="{Binding goToRegCustomer}"/>
-                <MenuItem Header="_Manage Customers" Command="{Binding goToManageCustomer}"/>
+                <MenuItem Header="_Register Customer" Style="{StaticResource navItem}" Command="{Binding goToRegCustomer}"/>
+                <MenuItem Header="_Manage Customers" Style="{StaticResource navItem}" Command="{Binding goToManageCustomer}"/>
             </Menu>
 
-            <Label Content="Materials" FontWeight="Bold" />
+            <Label Content="Materials" Style="{StaticResource navHeading}" />
 
             <Menu Margin="0 10 0 10">
                 <Menu.ItemsPanel>
@@ -39,11 +60,11 @@
                         <VirtualizingStackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <MenuItem Header="_Create Materials" Command="{Binding goToRegMaterial}"/>
-                <MenuItem Header="_Manage Materials"  Command="{Binding goToManageMaterial}" />
+                <MenuItem Header="_Create Materials" Style="{StaticResource navItem}" Command="{Binding goToRegMaterial}"/>
+                <MenuItem Header="_Manage Materials" Style="{StaticResource navItem}"  Command="{Binding goToManageMaterial}" />
             </Menu>
 
-            <Label Content="Quotes" FontWeight="Bold" />
+            <Label Content="Quotes" Style="{StaticResource navHeading}" />
 
             <Menu Margin="0 10 0 10">
                 <Menu.ItemsPanel>
@@ -51,10 +72,10 @@
                         <VirtualizingStackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <MenuItem Header="_Manage Quotes"  Command="{Binding goToManageQuotes}"/>
+                <MenuItem Header="_Manage Quotes" Style="{StaticResource navItem}" Command="{Binding goToManageQuotes}"/>
             </Menu>
 
-            <Label Content="Reports" FontWeight="Bold" />
+            <Label Content="Reports" Style="{StaticResource navHeading}" />
 
             <Menu Margin="0 10 0 10">
                 <Menu.ItemsPanel>
@@ -62,9 +83,9 @@
                         <VirtualizingStackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <MenuItem Header="_Customer Reports" Command="{Binding goToCustomerAnalysis}"/>
-                <MenuItem Header="_Quote Reports" Command="{Binding goToQuoteAnalysis}"/>
-                <MenuItem Header="_Material Reports" Command="{Binding goToMaterialAnalysis}"/>
+                <MenuItem Header="_Customer Reports" Style="{StaticResource navItem}" Command="{Binding goToCustomerAnalysis}"/>
+                <MenuItem Header="_Quote Reports" Style="{StaticResource navItem}" Command="{Binding goToQuoteAnalysis}"/>
+                <MenuItem Header="_Material Reports" Style="{StaticResource navItem}" Command="{Binding goToMaterialAnalysis}"/>
             </Menu>
 
             <Menu Margin="0 10 0 10">
@@ -73,7 +94,7 @@
                         <VirtualizingStackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <MenuItem Header="_Settings"  Command="{Binding goToSettings}" />
+                <MenuItem Header="_Settings" Style="{StaticResource navItem}" Command="{Binding goToSettings}" />
             </Menu>
 
         </StackPanel>
@@ -106,9 +127,7 @@
             <MenuItem Header="_Settings"  Command="{Binding goToSettings}">
             </MenuItem>
         </Menu>-->
-        
             
-         <StackPanel></StackPanel>
 
         <ContentControl Content="{Binding ViewModel}" />
     </DockPanel>
