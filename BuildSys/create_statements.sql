@@ -22,6 +22,7 @@ CREATE TABLE Customers (
   email varchar(42) NOT NULL,
   vat_no varchar(24),
   account_type char(1) NOT NULL,
+  registered_on date DEFAULT SYSDATE,
   status char(1) DEFAULT 'A',
   CONSTRAINT pk_customers PRIMARY KEY (customer_id)
 );

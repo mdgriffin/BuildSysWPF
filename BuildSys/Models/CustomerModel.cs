@@ -414,5 +414,12 @@ namespace BuildSys.Models
             update(sqlUpdate);
         }
 
+        public int getNumCustomers ()
+        {
+            DataTable customersTable = select("SELECT * FROM Customers WHERE customer_id = " + customerId);
+            DataRow cust = customersTable.Rows[0];
+
+            return Int32.Parse(cust[0].ToString());
+        }
     }
 }

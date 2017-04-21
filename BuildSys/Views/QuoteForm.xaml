@@ -32,7 +32,7 @@
 
                 <Label Content="Create Quote" Style="{StaticResource MainHeading}" />
 
-                <Expander Header="Quote Issued To" FontWeight="Bold" IsExpanded="False">
+                <Expander Header="Quote Issued To" FontWeight="Bold" IsExpanded="False" >
 
                     <StackPanel>
 
