@@ -28,6 +28,16 @@ namespace BuildSys.ViewModels
 
             quote = new QuoteModel(customerId);
 
+            customer = CustomerModel.getCustomer(customerId);
+
+            if (customer.companyName == null || customer.vatNo == null)
+            {
+                isBusinessCustomer = "Collapsed";
+            } else
+            {
+                isBusinessCustomer = "Visible";
+            }
+
             materialList = MaterialModel.getMaterialList();
             originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
 
@@ -46,6 +56,17 @@ namespace BuildSys.ViewModels
             this.quote = QuoteModel.getQuote(quoteId);
             this.customerId = quote.customer.customerId;
 
+            customer = CustomerModel.getCustomer(customerId);
+
+            if (customer.companyName == null || customer.vatNo == null)
+            {
+                isBusinessCustomer = "Collapsed";
+            }
+            else
+            {
+                isBusinessCustomer = "Visible";
+            }
+
             materialList = MaterialModel.getMaterialList();
             originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
 
@@ -56,7 +77,10 @@ namespace BuildSys.ViewModels
 
         public ObservableCollection<QuoteMaterialModel> quoteMaterialList { get; set; }
 
+        public String isBusinessCustomer { get; set; }
+
         public QuoteModel quote { get; set; }
+        public CustomerModel customer { get; set; }
         public String btnText { get; set; }
 
         private QuoteMaterialModel _quoteMaterial;
