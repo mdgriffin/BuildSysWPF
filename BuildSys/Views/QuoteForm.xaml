@@ -114,31 +114,28 @@
 
                 <Label Content="Quote" Style="{StaticResource SecondaryHeading}" />
 
-                <DataGrid MaxHeight="450" ItemsSource="{Binding quoteMaterialList}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid MaxHeight="450" ItemsSource="{Binding quoteMaterialList}"  AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Actions">
+                        <DataGridTextColumn Binding="{Binding description}" Header="Description"/>
+                        <DataGridTextColumn Binding="{Binding pricePerUnit}" Header="pricePerUnit"/>
+                        <DataGridTextColumn Binding="{Binding numUnits}" Header="NumUnits"/>
+                        <DataGridTextColumn Binding="{Binding totalCost}" Header="totalCost"/>
+                        <DataGridTemplateColumn Header="Actions" Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <WrapPanel>
-
                                         <Button
                                             Content="Remove From Quote"
                                             HorizontalAlignment="Center"
-                                            Margin="2"
-                                            Padding="7"
+                                            Style="{StaticResource btnSecondary}"
                                             Command="{Binding Path=DataContext.removeQuoteMaterialCmd,       
                                             RelativeSource= {RelativeSource FindAncestor,
                                             AncestorType={x:Type DataGrid}}}"
                                             CommandParameter="{Binding listIndex}" />
-
                                     </WrapPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding description}" Header="Description" />
-                        <DataGridTextColumn Binding="{Binding pricePerUnit}" Header="pricePerUnit" />
-                        <DataGridTextColumn Binding="{Binding numUnits}" Header="NumUnits" />
-                        <DataGridTextColumn Binding="{Binding totalCost}" Header="totalCost" />
                     </DataGrid.Columns>
                 </DataGrid>
 

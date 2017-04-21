@@ -12,12 +12,12 @@
         <!-- App Styling -->
         <Style x:Key="MainHeading" TargetType="{x:Type Label}">
             <Setter Property="FontSize" Value="28"/>
-            <Setter Property="Foreground" Value="Blue" />
+            <Setter Property="Foreground" Value="#1089F2" />
         </Style>
         
         <Style x:Key="SecondaryHeading" TargetType="{x:Type Label}">
             <Setter Property="FontSize" Value="22"/>
-            <Setter Property="Foreground" Value="CadetBlue" />
+            <Setter Property="Foreground" Value="#263238" />
         </Style>
 
         <Style x:Key="btnPrimary" TargetType="{x:Type Button}">
@@ -37,13 +37,14 @@
         </Style>
 
         <Style TargetType="DataGrid">
+            <Setter Property="Width" Value="Auto" />
             <Setter Property="RowHeaderWidth" Value="0" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalGridLinesBrush" Value="Transparent"/>
             <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
 
         <Style TargetType="DataGridColumnHeader">
@@ -56,9 +57,8 @@
            
         <Style  TargetType="DataGridRow">
             <Setter Property="Background" Value="White" />
-            <!--<Setter Property="Margin" Value="0 3 0 3" />-->
-            <!--<Setter Property="BorderBrush" Value="#eaeaea" />
-            <Setter Property="BorderThickness" Value="1" />-->
+            <Setter Property="BorderBrush" Value="#eaeaea" />
+            <Setter Property="BorderThickness" Value="0 0 0 1" />
         </Style>
 
         <Style TargetType="DataGridCell">
