@@ -33,7 +33,6 @@ namespace BuildSys.ViewModels
             }
         }
 
-        // TODO: Fix Navigation
 
         public void navigateTo (BaseViewModel vm)
         {
@@ -46,7 +45,7 @@ namespace BuildSys.ViewModels
             if (canNavigateBack())
             {
                 NavigationStack.Pop();
-                parent.ViewModel = NavigationStack.Pop();
+                parent.ViewModel = NavigationStack.Peek();
             }
         }
 
