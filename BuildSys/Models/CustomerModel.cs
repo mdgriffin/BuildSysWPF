@@ -39,6 +39,7 @@ namespace BuildSys.Models
                 if (value != _title)
                 {
                     this._title = value;
+                    validateProp("title");
                     NotifyPropertyChanged("title");
                 }
             }
@@ -227,9 +228,9 @@ namespace BuildSys.Models
         public CustomerModel() : this(getNextRowId("customer_id", "Customers"), "", "", "", "", "", "", "", "", 'P', "", "") { }
 
 
-        // TODO: Validate that a title has been selected
         public override void validateAllProps()
         {
+            validateProp("title");
             validateProp("firstname");
             validateProp("surname");
             validateProp("street");
@@ -251,6 +252,12 @@ namespace BuildSys.Models
 
             switch (propertyName)
             {
+                case "title":
+                    if (Validator.isEmpty(title))
+                    {
+                        errorMessage = Validator.ERROR_IS_EMPTY;
+                    }
+                    break;
                 case "firstname":
                     if (Validator.isEmpty(firstname))
                     {

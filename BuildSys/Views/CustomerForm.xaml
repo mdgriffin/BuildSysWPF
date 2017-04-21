@@ -35,7 +35,7 @@
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblTitle" Content="Title" MinWidth="100"/>
-            <ComboBox HorizontalAlignment="Left" x:Name="cmbTitle" VerticalAlignment="Center" Width="120" ItemsSource="{StaticResource Titles}" SelectedItem="{Binding customer.title}"/>
+            <ComboBox HorizontalAlignment="Left" x:Name="cmbTitle" VerticalAlignment="Center" Width="120" ItemsSource="{StaticResource Titles}" SelectedItem="{Binding customer.title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
         </WrapPanel>
         <WrapPanel Margin="0,5">
             <Label Name="lblFirstname" Content="Firstname" MinWidth="100"/>
