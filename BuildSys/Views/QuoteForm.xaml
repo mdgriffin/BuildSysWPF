@@ -32,24 +32,29 @@
 
                 <Label Content="Create Quote" Style="{StaticResource MainHeading}" />
 
+                <Expander Header="Quote Issued To" FontWeight="Bold" IsExpanded="False">
 
-                <Label Content="Quote Issued To:" FontWeight="Bold" Padding="0 3 3 8" />
+                    <StackPanel>
 
-                <TextBlock Visibility="{Binding isBusinessCustomer }" Text="{Binding customer.companyName}" />
-                <TextBlock Visibility="{Binding isBusinessCustomer }" Text="{Binding customer.vatNo}" />
-                
-                <TextBlock >
-                    <Run Text="{Binding customer.title}"/>
-                    <Run Text="{Binding customer.firstname}"/>
-                    <Run Text="{Binding customer.surname}"/>
-                </TextBlock>
+                        <TextBlock Visibility="{Binding isBusinessCustomer }" FontWeight="Normal" Text="{Binding customer.companyName}" />
+                        <TextBlock Visibility="{Binding isBusinessCustomer }" FontWeight="Normal" Text="{Binding customer.vatNo}" />
 
-                <TextBlock Text="{Binding customer.street}" />
-                <TextBlock Text="{Binding customer.town}" />
-                <TextBlock Text="{Binding customer.county}" />
+                        <TextBlock FontWeight="Normal" >
+                        <Run Text="{Binding customer.title}"/>
+                        <Run Text="{Binding customer.firstname}"/>
+                        <Run Text="{Binding customer.surname}"/>
+                        </TextBlock>
 
-                <TextBlock Text="{Binding customer.telno}" />
-                <TextBlock Text="{Binding customer.email}" />
+                        <TextBlock Text="{Binding customer.street}" FontWeight="Normal" />
+                        <TextBlock Text="{Binding customer.town}" FontWeight="Normal" />
+                        <TextBlock Text="{Binding customer.county}" FontWeight="Normal" />
+
+                        <TextBlock Text="{Binding customer.telno}" FontWeight="Normal" />
+                        <TextBlock Text="{Binding customer.email}" FontWeight="Normal" />
+
+                    </StackPanel>
+
+                </Expander>
 
                 <Label Content="Quote Description" Margin="0 10 0 0" />
                 <TextBox AcceptsReturn="True" Height="Auto" TextWrapping="Wrap" Text="{Binding quote.description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=False}"  Validation.ErrorTemplate="{StaticResource inputError}"/>
