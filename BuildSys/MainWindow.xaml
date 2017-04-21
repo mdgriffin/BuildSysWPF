@@ -37,8 +37,8 @@
 
         
     </Window.Resources>
-    
-    <DockPanel Background="#f4f4f4">
+
+    <DockPanel Background="#F4F7F9">
 
         <StackPanel DockPanel.Dock="Left" Background="White" Width="200">
 

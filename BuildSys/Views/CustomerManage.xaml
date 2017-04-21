@@ -32,8 +32,7 @@
                                     <Button
                                         Content="Edit"
                                         HorizontalAlignment="Center"
-                                        Margin="2"
-                                        Padding="7"
+                                        Style="{StaticResource btnSecondary}"
                                         Command="{Binding Path=DataContext.editCustomerCmd,       
                                         RelativeSource= {RelativeSource FindAncestor,
                                         AncestorType={x:Type DataGrid}}}"
@@ -42,8 +41,7 @@
                                     <Button
                                         Content="Delete"
                                         HorizontalAlignment="Center"
-                                        Margin="2"
-                                        Padding="7"
+                                        Style="{StaticResource btnSecondary}"
                                         Command="{Binding Path=DataContext.deleteCustomerCmd,       
                                         RelativeSource= {RelativeSource FindAncestor,
                                         AncestorType={x:Type DataGrid}}}"
@@ -52,8 +50,7 @@
                                     <Button
                                         Content="Create Quote"
                                         HorizontalAlignment="Center"
-                                        Margin="2"
-                                        Padding="7"
+                                        Style="{StaticResource btnSecondary}"
                                         Command="{Binding Path=DataContext.createQuoteCmd,       
                                         RelativeSource= {RelativeSource FindAncestor,
                                         AncestorType={x:Type DataGrid}}}"

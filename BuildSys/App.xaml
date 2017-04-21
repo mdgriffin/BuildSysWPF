@@ -20,6 +20,22 @@
             <Setter Property="Foreground" Value="CadetBlue" />
         </Style>
 
+        <Style x:Key="btnPrimary" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#03A9F4" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="7" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style x:Key="btnSecondary" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="7" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="BorderBrush" Value="#eaeaea" />
+        </Style>
+
         <Style TargetType="DataGrid">
             <Setter Property="RowHeaderWidth" Value="0" />
             <Setter Property="Foreground" Value="Black" />
@@ -33,13 +49,14 @@
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Foreground" Value="Black" />
-            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Background" Value="#EAEEF0" />
+            <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Padding" Value="5 10" />
         </Style>
            
         <Style  TargetType="DataGridRow">
             <Setter Property="Background" Value="White" />
-            <Setter Property="Margin" Value="0 3 0 3" />
+            <!--<Setter Property="Margin" Value="0 3 0 3" />-->
             <!--<Setter Property="BorderBrush" Value="#eaeaea" />
             <Setter Property="BorderThickness" Value="1" />-->
         </Style>
