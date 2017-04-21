@@ -42,6 +42,11 @@
 
         <StackPanel DockPanel.Dock="Left" Background="White" Width="200">
 
+            <StackPanel Background="#1089F2">
+                <TextBlock Text="BuildSys" Foreground="White" Margin="10 10 10 0" FontSize="28" FontFamily="Impact" />
+                <TextBlock Text="Building Quotation System" Foreground="White" Margin="10 0 10 10" FontSize="15" />
+            </StackPanel>
+
             <Label Content="Customers" Style="{StaticResource navHeading}"/>
 
             <Menu Margin="0 10 0 10">
