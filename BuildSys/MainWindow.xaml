@@ -90,7 +90,7 @@
                         <VirtualizingStackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <MenuItem Header="_Create Quote" Style="{StaticResource navItem}" Command="{Binding goToCreateQuotes}"/>
+                <MenuItem Header="_Create Quote" Style="{StaticResource navItem}" Command="{Binding goToCreateQuote}"/>
                 <MenuItem Header="_Manage Quotes" Style="{StaticResource navItem}" Command="{Binding goToManageQuotes}"/>
             </Menu>
 

@@ -50,6 +50,14 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand goToCreateQuote
+        {
+            get
+            {
+                return new RelayCommand(param => navigateTo(new QuoteCustomerSelectViewModel(this)), param => true);
+            }
+        }
+
         public ICommand goToManageQuotes
         {
             get

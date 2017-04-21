@@ -1,18 +1,19 @@
 ﻿using BuildSys.Models;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace BuildSys.ViewModels
 {
-    public class CustomerManageViewModel: BaseViewModel
+    public class QuoteCustomerSelectViewModel : BaseViewModel
     {
 
-        public CustomerManageViewModel (BaseViewModel parent)
+        public QuoteCustomerSelectViewModel (BaseViewModel parent)
         {
             this.parent = parent;
 
@@ -23,7 +24,8 @@ namespace BuildSys.ViewModels
         }
 
         private String _customerFilter;
-        public String customerFilter {
+        public String customerFilter
+        {
             get
             {
                 return _customerFilter;
@@ -52,41 +54,7 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public ICommand editCustomerCmd
-        {
-            get
-            {
-                return new RelayCommand((customerId) => editCustomer((int) customerId), param => true);
-            }
-        }
-
-        public ICommand deleteCustomerCmd
-        {
-            get
-            {
-                return new RelayCommand((customerId) => deleteCustomer((int)customerId), param => true);
-            }
-        }
-
-        public void editCustomer (int customerId)
-        {
-            navigateTo(new CustomerFormViewModel(parent, customerId));
-        }
-
-        public void deleteCustomer(int customerId)
-        {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
-            
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                CustomerModel.deleteCustomer(customerId);
-                MessageBox.Show("Customer Deleted");
-                CustomerList.Where(cust => cust.customerId == customerId).ToList().All(i => CustomerList.Remove(i));
-                originalCustomerList.Where(cust => cust.customerId == customerId).ToList().All(i => CustomerList.Remove(i));
-            }  
-        }
-
-        public void filterCustomers ()
+        public void filterCustomers()
         {
             CustomerList = new ObservableCollection<CustomerModel>(originalCustomerList);
             Regex matchName = new Regex(@"^" + customerFilter + @".+", RegexOptions.IgnoreCase);
@@ -103,10 +71,8 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand((customerId) => navigateTo(new QuoteFormViewModel(parent, (int) customerId)) , param => true);
+                return new RelayCommand((customerId) => navigateTo(new QuoteFormViewModel(parent, (int)customerId)), param => true);
             }
         }
-
     }
-
 }

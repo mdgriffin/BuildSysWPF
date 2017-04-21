@@ -84,6 +84,7 @@
     <Compile Include="ViewModels\MaterialFormViewModel.cs" />
     <Compile Include="ViewModels\MaterialManageViewModel.cs" />
     <Compile Include="ViewModels\QuoteAnalysisViewModel.cs" />
+    <Compile Include="ViewModels\QuoteCustomerSelectViewModel.cs" />
     <Compile Include="ViewModels\QuoteFormViewModel.cs" />
     <Compile Include="ViewModels\QuoteManageViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -110,6 +111,9 @@
     </Compile>
     <Compile Include="Views\QuoteAnalysis.xaml.cs">
       <DependentUpon>QuoteAnalysis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuoteCustomerSelect.xaml.cs">
+      <DependentUpon>QuoteCustomerSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuoteForm.xaml.cs">
       <DependentUpon>QuoteForm.xaml</DependentUpon>
@@ -162,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QuoteAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuoteCustomerSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
