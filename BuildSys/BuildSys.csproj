@@ -227,7 +227,9 @@
     <None Include="Views\App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="analysis_stmt.sql" />
     <Content Include="create_statements.sql" />
+    <Content Include="dummy_data.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
