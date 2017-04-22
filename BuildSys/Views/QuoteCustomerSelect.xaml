@@ -22,7 +22,7 @@
 
                     <DataGridTextColumn Binding="{Binding firstname}" Header="Firstname" />
                     <DataGridTextColumn Binding="{Binding surname}" Header="Surname" />
-                    <DataGridTextColumn Binding="{Binding email}" Header="Email" />
+                    <DataGridTextColumn Binding="{Binding companyName}" Header="Company" />
                     <DataGridTemplateColumn Header="Actions" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
