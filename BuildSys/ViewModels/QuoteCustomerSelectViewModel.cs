@@ -61,7 +61,7 @@ namespace BuildSys.ViewModels
 
             if (customerFilter.Length > 0)
             {
-                CustomerList.Where(cust => !matchName.IsMatch(cust.firstname) && !matchName.IsMatch(cust.surname))
+                CustomerList.Where(cust => !matchName.IsMatch(cust.firstname) && !matchName.IsMatch(cust.surname) && !matchName.IsMatch(cust.companyName))
                     .ToList()
                     .All(i => CustomerList.Remove(i));
             }
