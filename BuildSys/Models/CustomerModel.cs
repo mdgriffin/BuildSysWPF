@@ -421,9 +421,9 @@ namespace BuildSys.Models
             update(sqlUpdate);
         }
 
-        public int getNumCustomers ()
+        public static int getNumCustomers ()
         {
-            DataTable customersTable = select("SELECT * FROM Customers WHERE customer_id = " + customerId);
+            DataTable customersTable = select("SELECT COUNT(customer_id) FROM Customers");
             DataRow cust = customersTable.Rows[0];
 
             return Int32.Parse(cust[0].ToString());

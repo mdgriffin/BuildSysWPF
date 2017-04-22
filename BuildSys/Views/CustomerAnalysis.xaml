@@ -38,7 +38,7 @@
                 <StackPanel Grid.Column="1" Grid.Row="0" Background="Teal" Margin="5 0 5 0">
 
                     <Label Content="Number of Customers" Style="{StaticResource SecondaryHeading}" Margin="10 10 10 0" Padding="0" Foreground="White" />
-                    <TextBlock Text="32" Margin="10 0 10 10" Foreground="White" FontSize="18" />
+                    <TextBlock Text="{Binding numCustomers}" Margin="10 0 10 10" Foreground="White" FontSize="18" />
 
                 </StackPanel>
 

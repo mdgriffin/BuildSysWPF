@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LiveCharts;
 using LiveCharts.Wpf;
+using BuildSys.Models;
 
 namespace BuildSys.ViewModels
 {
@@ -15,6 +16,8 @@ namespace BuildSys.ViewModels
         public CustomerAnalysisViewModel(BaseViewModel parent)
         {
             this.parent = parent;
+
+            numCustomers = CustomerModel.getNumCustomers();
 
             GraphCollection = new SeriesCollection
             {
@@ -32,5 +35,7 @@ namespace BuildSys.ViewModels
         public SeriesCollection GraphCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
+
+        public int numCustomers { get; set; }
     }
 }
