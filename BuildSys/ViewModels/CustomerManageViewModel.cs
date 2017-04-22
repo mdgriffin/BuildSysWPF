@@ -68,6 +68,22 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand createQuoteCmd
+        {
+            get
+            {
+                return new RelayCommand((customerId) => navigateTo(new QuoteFormViewModel(parent, (int)customerId)), param => true);
+            }
+        }
+
+        public ICommand viewCustomerQuoteCmd
+        {
+            get
+            {
+                return new RelayCommand((customerId) => viewCustomerQuotes((int)customerId), param => true);
+            }
+        }
+
         public void editCustomer (int customerId)
         {
             navigateTo(new CustomerFormViewModel(parent, customerId));
@@ -86,6 +102,11 @@ namespace BuildSys.ViewModels
             }  
         }
 
+        public void viewCustomerQuotes(int customerId)
+        {
+            navigateTo(new CustomerQuoteManageViewModel(parent, customerId));
+        }
+
         public void filterCustomers ()
         {
             CustomerList = new ObservableCollection<CustomerModel>(originalCustomerList);
@@ -99,13 +120,7 @@ namespace BuildSys.ViewModels
             }
         }
 
-        public ICommand createQuoteCmd
-        {
-            get
-            {
-                return new RelayCommand((customerId) => navigateTo(new QuoteFormViewModel(parent, (int) customerId)) , param => true);
-            }
-        }
+        
 
     }
 

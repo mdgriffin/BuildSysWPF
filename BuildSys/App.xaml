@@ -208,6 +208,10 @@
             <views:CustomerManage />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModels:CustomerQuoteManageViewModel}">
+            <views:CustomerQuoteManage />
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type viewModels:MaterialFormViewModel}">
             <views:MaterialForm />
         </DataTemplate>

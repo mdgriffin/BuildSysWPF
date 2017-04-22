@@ -210,7 +210,7 @@ namespace BuildSys.Models
 
         public static ObservableCollection<QuoteModel> getCustomersQuotes(int customerId)
         {
-            DataTable quotesTable = select("SELECT * FROM Quotes WHERE status = 'A' && customer_id = " + customerId);
+            DataTable quotesTable = select("SELECT * FROM Quotes WHERE status = 'A' AND customer_id = " + customerId);
 
             ObservableCollection<QuoteModel> quoteList = new ObservableCollection<QuoteModel>();
 
