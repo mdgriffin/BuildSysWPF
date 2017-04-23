@@ -257,7 +257,9 @@ namespace BuildSys.ViewModels
 
             // Create a copy of this quote material
             quoteMaterial = quoteMaterialList.ElementAt(quoteMaterialIndex).clone();
-            selectedMaterial = MaterialModel.getMaterial(quoteMaterial.materialId);
+            // This material may have been deleted
+            //selectedMaterial = MaterialModel.getMaterial(quoteMaterial.materialId);
+            selectedMaterial = new MaterialModel();
         }
 
         public void updateTotalQuoteCosts ()
