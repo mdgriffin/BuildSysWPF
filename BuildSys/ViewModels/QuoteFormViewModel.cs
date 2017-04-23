@@ -257,9 +257,19 @@ namespace BuildSys.ViewModels
 
             // Create a copy of this quote material
             quoteMaterial = quoteMaterialList.ElementAt(quoteMaterialIndex).clone();
-            // This material may have been deleted
-            //selectedMaterial = MaterialModel.getMaterial(quoteMaterial.materialId);
-            selectedMaterial = new MaterialModel();
+            
+            // Get the original material from the list if available
+            MaterialModel materialFromList = materialList.Where(mat => mat.materialId == quoteMaterial.materialId).First();
+
+            // Check that this material is in the list
+            if (materialFromList != null)
+            {
+                selectedMaterial = materialFromList;
+            }
+            else
+            {
+                selectedMaterial = new MaterialModel();
+            }
         }
 
         public void updateTotalQuoteCosts ()
