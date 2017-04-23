@@ -79,6 +79,7 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\CustomerAnalysisViewModel.cs" />
     <Compile Include="ViewModels\CustomerQuoteManageViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\CustomerManageViewModel.cs" />
     <Compile Include="ViewModels\MaterialAnalysisViewModel.cs" />
@@ -103,6 +104,9 @@
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="Views\CustomerQuoteManage.xaml.cs">
       <DependentUpon>CustomerQuoteManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MaterialAnalysis.xaml.cs">
       <DependentUpon>MaterialAnalysis.xaml</DependentUpon>
@@ -158,6 +162,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CustomerQuoteManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

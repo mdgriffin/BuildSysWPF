@@ -15,7 +15,7 @@ namespace BuildSys.ViewModels
         public MainViewModel()
         {
             this.parent = this;
-            navigateTo(new CustomerManageViewModel(this));
+            navigateTo(new HomeViewModel(this));
         }
 
         public ICommand goToManageCustomer
