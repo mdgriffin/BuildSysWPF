@@ -75,7 +75,10 @@ namespace BuildSys.ViewModels
             updateTotalQuoteCosts();
         }
 
+        public String addOrUpdateQuoteMaterialBtn { get; set; } = "Add to Quote";
+
         public ObservableCollection<QuoteMaterialModel> quoteMaterialList { get; set; }
+        private ObservableCollection<QuoteMaterialModel> removedQuoteMaterialList = new ObservableCollection<QuoteMaterialModel>();
 
         public String isBusinessCustomer { get; set; }
 
@@ -175,27 +178,35 @@ namespace BuildSys.ViewModels
             quoteMaterial = new QuoteMaterialModel(quote.quoteId, materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
         }
 
-        public ICommand addMaterialoToQuoteListCmd
+        public ICommand addOrUpdateQuoteMaterialCmd
         {
             get
             {
-                return new RelayCommand(param => addMaterialToQuoteList(), param => selectedMaterial != null && !selectedMaterial.HasErrors);
+                return new RelayCommand(param => addOrUpdateQuoteMaterial(), param => selectedMaterial != null && !selectedMaterial.HasErrors);
             }
         }
 
 
-        public void addMaterialToQuoteList()
+        public void addOrUpdateQuoteMaterial()
         {
             quoteMaterial.validateAllProps();
 
             if (selectedMaterial != null && quoteMaterial != null && !quoteMaterial.HasErrors)
             {
-                quoteMaterialList.Add(quoteMaterial);
+                if (quoteMaterial.quoteMaterialId == null)
+                {
+                    quoteMaterialList.Add(quoteMaterial);
+                    quoteMaterial.listIndex = quoteMaterialList.IndexOf(quoteMaterial);
+                }
+                else
+                {
+                    quoteMaterialList[quoteMaterial.listIndex] = quoteMaterial;
+                }
 
-                quoteMaterial.listIndex = quoteMaterialList.IndexOf(quoteMaterial);
+                addOrUpdateQuoteMaterialBtn = "Add to Quote";
+                NotifyPropertyChanged("addOrUpdateQuoteMaterialBtn");
 
                 updateTotalQuoteCosts();
-
                 quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
             }
             else
@@ -209,17 +220,45 @@ namespace BuildSys.ViewModels
         {
             get
             {
-                return new RelayCommand(quoteMaterialListIndex => removeQuoteMaterial((int)quoteMaterialListIndex), param => true);
+                return new RelayCommand(quoteMaterialIndex => removeQuoteMaterial((int)quoteMaterialIndex), param => true);
             }
         }
-        
 
-        public void removeQuoteMaterial (int quoteMaterialListIndex)
+        public void removeQuoteMaterial (int quoteMaterialIndex)
         {
-            quoteMaterialList.RemoveAt(quoteMaterialListIndex);
+            // Check if this material has been saved
+            if (quoteMaterialList.ElementAt(quoteMaterialIndex).quoteMaterialId != null)
+            {
+                removedQuoteMaterialList.Add(quoteMaterialList.ElementAt(quoteMaterialIndex));
+            }
+            
+            // remove from the list
+            quoteMaterialList.RemoveAt(quoteMaterialIndex);
+
+            int currentIndex = 0;
+            // Ensure each element is set ot the correct index
+            quoteMaterialList.ToList().ForEach(qm => qm.listIndex = currentIndex++);
+
             updateTotalQuoteCosts();
         }
 
+        public ICommand editQuoteMaterialCmd
+        {
+            get
+            {
+                return new RelayCommand(quoteMaterialIndex => editQuoteMaterial((int)quoteMaterialIndex), param => true);
+            }
+        }
+
+        public void editQuoteMaterial(int quoteMaterialIndex)
+        {
+            addOrUpdateQuoteMaterialBtn = "Update In Quote";
+            NotifyPropertyChanged("addOrUpdateQuoteMaterialBtn");
+
+            // Create a copy of this quote material
+            quoteMaterial = quoteMaterialList.ElementAt(quoteMaterialIndex).clone();
+            selectedMaterial = MaterialModel.getMaterial(quoteMaterial.materialId);
+        }
 
         public void updateTotalQuoteCosts ()
         {
@@ -270,14 +309,22 @@ namespace BuildSys.ViewModels
                     
                     foreach (QuoteMaterialModel quoteMat in quoteMaterialList)
                     {
-                        if (quoteMat.quoteMaterialId != 0)
+                        if (!quoteMat.HasErrors)
                         {
-                            quoteMat.updateMaterial();
+                            if (quoteMat.quoteMaterialId != 0)
+                            {
+                                quoteMat.updateMaterial();
+                            }
+                            else
+                            {
+                                quoteMat.insertMaterial();
+                            }
                         }
-                        else
-                        {
-                            quoteMat.insertMaterial();
-                        }
+                    }
+
+                    foreach (QuoteMaterialModel quoteMat in removedQuoteMaterialList)
+                    {
+                        QuoteMaterialModel.delete(quoteMat.quoteMaterialId.Value);
                     }
 
                     MessageBox.Show("Quote Saved");

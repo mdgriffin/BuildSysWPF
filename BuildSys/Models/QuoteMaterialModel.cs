@@ -9,11 +9,25 @@ namespace BuildSys.Models
     {
         // If a Quote Material has an id, it has already been saved
         public int? quoteMaterialId; // Primary Key
-        private int quoteId; // Foreign key to quotes
-        private int materialId; // Foreign key to materials
+        public int quoteId; // Foreign key to quotes
+        public int materialId; // Foreign key to materials
 
         // used in conjunction with the quote material list to get the specific index of a list item
-        public int listIndex { get; set; }
+        public int _listIndex;
+        public int listIndex {
+            get
+            {
+                return _listIndex;
+            }
+            set
+            {
+                if (value != _listIndex)
+                {
+                    _listIndex = value;
+                    NotifyPropertyChanged("listIndex");
+                }
+            }
+        }
 
         public String _description;
         public String description
@@ -87,7 +101,7 @@ namespace BuildSys.Models
                 if (value != _isService)
                 {
                     _isService = value;
-                    NotifyPropertyChanged("isService");
+                    //NotifyPropertyChanged("isService");
                 }
             }
         }
@@ -104,7 +118,7 @@ namespace BuildSys.Models
                 if (value != _totalCost)
                 {
                     _totalCost = value;
-                    NotifyPropertyChanged("totalCost");
+                    //NotifyPropertyChanged("totalCost");
                 }
             }
         }
@@ -169,6 +183,17 @@ namespace BuildSys.Models
             }
         }
 
+        /*
+        public void notifyQuoteMaterialUpdated ()
+        {
+           
+            NotifyPropertyChanged("description");
+            NotifyPropertyChanged("pricePerUnit");
+            NotifyPropertyChanged("numUnits");
+            NotifyPropertyChanged("totalCost");
+        }
+        */
+
         public QuoteMaterialModel (int quoteMaterialId, int quoteId, int materialId, String description, String pricePerUnit, String numUnits, Boolean isService)
         {
             this.quoteMaterialId = quoteMaterialId;
@@ -183,15 +208,29 @@ namespace BuildSys.Models
 
         public QuoteMaterialModel(int quoteId, int materialId, String pricePerUnit, Boolean isService) : this(0, quoteId, materialId, "", pricePerUnit, "0", isService) { }
 
+        public QuoteMaterialModel clone ()
+        {
+            if (quoteMaterialId == null)
+            {
+                return new QuoteMaterialModel(quoteId, materialId, materialId, description, pricePerUnit, numUnits, isService);
+            }
+            else
+            {
+                return new QuoteMaterialModel(quoteMaterialId.Value, materialId, materialId, description, pricePerUnit, numUnits, isService);
+            }
+            
+        }
+
         public static ObservableCollection<QuoteMaterialModel> getQuoteMaterialList(int quoteId)
         {
             DataTable quoteMaterialsTable = select("SELECT * FROM Quote_Materials WHERE quote_id = " + quoteId);
-
             ObservableCollection<QuoteMaterialModel> quoteMaterialsList = new ObservableCollection<QuoteMaterialModel>();
+
+            int rowIndex = 0;
 
             foreach (DataRow row in quoteMaterialsTable.Rows)
             {
-                quoteMaterialsList.Add(new QuoteMaterialModel(
+                QuoteMaterialModel qm = new QuoteMaterialModel(
                     Int32.Parse(row["quote_material_id"].ToString()),
                     Int32.Parse(row["quote_id"].ToString()),
                     Int32.Parse(row["material_id"].ToString()),
@@ -199,7 +238,11 @@ namespace BuildSys.Models
                     row["price_per_unit"].ToString(),
                     row["num_units"].ToString(),
                     row["is_service"].ToString() == "1"
-                ));
+                );
+
+                qm.listIndex = rowIndex++;
+
+                quoteMaterialsList.Add(qm);
             }
 
             return quoteMaterialsList;
