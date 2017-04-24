@@ -17,19 +17,22 @@
         <Label Content="Manage Customers" Style="{StaticResource MainHeading}" />
 
         <TextBox MinWidth="150" VerticalAlignment="Center" Style="{StaticResource inputFilter}" Tag="Filter Customers" Text="{Binding customerFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
         
-        <Grid Width="Auto">
-            <DataGrid Margin="0 10 0 0" MaxHeight="450" ItemsSource="{Binding CustomerList}" AutoGenerateColumns="False" IsReadOnly="True">
-                <DataGrid.Columns>
-                    
-                    <DataGridTextColumn Binding="{Binding firstname}" Header="Firstname" />
-                    <DataGridTextColumn Binding="{Binding surname}" Header="Surname" />
-                    <DataGridTextColumn Binding="{Binding companyName}" Header="Company" />
-                    <DataGridTemplateColumn Header="Actions" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <WrapPanel>
-                                    <Button
+        <TabControl Margin="0 20 0 0">
+            <TabItem Header="Active Customers">
+                <Grid Width="Auto" Margin="10">
+                    <DataGrid Margin="0 10 0 0" MaxHeight="450" ItemsSource="{Binding CustomerList}" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Binding="{Binding firstname}" Header="Firstname" />
+                            <DataGridTextColumn Binding="{Binding surname}" Header="Surname" />
+                            <DataGridTextColumn Binding="{Binding companyName}" Header="Company" />
+                            <DataGridTemplateColumn Header="Actions" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel>
+                                            <Button
                                         Content="Edit"
                                         HorizontalAlignment="Center"
                                         Style="{StaticResource btnSecondary}"
@@ -38,7 +41,7 @@
                                         AncestorType={x:Type DataGrid}}}"
                                         CommandParameter="{Binding customerId}" />
 
-                                    <Button
+                                            <Button
                                         Content="Delete"
                                         HorizontalAlignment="Center"
                                         Style="{StaticResource btnSecondary}"
@@ -47,7 +50,7 @@
                                         AncestorType={x:Type DataGrid}}}"
                                         CommandParameter="{Binding customerId}" />
 
-                                    <Button
+                                            <Button
                                         Content="Create Quote"
                                         HorizontalAlignment="Center"
                                         Style="{StaticResource btnSecondary}"
@@ -56,7 +59,7 @@
                                         AncestorType={x:Type DataGrid}}}"
                                         CommandParameter="{Binding customerId}" />
 
-                                    <Button
+                                            <Button
                                         Content="View Quotes"
                                         HorizontalAlignment="Center"
                                         Style="{StaticResource btnSecondary}"
@@ -65,13 +68,45 @@
                                         AncestorType={x:Type DataGrid}}}"
                                         CommandParameter="{Binding customerId}" />
 
-                                </WrapPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Deleted Customers" >
+                <Grid Width="Auto" Margin="10">
+                    <DataGrid Margin="0 10 0 0" MaxHeight="450" ItemsSource="{Binding DeletedCustomerList}" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Binding="{Binding firstname}" Header="Firstname" />
+                            <DataGridTextColumn Binding="{Binding surname}" Header="Surname" />
+                            <DataGridTextColumn Binding="{Binding companyName}" Header="Company" />
+                            <DataGridTemplateColumn Header="Actions" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel>
+                                            <Button
+                                        Content="Restore Customer"
+                                        HorizontalAlignment="Center"
+                                        Style="{StaticResource btnSecondary}"
+                                        Command="{Binding Path=DataContext.restoreCustomerCmd,       
+                                        RelativeSource= {RelativeSource FindAncestor,
+                                        AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding customerId}" />
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        
     </StackPanel>
     
 </UserControl>

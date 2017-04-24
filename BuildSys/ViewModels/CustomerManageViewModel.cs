@@ -9,20 +9,21 @@ using System.Windows.Input;
 
 namespace BuildSys.ViewModels
 {
-    public class CustomerManageViewModel: BaseViewModel
+    public class CustomerManageViewModel : BaseViewModel
     {
 
-        public CustomerManageViewModel (BaseViewModel parent)
+        public CustomerManageViewModel(BaseViewModel parent)
         {
             this.parent = parent;
 
             CustomerList = CustomerModel.getCustomerList();
+            DeletedCustomerList = CustomerModel.getDeletedCustomerList();
 
             // Keep a copy of the CustomerList so that we can restore the list after filtering
             originalCustomerList = new ObservableCollection<CustomerModel>(CustomerList);
         }
 
-        private String _customerFilter;
+        private String _customerFilter = "";
         public String customerFilter {
             get
             {
@@ -38,9 +39,11 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ObservableCollection<CustomerModel> DeletedCustomerList { get; set; }
+
         private ObservableCollection<CustomerModel> originalCustomerList;
 
-        private ObservableCollection<CustomerModel> _customerList = new ObservableCollection<CustomerModel>();
+        private ObservableCollection<CustomerModel> _customerList;
         public ObservableCollection<CustomerModel> CustomerList
         {
             get { return _customerList ?? (_customerList = new ObservableCollection<CustomerModel>()); }
@@ -84,6 +87,14 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand restoreCustomerCmd
+        {
+            get
+            {
+                return new RelayCommand((customerId) => restoreCustomer((int)customerId), param => true);
+            }
+        }
+
         public void editCustomer (int customerId)
         {
             navigateTo(new CustomerFormViewModel(parent, customerId));
@@ -91,15 +102,31 @@ namespace BuildSys.ViewModels
 
         public void deleteCustomer(int customerId)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
-            
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                CustomerModel.deleteCustomer(customerId);
-                MessageBox.Show("Customer Deleted");
-                CustomerList.Where(cust => cust.customerId == customerId).ToList().All(i => CustomerList.Remove(i));
-                originalCustomerList.Where(cust => cust.customerId == customerId).ToList().All(i => CustomerList.Remove(i));
-            }  
+            CustomerModel.deleteCustomer(customerId);
+
+            CustomerModel deletedCustomer = CustomerList.Where(cust => cust.customerId == customerId).First();
+
+            CustomerList.Remove(deletedCustomer);
+            originalCustomerList.Remove(deletedCustomer);
+
+            DeletedCustomerList.Add(deletedCustomer);
+        }
+
+        public void restoreCustomer(int customerId)
+        {
+            CustomerModel.restoreCustomer(customerId);
+            // TODO: Add on to active customer list
+            CustomerModel restoredCustomer = DeletedCustomerList.Where(cust => cust.customerId == customerId).First();
+
+            CustomerList.Add(restoredCustomer);
+            //NotifyPropertyChanged("CustomerList");
+
+            originalCustomerList.Add(restoredCustomer);
+
+            DeletedCustomerList.Remove(restoredCustomer);
+            //NotifyPropertyChanged("DeletedCustomerList");
+
+            filterCustomers();
         }
 
         public void viewCustomerQuotes(int customerId)
@@ -119,9 +146,6 @@ namespace BuildSys.ViewModels
                     .All(i => CustomerList.Remove(i));
             }
         }
-
-        
-
     }
 
 }

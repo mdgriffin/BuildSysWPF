@@ -330,6 +330,20 @@ namespace BuildSys.Models
             return CustomerList;
         }
 
+        public static ObservableCollection<CustomerModel> getDeletedCustomerList()
+        {
+            DataTable customersTable = select("SELECT * FROM Customers WHERE status = 'I'");
+
+            ObservableCollection<CustomerModel> CustomerList = new ObservableCollection<CustomerModel>();
+
+            foreach (DataRow row in customersTable.Rows)
+            {
+                CustomerList.Add(new CustomerModel(Int32.Parse(row["customer_id"].ToString()), row["title"].ToString(), row["firstname"].ToString(), row["surname"].ToString(), row["street"].ToString(), row["town"].ToString(), row["county"].ToString(), row["telephone"].ToString(), row["email"].ToString(), row["account_type"].ToString().ToCharArray()[0], row["company_name"].ToString(), row["vat_no"].ToString()));
+            }
+
+            return CustomerList;
+        }
+
         public static CustomerModel getCustomer (int customerId)
         {
             DataTable customersTable = select("SELECT * FROM Customers WHERE customer_id = " + customerId);
@@ -348,6 +362,15 @@ namespace BuildSys.Models
         {
             String sqlDelete = "Update Customers SET " +
                 "status = 'I' " +
+                " WHERE customer_id = " + customerId;
+
+            update(sqlDelete);
+        }
+
+        public static void restoreCustomer(int customerId)
+        {
+            String sqlDelete = "Update Customers SET " +
+                "status = 'A' " +
                 " WHERE customer_id = " + customerId;
 
             update(sqlDelete);
