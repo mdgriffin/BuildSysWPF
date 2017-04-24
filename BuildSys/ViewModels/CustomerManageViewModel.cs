@@ -115,16 +115,12 @@ namespace BuildSys.ViewModels
         public void restoreCustomer(int customerId)
         {
             CustomerModel.restoreCustomer(customerId);
-            // TODO: Add on to active customer list
             CustomerModel restoredCustomer = DeletedCustomerList.Where(cust => cust.customerId == customerId).First();
 
             CustomerList.Add(restoredCustomer);
-            //NotifyPropertyChanged("CustomerList");
-
             originalCustomerList.Add(restoredCustomer);
 
             DeletedCustomerList.Remove(restoredCustomer);
-            //NotifyPropertyChanged("DeletedCustomerList");
 
             filterCustomers();
         }

@@ -21,14 +21,13 @@ namespace BuildSys.ViewModels
             this.parent = parent;
 
             quoteList = QuoteModel.getQuoteList();
+            deletedQuoteList = QuoteModel.getDeletedQuoteList();
 
             // Keep a copy of the quoteList so that we can restore the list after filtering
             originalQuoteList = new ObservableCollection<QuoteModel>(quoteList);
-
-
         }
 
-        private String _quoteFilter;
+        private String _quoteFilter = "";
         public String quoteFilter
         {
             get
@@ -44,6 +43,8 @@ namespace BuildSys.ViewModels
                 }
             }
         }
+
+        public ObservableCollection<QuoteModel> deletedQuoteList { get; set; }
 
         private ObservableCollection<QuoteModel> originalQuoteList;
 
@@ -78,6 +79,14 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand restoreQuoteCmd
+        {
+            get
+            {
+                return new RelayCommand((quoteId) => restoreQuote((int)quoteId), param => true);
+            }
+        }
+
         public void editQuote(int quoteId)
         {
             navigateTo(new QuoteFormViewModel(parent, quoteId, true));
@@ -85,15 +94,26 @@ namespace BuildSys.ViewModels
 
         public void deleteQuote(int quoteId)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            QuoteModel.deleteQuote(quoteId);
 
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                QuoteModel.deleteQuote(quoteId);
-                MessageBox.Show("Quote Deleted");
-                quoteList.Where(quote => quote.quoteId == quoteId).ToList().All(i => quoteList.Remove(i));
-                originalQuoteList.Where(quote => quote.quoteId == quoteId).ToList().All(i => quoteList.Remove(i));
-            }
+            QuoteModel deletedQuote = quoteList.Where(quote => quote.quoteId == quoteId).First();
+            quoteList.Remove(deletedQuote);
+            originalQuoteList.Remove(deletedQuote);
+
+            deletedQuoteList.Add(deletedQuote);
+        }
+
+        public void restoreQuote(int quoteId)
+        {
+            QuoteModel.restoreQuote(quoteId);
+            QuoteModel restoredQuote = deletedQuoteList.Where(quote => quote.quoteId == quoteId).First();
+
+            quoteList.Add(restoredQuote);
+            originalQuoteList.Add(restoredQuote);
+
+            deletedQuoteList.Remove(restoredQuote);
+
+            filterQuotes();
         }
 
         public void filterQuotes()

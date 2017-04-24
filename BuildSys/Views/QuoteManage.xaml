@@ -17,20 +17,23 @@
 
         <TextBox MinWidth="150" VerticalAlignment="Center" Style="{StaticResource inputFilter}"  Tag="Filter Quotes" Text="{Binding quoteFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
-        <Grid Width="Auto">
-            <DataGrid  MaxHeight="450" Margin="0 10 0 0" ItemsSource="{Binding quoteList}" AutoGenerateColumns="False" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding description}" Header="Description" />
-                    <DataGridTextColumn Binding="{Binding subtotal}" Header="Subtotal" />
-                    <DataGridTextColumn Binding="{Binding vat}" Header="VAT" />
-                    <DataGridTextColumn Binding="{Binding customer.firstname}" Header="Customer First Name" />
-                    <DataGridTextColumn Binding="{Binding customer.surname}" Header="Customer Surname" />
-                    <DataGridTemplateColumn Header="Actions" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <WrapPanel>
+        <TabControl Margin="0 20 0 0">
+            <TabItem Header="Active Quotes">
 
-                                    <Button
+                <Grid Width="Auto">
+                    <DataGrid  MaxHeight="325" Margin="0 10 0 0" ItemsSource="{Binding quoteList}" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding description}" Header="Description" />
+                            <DataGridTextColumn Binding="{Binding subtotal}" Header="Subtotal" />
+                            <DataGridTextColumn Binding="{Binding vat}" Header="VAT" />
+                            <DataGridTextColumn Binding="{Binding customer.firstname}" Header="Customer First Name" />
+                            <DataGridTextColumn Binding="{Binding customer.surname}" Header="Customer Surname" />
+                            <DataGridTemplateColumn Header="Actions" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel>
+
+                                            <Button
                                         Content="Edit"
                                         HorizontalAlignment="Center"
                                         Margin="2"
@@ -40,7 +43,7 @@
                                         AncestorType={x:Type DataGrid}}}"
                                         CommandParameter="{Binding quoteId}" />
 
-                                    <Button
+                                            <Button
                                         Content="Delete"
                                         HorizontalAlignment="Center"
                                         Margin="2"
@@ -50,13 +53,52 @@
                                         AncestorType={x:Type DataGrid}}}"
                                         CommandParameter="{Binding quoteId}" />
 
-                                </WrapPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Deleted Quotes">
+
+                <Grid Width="Auto">
+                    <DataGrid  MaxHeight="325" Margin="0 10 0 0" ItemsSource="{Binding deletedQuoteList}" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding description}" Header="Description" />
+                            <DataGridTextColumn Binding="{Binding subtotal}" Header="Subtotal" />
+                            <DataGridTextColumn Binding="{Binding vat}" Header="VAT" />
+                            <DataGridTextColumn Binding="{Binding customer.firstname}" Header="Customer First Name" />
+                            <DataGridTextColumn Binding="{Binding customer.surname}" Header="Customer Surname" />
+                            <DataGridTemplateColumn Header="Actions" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel>
+
+                                            <Button
+                                        Content="Restore"
+                                        HorizontalAlignment="Center"
+                                        Margin="2"
+                                        Padding="7"
+                                        Command="{Binding Path=DataContext.restoreQuoteCmd,       
+                                        RelativeSource= {RelativeSource FindAncestor,
+                                        AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding quoteId}" />
+
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
+        
     </StackPanel>
 
 </UserControl>

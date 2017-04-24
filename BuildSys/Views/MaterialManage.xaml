@@ -18,7 +18,7 @@
         <TextBox MinWidth="150" VerticalAlignment="Center" Style="{StaticResource inputFilter}"  Tag="Filter Materials" Text="{Binding materialFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         
         <Grid Width="Auto">
-            <DataGrid Margin="0 10 0 0" MaxHeight="450" ItemsSource="{Binding materialList}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid Margin="0 10 0 0" MaxHeight="325" ItemsSource="{Binding materialList}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding name}" Header="Name" />
                     <DataGridTextColumn Binding="{Binding unit}" Header="Unit" />

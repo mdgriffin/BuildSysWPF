@@ -156,6 +156,32 @@ namespace BuildSys.Models
             return quoteList;
         }
 
+        // TODO: Merge getQuoteList and getDeletedQuoteList into one method that takes a char
+
+        public static ObservableCollection<QuoteModel> getDeletedQuoteList()
+        {
+            DataTable quotesTable = select("SELECT * FROM Quotes WHERE status = 'I' AND customer_id NOT IN (SELECT customer_id FROM Customers WHERE status = 'I')");
+
+            ObservableCollection<QuoteModel> quoteList = new ObservableCollection<QuoteModel>();
+
+            foreach (DataRow row in quotesTable.Rows)
+            {
+                QuoteModel nextQuote = new QuoteModel(
+                    Int32.Parse(row["quote_id"].ToString()),
+                    DateTime.Parse(row["date_issued"].ToString()),
+                    Int32.Parse(row["customer_id"].ToString()),
+                    row["description"].ToString(),
+                    DateTime.Parse(row["date_amended"].ToString()),
+                    Double.Parse(row["vat"].ToString()),
+                    Double.Parse(row["subtotal"].ToString())
+                );
+
+                quoteList.Add(nextQuote);
+            }
+
+            return quoteList;
+        }
+
         public static QuoteModel getQuote(int quoteId)
         {
             DataTable quotesTable = select("SELECT * FROM Quotes WHERE quote_id = " + quoteId);
@@ -176,6 +202,16 @@ namespace BuildSys.Models
         {
             String sqlDelete = "Update Quotes SET " +
                 "status = 'I', " +
+                "date_amended = CURRENT_TIMESTAMP" +
+                " WHERE quote_id = " + quoteId;
+
+            update(sqlDelete);
+        }
+
+        public static void restoreQuote(int quoteId)
+        {
+            String sqlDelete = "Update Quotes SET " +
+                "status = 'A', " +
                 "date_amended = CURRENT_TIMESTAMP" +
                 " WHERE quote_id = " + quoteId;
 
