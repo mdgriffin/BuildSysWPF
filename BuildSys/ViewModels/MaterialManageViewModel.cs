@@ -18,12 +18,13 @@ namespace BuildSys.ViewModels
             this.parent = parent;
 
             materialList = MaterialModel.getMaterialList();
+            deletedMaterialList = MaterialModel.getDeletedMaterialList();
 
             // Keep a copy of the materialList so that we can restore the list after filtering
             originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
         }
 
-        private String _materialFilter;
+        private String _materialFilter = "";
         public String materialFilter
         {
             get
@@ -39,6 +40,8 @@ namespace BuildSys.ViewModels
                 }
             }
         }
+
+        public ObservableCollection<MaterialModel> deletedMaterialList { get; set; }
 
         private ObservableCollection<MaterialModel> originalMaterialList;
 
@@ -70,6 +73,14 @@ namespace BuildSys.ViewModels
             }
         }
 
+        public ICommand restoreMaterialCmd
+        {
+            get
+            {
+                return new RelayCommand((materialId) => restoreMaterial((int)materialId), param => true);
+            }
+        }
+
         public void editMaterial(int materialId)
         {
             navigateTo(new MaterialFormViewModel(parent, materialId));
@@ -77,15 +88,27 @@ namespace BuildSys.ViewModels
 
         public void deleteMaterial(int materialId)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            MaterialModel.deleteMaterial(materialId);
 
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                MaterialModel.deleteMaterial(materialId);
-                MessageBox.Show("Material Deleted");
-                materialList.Where(mat => mat.materialId == materialId).ToList().All(i => materialList.Remove(i));
-                originalMaterialList.Where(mat => mat.materialId == materialId).ToList().All(i => materialList.Remove(i));
-            }
+            MaterialModel deletedMaterial = materialList.Where(mat => mat.materialId == materialId).First();
+
+            materialList.Remove(deletedMaterial);
+            originalMaterialList.Remove(deletedMaterial);
+
+            deletedMaterialList.Add(deletedMaterial);
+        }
+
+        public void restoreMaterial(int materialId)
+        {
+            MaterialModel.restoreMaterial(materialId);
+
+            MaterialModel restoredMaterial = deletedMaterialList.Where(mat => mat.materialId == materialId).First();
+            deletedMaterialList.Remove(restoredMaterial);
+
+            materialList.Add(restoredMaterial);
+            originalMaterialList.Add(restoredMaterial);
+
+            filterMaterials();
         }
 
         public void filterMaterials()

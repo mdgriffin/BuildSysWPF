@@ -97,6 +97,7 @@ namespace BuildSys.ViewModels
             QuoteModel.deleteQuote(quoteId);
 
             QuoteModel deletedQuote = quoteList.Where(quote => quote.quoteId == quoteId).First();
+
             quoteList.Remove(deletedQuote);
             originalQuoteList.Remove(deletedQuote);
 

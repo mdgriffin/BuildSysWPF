@@ -151,6 +151,20 @@ namespace BuildSys.Models
             return materialList;
         }
 
+        public static ObservableCollection<MaterialModel> getDeletedMaterialList()
+        {
+            DataTable materialsTable = select("SELECT * FROM Materials WHERE status = 'I'");
+
+            ObservableCollection<MaterialModel> materialList = new ObservableCollection<MaterialModel>();
+
+            foreach (DataRow row in materialsTable.Rows)
+            {
+                materialList.Add(new MaterialModel(Int32.Parse(row["material_id"].ToString()), row["name"].ToString(), row["unit"].ToString(), row["price_per_unit"].ToString(), row["is_service"].ToString().ToCharArray()[0] == '1'));
+            }
+
+            return materialList;
+        }
+
         public static MaterialModel getMaterial(int materialId)
         {
             DataTable materialsTable = select("SELECT * FROM Materials WHERE material_id = " + materialId);
@@ -163,6 +177,15 @@ namespace BuildSys.Models
         {
             String sqlDelete = "Update Materials SET " +
                 "status = 'I' " +
+                " WHERE material_id = " + materialId;
+
+            update(sqlDelete);
+        }
+
+        public static void restoreMaterial(int materialId)
+        {
+            String sqlDelete = "Update Materials SET " +
+                "status = 'A' " +
                 " WHERE material_id = " + materialId;
 
             update(sqlDelete);

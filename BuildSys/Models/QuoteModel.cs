@@ -268,7 +268,7 @@ namespace BuildSys.Models
             return quoteList;
         }
 
-
+        // TODO: Check usage of this method? Is it used?
         public static void deleteCustomerQuotes(int customerId)
         {
             String sqlDelete = "Update Quotes SET " +
