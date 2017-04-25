@@ -231,5 +231,28 @@ namespace BuildSys.Models
 
             return Double.Parse(mat[0].ToString());
         }
+
+        public static DataTable getMaterialsByCost ()
+        {
+            return select(
+                "SELECT M.price_range as Material_Price_Range, COUNT(*) AS number_of_occurences " +
+                    "FROM (" +
+                      "SELECT CASE " +
+                        "WHEN price_per_unit BETWEEN  0 and 10  THEN  '€0 - €10' " +
+                        "WHEN price_per_unit BETWEEN 10 and 20  THEN '€10 - €20' " +
+                        "WHEN price_per_unit BETWEEN 20 and 30  THEN '€20 - €30' " +
+                        "WHEN price_per_unit BETWEEN 30 and 40  THEN '€30 - €40' " +
+                        "WHEN price_per_unit BETWEEN 40 and 50  THEN '€40 - €50' " +
+                        "WHEN price_per_unit BETWEEN 50 and 60  THEN '€50 - €60' " +
+                        "WHEN price_per_unit BETWEEN 60 and 70  THEN '€60 - €70' " +
+                        "WHEN price_per_unit BETWEEN 70 and 80  THEN '€70 - €80' " +
+                        "WHEN price_per_unit BETWEEN 80 and 80  THEN '€80 - €90' " +
+                        "WHEN price_per_unit BETWEEN 90 and 100 THEN '€90 - €100' " +
+                        "ELSE 'Over €100' END AS price_range " +
+                      "FROM Materials) M " +
+                    "GROUP BY M.price_range " +
+                    "ORDER BY Material_Price_Range"
+            );
+        }
     }
 }
