@@ -54,10 +54,10 @@
 
             </Grid>
 
-            <Label Content="Number fo Customers Registered Per Month" Style="{StaticResource SecondaryHeading}"/>
+            <Label Content="Number of Customers Registered Per Month" Style="{StaticResource SecondaryHeading}"/>
 
             <Grid>
-                <lvc:PieChart LegendLocation="Bottom" Height="400"  Series="{Binding SeriesCollection}"  Hoverable="False" DataTooltip="{x:Null}" />
+                <lvc:PieChart LegendLocation="Bottom" Height="400"  Series="{Binding SeriesCollection}" DataClickCommand="{Binding DataClickCmd}"  Hoverable="True" DataTooltip="{x:Null}" />
             </Grid>
 
         </StackPanel>
