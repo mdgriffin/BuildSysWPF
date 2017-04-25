@@ -193,14 +193,15 @@ namespace BuildSys.ViewModels
 
             if (selectedMaterial != null && quoteMaterial != null && !quoteMaterial.HasErrors)
             {
-                if (quoteMaterial.quoteMaterialId == null)
+                // this is a newly added material
+                if (quoteMaterial.listIndex == null)
                 {
                     quoteMaterialList.Add(quoteMaterial);
                     quoteMaterial.listIndex = quoteMaterialList.IndexOf(quoteMaterial);
                 }
                 else
                 {
-                    quoteMaterialList[quoteMaterial.listIndex] = quoteMaterial;
+                    quoteMaterialList[quoteMaterial.listIndex.Value] = quoteMaterial;
                 }
 
                 addOrUpdateQuoteMaterialBtn = "Add to Quote";
@@ -257,7 +258,8 @@ namespace BuildSys.ViewModels
 
             // Create a copy of this quote material
             quoteMaterial = quoteMaterialList.ElementAt(quoteMaterialIndex).clone();
-            
+            quoteMaterial.listIndex = quoteMaterialList.ElementAt(quoteMaterialIndex).listIndex;
+
             // Get the original material from the list if available
             MaterialModel materialFromList = materialList.Where(mat => mat.materialId == quoteMaterial.materialId).First();
 
@@ -265,10 +267,6 @@ namespace BuildSys.ViewModels
             if (materialFromList != null)
             {
                 selectedMaterial = materialFromList;
-            }
-            else
-            {
-                selectedMaterial = new MaterialModel();
             }
         }
 

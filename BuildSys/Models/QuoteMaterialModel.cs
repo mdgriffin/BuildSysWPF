@@ -14,7 +14,7 @@ namespace BuildSys.Models
 
         // used in conjunction with the quote material list to get the specific index of a list item
         public int _listIndex;
-        public int listIndex {
+        public int? listIndex {
             get
             {
                 return _listIndex;
@@ -23,7 +23,7 @@ namespace BuildSys.Models
             {
                 if (value != _listIndex)
                 {
-                    _listIndex = value;
+                    _listIndex = value.Value;
                     NotifyPropertyChanged("listIndex");
                 }
             }
@@ -118,7 +118,7 @@ namespace BuildSys.Models
                 if (value != _totalCost)
                 {
                     _totalCost = value;
-                    //NotifyPropertyChanged("totalCost");
+                    NotifyPropertyChanged("totalCost");
                 }
             }
         }
