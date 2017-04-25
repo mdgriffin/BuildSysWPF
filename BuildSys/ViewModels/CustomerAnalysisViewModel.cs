@@ -24,10 +24,12 @@ namespace BuildSys.ViewModels
 
             DataTable numCustomersRegisteredPerMonth = CustomerModel.getNumCustomersRegisteredPerMonth();
             int startMonth = 0;
+            int startYear = DateTime.Now.Year;
 
             if (numCustomersRegisteredPerMonth.Rows.Count > 0)
             {
                 startMonth = Int32.Parse(numCustomersRegisteredPerMonth.Rows[0]["month_code"].ToString()) - 1;
+                startYear = Int32.Parse(numCustomersRegisteredPerMonth.Rows[0]["year_code"].ToString());
 
                 foreach (DataRow numInMonth in numCustomersRegisteredPerMonth.Rows)
                 {
@@ -48,7 +50,8 @@ namespace BuildSys.ViewModels
 
             for (int i = 0; i < 12; i++)
             {
-                Labels[i] = MONTHS[(i + startMonth) % 12];
+                // The correct month and year value to each label in the righr order of month and add the correct year
+                Labels[i] = MONTHS[(i + startMonth) % 12] + " " + ((i + startMonth) % 12 >= startMonth? startYear : startYear + 1);
             }
 
             Formatter = value => value.ToString("N0");
