@@ -55,6 +55,7 @@ namespace BuildSys.ViewModels
             Formatter = value => value.ToString("N0");
 
             numCustomers = CustomerModel.getNumCustomers();
+            numDeletedCustomers = CustomerModel.getNumCustomers("I");
             bestCustomer = CustomerModel.getBestCustomer();
         }
 
@@ -65,6 +66,7 @@ namespace BuildSys.ViewModels
         public Func<double, string> Formatter { get; set; }
 
         public int numCustomers { get; set; }
+        public int numDeletedCustomers { get; set; }
         public CustomerModel bestCustomer { get; set; }
     }
 }

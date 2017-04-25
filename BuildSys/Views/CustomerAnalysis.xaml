@@ -40,18 +40,15 @@
 
                 <StackPanel Grid.Column="1" Grid.Row="0" Background="Teal" Margin="5 0 5 0">
 
-                    <Label Content="Number of Customers" Style="{StaticResource SecondaryHeading}" Margin="10 10 10 0" Padding="0" Foreground="White" />
+                    <Label Content="Number of Active Customers" Style="{StaticResource SecondaryHeading}" Margin="10 10 10 0" Padding="0" Foreground="White" />
                     <TextBlock Text="{Binding numCustomers}" Margin="10 0 10 10" Foreground="White" FontSize="18" />
 
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Grid.Row="0" Background="Teal" Margin="10 0 0 0">
 
-                    <Label Content="Best Customer" Style="{StaticResource SecondaryHeading}" Margin="10 10 10 0" Padding="0" Foreground="White" />
-                    <TextBlock Margin="10 0 10 10" Foreground="White" FontSize="18" >
-                        <Run Text="{Binding bestCustomer.firstname}"></Run>
-                        <Run Text="{Binding bestCustomer.surname}"></Run>
-                    </TextBlock>
+                    <Label Content="Number of Deleted Customers" Style="{StaticResource SecondaryHeading}" Margin="10 10 10 0" Padding="0" Foreground="White" />
+                    <TextBlock Text="{Binding numDeletedCustomers}" Margin="10 0 10 10" Foreground="White" FontSize="18" />
 
                 </StackPanel>
 

@@ -444,12 +444,17 @@ namespace BuildSys.Models
             update(sqlUpdate);
         }
 
-        public static int getNumCustomers()
+        public static int getNumCustomers(String status)
         {
-            DataTable customersTable = select("SELECT COUNT(customer_id) FROM Customers");
+            DataTable customersTable = select("SELECT COUNT(customer_id) FROM Customers WHERE status = '" + status + "'");
             DataRow cust = customersTable.Rows[0];
 
             return Int32.Parse(cust[0].ToString());
+        }
+
+        public static int getNumCustomers()
+        {
+            return getNumCustomers("A");
         }
 
         public static DataTable getNumCustomersRegisteredPerMonth()
