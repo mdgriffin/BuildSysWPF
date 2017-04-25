@@ -215,5 +215,21 @@ namespace BuildSys.Models
 
             update(sqlUpdate);
         }
+
+        public static int getNumMaterials()
+        {
+            DataTable materialsTable = select("SELECT COUNT(material_id) FROM Materials WHERE status = 'A'");
+            DataRow mat = materialsTable.Rows[0];
+
+            return Int32.Parse(mat[0].ToString());
+        }
+
+        public static double getAvgMaterialCost()
+        {
+            DataTable materialsTable = select("SELECT ROUND(AVG(price_per_unit), 2) FROM Materials WHERE status = 'A'");
+            DataRow mat = materialsTable.Rows[0];
+
+            return Double.Parse(mat[0].ToString());
+        }
     }
 }

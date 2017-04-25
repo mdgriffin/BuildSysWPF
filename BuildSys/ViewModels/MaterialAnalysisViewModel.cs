@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LiveCharts;
 using LiveCharts.Wpf;
+using BuildSys.Models;
 
 namespace BuildSys.ViewModels
 {
@@ -27,10 +24,16 @@ namespace BuildSys.ViewModels
 
             Labels = new[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             Formatter = value => value.ToString("N");
+
+            numMaterials = MaterialModel.getNumMaterials();
+            avgMaterialCost = MaterialModel.getAvgMaterialCost();
         }
 
         public SeriesCollection GraphCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
+
+        public int numMaterials { get; set; }
+        public double avgMaterialCost { get; set; }
     }
 }

@@ -18,6 +18,45 @@
 
             <Label Content="Materials Report" Style="{StaticResource MainHeading}" />
 
+
+            <Grid Margin="0 10 0 10">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.Row="0" Background="Teal" Margin="0 0 10 0">
+
+                    <Label Content="Number of Materials" Style="{StaticResource SecondaryHeading}" Margin="10 10 10 0" Padding="0" Foreground="White" />
+                    <TextBlock Text="{Binding numMaterials}" Margin="10 0 10 10" Foreground="White" FontSize="18" />
+
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Grid.Row="0" Background="Teal" Margin="5 0 5 0">
+
+                    <Label Content="Average Material Cost" Style="{StaticResource SecondaryHeading}" Margin="10 10 10 0" Padding="0" Foreground="White" />
+                    <TextBlock Text="{Binding avgMaterialCost}" Margin="10 0 10 10" Foreground="White" FontSize="18" />
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Grid.Row="0" Background="Teal" Margin="10 0 0 0">
+
+                    <Label Content="Deleted Customers" Style="{StaticResource SecondaryHeading}" Margin="10 10 10 0" Padding="0" Foreground="White" />
+                    <TextBlock Text="{Binding numDeletedCustomers}" Margin="10 0 10 10" Foreground="White" FontSize="18" />
+
+                </StackPanel>
+
+            </Grid>
+
+            <Label Content="Number fo Customers Registered Per Month" Style="{StaticResource SecondaryHeading}"/>
+
             <lvc:CartesianChart Height="300" Series="{Binding GraphCollection}" LegendLocation="Bottom">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
