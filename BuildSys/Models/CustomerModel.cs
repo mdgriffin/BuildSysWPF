@@ -444,12 +444,22 @@ namespace BuildSys.Models
             update(sqlUpdate);
         }
 
-        public static int getNumCustomers ()
+        public static int getNumCustomers()
         {
             DataTable customersTable = select("SELECT COUNT(customer_id) FROM Customers");
             DataRow cust = customersTable.Rows[0];
 
             return Int32.Parse(cust[0].ToString());
+        }
+
+        public static DataTable getNumCustomersRegisteredPerMonth()
+        {
+            return select(
+                "SELECT EXTRACT(month from registered_on) AS month_code, EXTRACT(year from registered_on) AS year_code, COUNT(customer_id) AS num_customers_registered  FROM Customers " + 
+                "WHERE registered_on > add_months(sysdate, -12) " +
+                "GROUP BY EXTRACT(year from registered_on), EXTRACT(month from registered_on) " +
+                "ORDER BY EXTRACT(year from registered_on) ASC, EXTRACT(month from registered_on) ASC "
+            );
         }
     }
 }

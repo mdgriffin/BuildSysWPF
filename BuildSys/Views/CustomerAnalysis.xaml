@@ -56,7 +56,7 @@
                     <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Quotes Issued" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                    <lvc:Axis Title="Customers Registered" LabelFormatter="{Binding Formatter}"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
 

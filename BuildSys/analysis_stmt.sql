@@ -83,9 +83,10 @@ SELECT * FROM Customers;
 SELECT COUNT(customer_id) FROM Customers;
 
 -- Number of customers registed by month
-SELECT EXTRACT(month from registered_on) AS month_code, COUNT(customer_id) AS num_customers_registered  FROM Customers
-  GROUP BY EXTRACT(month from registered_on)
-  ORDER BY EXTRACT(month from registered_on);
+SELECT EXTRACT(month from registered_on), EXTRACT(year from registered_on) AS year_code, COUNT(customer_id) AS num_customers_registered  FROM Customers
+  WHERE registered_on > add_months(sysdate, -12)
+  GROUP BY EXTRACT(year from registered_on), EXTRACT(month from registered_on) 
+  ORDER BY EXTRACT(year from registered_on) ASC, EXTRACT(month from registered_on) ASC;
 
 -- Best Customer
 --SELECT * FROM Customers WHERE customer_id IN (SELECT customer_id from Quotes GROUP BY customer_id ORDER BY vat);
