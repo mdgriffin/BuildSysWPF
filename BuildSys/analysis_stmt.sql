@@ -8,6 +8,9 @@ SELECT * FROM Materials;
 -- Number of Materials
 SELECT COUNT(material_id) FROM Materials;
 
+-- Average Material Cost
+SELECT ROUND(AVG(price_per_unit), 2) FROM Materials WHERE status = 'A';
+
 -- Average Material Cost Growth??
 --SELECT * FROM Quote_Materials;
 

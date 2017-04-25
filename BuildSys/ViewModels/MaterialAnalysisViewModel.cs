@@ -13,25 +13,27 @@ namespace BuildSys.ViewModels
         {
             this.parent = parent;
 
-            GraphCollection = new SeriesCollection
-            {
-                new ColumnSeries
-                {
-                    Title = "Quotes Issued By Month",
-                    Values = new ChartValues<double> { 10, 50, 39, 50, 10, 50, 39, 50, 10, 50, 39, 50 }
-                }
-            };
-
-            Labels = new[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-            Formatter = value => value.ToString("N");
+            PointLabel = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
 
             numMaterials = MaterialModel.getNumMaterials();
             avgMaterialCost = MaterialModel.getAvgMaterialCost();
         }
 
-        public SeriesCollection GraphCollection { get; set; }
-        public string[] Labels { get; set; }
-        public Func<double, string> Formatter { get; set; }
+        public Func<ChartPoint, string> PointLabel { get; set; }
+
+        /*
+        private void Chart_OnDataClick(object sender, ChartPoint chartpoint)
+        {
+            var chart = (LiveCharts.Wpf.PieChart)chartpoint.ChartView;
+
+            //clear selected slice.
+            foreach (PieSeries series in chart.Series)
+                series.PushOut = 0;
+
+            var selectedSeries = (PieSeries)chartpoint.SeriesView;
+            selectedSeries.PushOut = 8;
+        }
+        */
 
         public int numMaterials { get; set; }
         public double avgMaterialCost { get; set; }
