@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace BuildSys
 {
-    //http://msdn.microsoft.com/en-us/magazine/dd419663.aspx#id0090030
+    /*
+     * Reference: Implementation of the ICommand Interface
+     * Source: https://gist.github.com/schuster-rainer/2648922
+     * Author: Rainer Schuster
+     */
 
     public class RelayCommand : ICommand
     {
