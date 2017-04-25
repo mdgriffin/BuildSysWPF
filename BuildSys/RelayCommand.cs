@@ -5,8 +5,8 @@ namespace BuildSys
 {
     /*
      * Reference: Implementation of the ICommand Interface
-     * Source: https://gist.github.com/schuster-rainer/2648922
-     * Author: Rainer Schuster
+     * Source: https://msdn.microsoft.com/en-us/magazine/dd419663.aspx#id0090030
+     * Author: Josh Smith
      */
 
     public class RelayCommand : ICommand
