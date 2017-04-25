@@ -461,5 +461,26 @@ namespace BuildSys.Models
                 "ORDER BY EXTRACT(year from registered_on) ASC, EXTRACT(month from registered_on) ASC "
             );
         }
+
+        public static CustomerModel getBestCustomer ()
+        {
+            DataTable customersTable = select(
+                "SELECT * FROM Customers WHERE customer_id = ( " +
+                    "SELECT customer_id FROM( " +
+                    "SELECT customer_id, SUM(subtotal + vat) as TOTAL_QUOTE_VALUE FROM Quotes GROUP BY customer_id ORDER BY total_quote_value DESC " +
+                    ") WHERE rownum = 1)"    
+            );
+
+            DataRow cust = customersTable.Rows[0];
+
+            if (cust["account_type"] != null && cust["account_type"].ToString() == "B")
+            {
+                return new CustomerModel(Int32.Parse(cust["customer_id"].ToString()), cust["title"].ToString(), cust["firstname"].ToString(), cust["surname"].ToString(), cust["street"].ToString(), cust["town"].ToString(), cust["county"].ToString(), cust["telephone"].ToString(), cust["email"].ToString(), cust["account_type"].ToString().ToCharArray()[0], cust["company_name"].ToString(), cust["vat_no"].ToString());
+            }
+            else
+            {
+                return new CustomerModel(Int32.Parse(cust["customer_id"].ToString()), cust["title"].ToString(), cust["firstname"].ToString(), cust["surname"].ToString(), cust["street"].ToString(), cust["town"].ToString(), cust["county"].ToString(), cust["telephone"].ToString(), cust["email"].ToString(), cust["account_type"].ToString().ToCharArray()[0]);
+            }
+        }
     }
 }

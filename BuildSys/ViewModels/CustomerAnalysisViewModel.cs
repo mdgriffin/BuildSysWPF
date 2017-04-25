@@ -18,8 +18,6 @@ namespace BuildSys.ViewModels
         {
             this.parent = parent;
 
-            numCustomers = CustomerModel.getNumCustomers();
-
             ChartValues<double> chartVals = new ChartValues<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
             DataTable numCustomersRegisteredPerMonth = CustomerModel.getNumCustomersRegisteredPerMonth();
@@ -55,13 +53,18 @@ namespace BuildSys.ViewModels
             }
 
             Formatter = value => value.ToString("N0");
+
+            numCustomers = CustomerModel.getNumCustomers();
+            bestCustomer = CustomerModel.getBestCustomer();
         }
 
         private static readonly string[] MONTHS = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+
         public SeriesCollection GraphCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
 
         public int numCustomers { get; set; }
+        public CustomerModel bestCustomer { get; set; }
     }
 }
