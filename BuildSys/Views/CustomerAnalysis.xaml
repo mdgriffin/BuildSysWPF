@@ -51,6 +51,8 @@
 
             </Grid>
 
+            <Label Content="Number fo Customers Registered Per Month" Style="{StaticResource SecondaryHeading}"/>
+
             <lvc:CartesianChart Height="300" Series="{Binding GraphCollection}" LegendLocation="Bottom">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
