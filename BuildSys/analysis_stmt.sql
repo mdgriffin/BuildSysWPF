@@ -82,5 +82,10 @@ SELECT * FROM Customers;
 -- Number of Customers
 SELECT COUNT(customer_id) FROM Customers;
 
+-- Number of customers registed by month
+SELECT EXTRACT(month from registered_on) AS month_code, COUNT(customer_id) AS num_customers_registered  FROM Customers
+  GROUP BY EXTRACT(month from registered_on)
+  ORDER BY EXTRACT(month from registered_on);
+
 -- Best Customer
 --SELECT * FROM Customers WHERE customer_id IN (SELECT customer_id from Quotes GROUP BY customer_id ORDER BY vat);
