@@ -34,6 +34,7 @@ namespace BuildSys.ViewModels
 
             numMaterials = MaterialModel.getNumMaterials();
             avgMaterialCost = MaterialModel.getAvgMaterialCost();
+            mostUsedMaterial = MaterialModel.getMostUsedMaterial();
         }
 
         public SeriesCollection SeriesCollection { get; set; }
@@ -41,28 +42,6 @@ namespace BuildSys.ViewModels
         
         public int numMaterials { get; set; }
         public double avgMaterialCost { get; set; }
-
-        public ICommand DataClickCmd
-        {
-            get
-            {
-                return new RelayCommand(chartPoint => OnDataClick((ChartPoint)chartPoint), param => true);
-            }
-        }
-
-        public void OnDataClick(ChartPoint chartpoint)
-        {
-            /*
-            var chart = (LiveCharts.Wpf.PieChart)chartpoint.ChartView;
-
-            //clear selected slice.
-            foreach (PieSeries series in chart.Series)
-                series.PushOut = 0;
-
-            var selectedSeries = (PieSeries)chartpoint.SeriesView;
-            selectedSeries.PushOut = 8;
-            */
-        }
-
+        public MaterialModel mostUsedMaterial { get; set; }
     }
 }

@@ -50,6 +50,15 @@ from (
   from Materials) m
 group by m.price_range;
 
+-- Most Used Material
+SELECT * FROM Materials
+  WHERE material_id IN (SELECT material_id FROM (
+    SELECT material_id
+      FROM Quote_Materials
+      GROUP BY material_id
+      ORDER BY COUNT(material_id) DESC
+  )) AND ROWNUM = 1;
+
 /**
  * Quote Analysis 
  **/

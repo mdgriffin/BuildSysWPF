@@ -254,5 +254,28 @@ namespace BuildSys.Models
                     "ORDER BY Material_Price_Range"
             );
         }
+
+        public static MaterialModel getMostUsedMaterial()
+        {
+            DataTable materialTable = select(
+                "SELECT * FROM Materials " +
+                  "WHERE material_id IN(SELECT material_id FROM( " +
+                    "SELECT material_id " +
+                      "FROM Quote_Materials " +
+                      "GROUP BY material_id " +
+                      "ORDER BY COUNT(material_id) DESC" +
+                  ")) AND ROWNUM = 1"
+            );
+
+            if (materialTable.Rows.Count > 0)
+            {
+                DataRow material = materialTable.Rows[0];   
+                return new MaterialModel(Int32.Parse(material["material_id"].ToString()), material["name"].ToString(), material["unit"].ToString(), material["price_per_unit"].ToString(), material["is_service"].ToString().ToCharArray()[0] == '1');
+            }
+            else
+            {
+                return new MaterialModel();
+            }
+        }
     }
 }
