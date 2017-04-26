@@ -84,6 +84,13 @@ SELECT  EXTRACT(MONTH FROM DATE_ISSUED), COUNT(quote_id) AS Quotes_Per_Month  FR
 -- Number of Quotes issued by year, Limit to last 5 years
 SELECT  EXTRACT(YEAR FROM DATE_ISSUED), COUNT(quote_id) AS Quotes_Per_Year  FROM Quotes Q WHERE ROWNUM < 6 GROUP BY EXTRACT(YEAR FROM DATE_ISSUED) ORDER BY  EXTRACT(YEAR FROM DATE_ISSUED);
 
+
+-- Get the cumulative value of quotes issued
+SELECT DISTINCT EXTRACT(MONTH FROM date_issued) AS month_issued,
+  EXTRACT(YEAR FROM date_issued) as year_issued,
+  SUM (subtotal + vat) OVER (ORDER BY  EXTRACT(MONTH FROM date_issued)) AS cumulative_total
+FROM Quotes
+ORDER BY month_issued;
 /**
  * Customer Analysis 
  **/
