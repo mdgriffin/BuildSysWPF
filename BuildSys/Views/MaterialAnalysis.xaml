@@ -35,7 +35,6 @@
                     <Label Content="Number of Materials" Style="{StaticResource SecondaryHeading}" Margin="10 10 10 0" Padding="0" Foreground="White" />
                     <TextBlock Text="{Binding numMaterials}" Margin="10 0 10 10" Foreground="White" FontSize="18" />
 
-
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Grid.Row="0" Background="Teal" Margin="5 0 5 0">
@@ -54,7 +53,7 @@
 
             </Grid>
 
-            <Label Content="Number of Customers Registered Per Month" Style="{StaticResource SecondaryHeading}"/>
+            <Label Content="Breakdown of Materials By Price" Style="{StaticResource SecondaryHeading}"/>
 
             <Grid>
                 <lvc:PieChart LegendLocation="Bottom" Height="400"  Series="{Binding SeriesCollection}" DataClickCommand="{Binding DataClickCmd}"  Hoverable="True" DataTooltip="{x:Null}" />

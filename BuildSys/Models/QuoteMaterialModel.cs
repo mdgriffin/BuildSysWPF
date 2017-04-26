@@ -13,7 +13,7 @@ namespace BuildSys.Models
         public int materialId; // Foreign key to materials
 
         // used in conjunction with the quote material list to get the specific index of a list item
-        public int _listIndex;
+        public int? _listIndex;
         public int? listIndex {
             get
             {
