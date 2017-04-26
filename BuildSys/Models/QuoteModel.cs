@@ -279,5 +279,15 @@ namespace BuildSys.Models
             update(sqlDelete);
         }
 
+        public static DataTable getCumulativeQuoteTotal ()
+        {
+            return select(
+                "SELECT DISTINCT EXTRACT(MONTH FROM date_issued) AS month_issued, " +
+                    "EXTRACT(YEAR FROM date_issued) as year_issued," +
+                    "SUM(subtotal + vat) OVER(ORDER BY  EXTRACT(MONTH FROM date_issued)) AS cumulative_total " +
+                "FROM Quotes " +
+                "ORDER BY month_issued"
+            );
+        }
     }
 }
