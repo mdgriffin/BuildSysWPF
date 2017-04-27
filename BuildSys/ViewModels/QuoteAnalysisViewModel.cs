@@ -49,6 +49,9 @@ namespace BuildSys.ViewModels
                 }
             };
 
+            mostRecentQuote = QuoteModel.getMostRecentQuote();
+            avgQuoteValue = QuoteModel.getAverageQuoteValue().ToString("C2");
+            numQuotes = QuoteModel.getNumQuotes();
         }
 
         private static readonly string[] MONTHS = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
@@ -56,5 +59,9 @@ namespace BuildSys.ViewModels
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
+
+        public QuoteModel mostRecentQuote { get; set; }
+        public String avgQuoteValue { get; set; }
+        public int numQuotes{ get; set; }
     }
 }

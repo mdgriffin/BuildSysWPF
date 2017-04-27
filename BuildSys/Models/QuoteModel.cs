@@ -289,5 +289,61 @@ namespace BuildSys.Models
                 "ORDER BY month_issued"
             );
         }
+
+        public static QuoteModel getMostRecentQuote ()
+        {
+            DataTable recentQuote = select(
+                "SELECT * FROM (SELECT * FROM Quotes ORDER BY date_amended DESC) WHERE ROWNUM = 1"
+            );
+
+            if (recentQuote.Rows.Count > 0)
+            {
+                DataRow quote = recentQuote.Rows[0];
+
+                return new QuoteModel(
+                    Int32.Parse(quote["quote_id"].ToString()),
+                    DateTime.Parse(quote["date_issued"].ToString()),
+                    Int32.Parse(quote["customer_id"].ToString()),
+                    quote["description"].ToString(),
+                    DateTime.Parse(quote["date_amended"].ToString()),
+                    Double.Parse(quote["vat"].ToString()),
+                    Double.Parse(quote["subtotal"].ToString())
+                );
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static double getAverageQuoteValue ()
+        {
+            DataTable avgValTbl = select("SELECT AVG(Subtotal + Vat) AS avg_val FROM Quotes");
+
+            if (avgValTbl.Rows.Count > 0)
+            {
+                DataRow quoteVal = avgValTbl.Rows[0];
+                return Double.Parse(quoteVal["avg_val"].ToString());
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public static int getNumQuotes()
+        {
+            DataTable numQuotes = select("SELECT COUNT(quote_id) AS num_quotes FROM Quotes");
+
+            if (numQuotes.Rows.Count > 0)
+            {
+                DataRow rowVal = numQuotes.Rows[0];
+                return Int32.Parse(rowVal["num_quotes"].ToString());
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

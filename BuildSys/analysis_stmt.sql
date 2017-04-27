@@ -84,6 +84,8 @@ SELECT  EXTRACT(MONTH FROM DATE_ISSUED), COUNT(quote_id) AS Quotes_Per_Month  FR
 -- Number of Quotes issued by year, Limit to last 5 years
 SELECT  EXTRACT(YEAR FROM DATE_ISSUED), COUNT(quote_id) AS Quotes_Per_Year  FROM Quotes Q WHERE ROWNUM < 6 GROUP BY EXTRACT(YEAR FROM DATE_ISSUED) ORDER BY  EXTRACT(YEAR FROM DATE_ISSUED);
 
+-- Most Recent Quote Issued
+SELECT * FROM (SELECT * FROM Quotes ORDER BY date_amended DESC) WHERE ROWNUM = 1;
 
 -- Get the cumulative value of quotes issued
 SELECT DISTINCT EXTRACT(MONTH FROM date_issued) AS month_issued,
