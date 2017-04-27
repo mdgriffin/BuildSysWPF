@@ -9,7 +9,7 @@ namespace BuildSys.ViewModels
     public abstract class BaseViewModel: ObservableObject
     {
         protected BaseViewModel parent;
-        private static Stack<BaseViewModel> NavigationStack = new Stack<BaseViewModel>();
+        private static Stack<BaseViewModel> NavigationStack = new Stack<BaseViewModel>(5);
 
         private BaseViewModel _ViewModel;
         public BaseViewModel ViewModel

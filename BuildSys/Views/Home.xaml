@@ -8,7 +8,61 @@
              d:DesignHeight="600" d:DesignWidth="800">
     <StackPanel Margin="10">
 
-        <Label Content="Welcome To BuildSys" Style="{StaticResource MainHeading}" />
+        <Label Content="Welcome To BuildSys" Style="{StaticResource MainHeading}" Margin="0 20 0 0"/>
 
+        <Grid Margin="0 30 0 0">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="Teal" Margin="0 0 10 0">
+            <Label Content="Customers" HorizontalAlignment="Center" Style="{StaticResource SecondaryHeading}" Margin="10" Padding="0" Foreground="White" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Background="Teal" Margin="5 0 5 0">
+            <Label Content="Materials" HorizontalAlignment="Center" Style="{StaticResource SecondaryHeading}" Margin="10" Padding="0" Foreground="White" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="0" Background="Teal" Margin="10 0 0 0">
+            <Label Content="Quotes" HorizontalAlignment="Center" Style="{StaticResource SecondaryHeading}" Margin="10" Padding="0" Foreground="White" />
+        </StackPanel>
+
+        </Grid>
+
+        <Grid Margin="0 0 0 30">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 10 0" Background="White">
+                <TextBlock Text="15 Registered Customers" Margin="20 10 20 0"/>
+                <Button Content="Register Customer" Margin="20" Style="{StaticResource btnPrimary}" Command="{Binding regCustomerCmd}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="5 0 5 0" Background="White">
+                <TextBlock Text="15 Materials Created" Margin="20 10 20 0"/>
+                <Button Content="Create Material" Margin="20" Style="{StaticResource btnPrimary}" Command="{Binding createMaterialCmd}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="2" Margin="10 0 0 0" Background="White" >
+                <TextBlock Text="15 Quotes Created" Margin="20 10 20 0"/>
+                <Button Content="Create Quote" Margin="20" Style="{StaticResource btnPrimary}" Command="{Binding createQuoteCmd}" />
+            </StackPanel>
+        </Grid>
+        
     </StackPanel>
 </UserControl>
