@@ -18,7 +18,7 @@
 
             <Label Content="Quote Report" Style="{StaticResource MainHeading}" />
 
-            <lvc:CartesianChart Height="300" Series="{Binding SeriesCollection}" LegendLocation="Right" >
+            <lvc:CartesianChart Height="300" Series="{Binding SeriesCollection}" LegendLocation="Bottom" >
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>

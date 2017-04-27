@@ -90,7 +90,7 @@ SELECT DISTINCT EXTRACT(MONTH FROM date_issued) AS month_issued,
   EXTRACT(YEAR FROM date_issued) as year_issued,
   SUM (subtotal + vat) OVER (ORDER BY  EXTRACT(MONTH FROM date_issued)) AS cumulative_total
 FROM Quotes
-ORDER BY month_issued;
+ORDER BY year_issued, month_issued;
 /**
  * Customer Analysis 
  **/
