@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuildSys.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,15 @@ namespace BuildSys.ViewModels
         public HomeViewModel (BaseViewModel parent)
         {
             this.parent = parent;
+
+            numCustomers = CustomerModel.getNumCustomers();
+            numMaterials = MaterialModel.getNumMaterials();
+            numQuotes = QuoteModel.getNumQuotes();
         }
+
+        public int numCustomers { get; set; }
+        public int numMaterials { get; set; }
+        public int numQuotes { get; set; }
 
         public ICommand regCustomerCmd
         {
