@@ -363,7 +363,7 @@ namespace BuildSys.ViewModels
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
-                printDialog.PrintVisual(new QuotePrint(quote), "My First Print Job");
+                printDialog.PrintVisual(new QuotePrint(quote), "Quote");
             }
         }
 

@@ -73,6 +73,16 @@
             <TextBlock Text="{Binding customer.county }" />
             <TextBlock Text="{Binding customer.telno }" />
 
+            <TextBlock Margin="0 5 0 0">
+                <Run Text="Date Issued: "/>
+                <Run Text="{Binding quote.dateIssued, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+            </TextBlock>
+
+            <TextBlock>
+                <Run Text="Quote ID: "/>
+                <Run Text="{Binding quote.quoteId}"/>
+            </TextBlock>
+
         </StackPanel>
 
         <StackPanel Margin="0 20 0 20" Grid.Row="1" Grid.Column="1" >
@@ -98,10 +108,19 @@
         </StackPanel>
 
         <StackPanel Margin="0 20 0 20" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBlock Text="{Binding quote.subtotal, StringFormat=Subtotal: €{0}}" />
-            <TextBlock Text="{Binding quote.vat, StringFormat=VAT: €{0}}" />
+            <TextBlock>
+                <Run Text="Subtotal:"/>
+                <Run Text="{Binding quote.subtotal, StringFormat='{}{0:c}', ConverterCulture=en-IE}"/>
+            </TextBlock>
+            <TextBlock>
+                <Run Text="VAT:"/>
+                <Run Text="{Binding quote.vat, StringFormat='{}{0:c}', ConverterCulture=en-IE}"/>
+            </TextBlock>
             <Separator />
-            <TextBlock Text="{Binding quote.total, StringFormat=Total: €{0}}" FontWeight="Bold" />
+            <TextBlock>
+                <Run Text="Total"/>
+                <Run Text="{Binding quote.total, StringFormat='{}{0:c}', ConverterCulture=en-IE}"/>
+            </TextBlock>
         </StackPanel>
 
         <WrapPanel  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
