@@ -8,6 +8,7 @@
     xmlns:viewModels="clr-namespace:BuildSys.ViewModels"
     mc:Ignorable="d"
     Title="BuildSys"
+    Language="en-IE"
     Height="600"
     Width="1000">
 

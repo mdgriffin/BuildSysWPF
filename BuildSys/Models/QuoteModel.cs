@@ -72,7 +72,7 @@ namespace BuildSys.Models
         {
             get
             {
-                return _total;
+                return subtotal + vat;
             }
             set
             {

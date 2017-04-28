@@ -24,7 +24,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding name}" Header="Name" />
                             <DataGridTextColumn Binding="{Binding unit}" Header="Unit" />
-                            <DataGridTextColumn Binding="{Binding pricePerUnit}" Header="Price Per Unit" />
+                            <DataGridTextColumn Binding="{Binding pricePerUnit, StringFormat='{}{0:c}'}" Header="Price Per Unit" />
                             <DataGridTemplateColumn Header="Actions" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -64,7 +64,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding name}" Header="Name" />
                             <DataGridTextColumn Binding="{Binding unit}" Header="Unit" />
-                            <DataGridTextColumn Binding="{Binding pricePerUnit}" Header="Price Per Unit" />
+                            <DataGridTextColumn Binding="{Binding pricePerUnit, StringFormat='{}{0:c}'}" Header="Price Per Unit" />
                             <DataGridTemplateColumn Header="Actions" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

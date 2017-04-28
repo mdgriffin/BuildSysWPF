@@ -366,6 +366,5 @@ namespace BuildSys.ViewModels
                 printDialog.PrintVisual(new QuotePrint(quote), "Quote");
             }
         }
-
     }
 }
