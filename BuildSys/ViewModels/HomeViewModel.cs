@@ -14,15 +14,18 @@ namespace BuildSys.ViewModels
         {
             this.parent = parent;
 
+            // Set the public properties for the view
             numCustomers = CustomerModel.getNumCustomers();
             numMaterials = MaterialModel.getNumMaterials();
             numQuotes = QuoteModel.getNumQuotes();
         }
 
+        // The public properties accessible from the view
         public int numCustomers { get; set; }
         public int numMaterials { get; set; }
         public int numQuotes { get; set; }
 
+        // Command for reg customer button
         public ICommand regCustomerCmd
         {
             get
@@ -31,6 +34,7 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Command for create material button
         public ICommand createMaterialCmd
         {
             get
@@ -39,6 +43,7 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Command for create quote button
         public ICommand createQuoteCmd
         {
             get

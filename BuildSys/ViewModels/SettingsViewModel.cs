@@ -12,14 +12,13 @@ namespace BuildSys.ViewModels
     class SettingsViewModel : BaseViewModel
     {
 
-        //MainViewModel parent;
-
         public SettingsViewModel (BaseViewModel parent)
         {
             this.parent = parent;
 
             setting = SettingModel.getSetting();
 
+            // Check is setting exists
             if (setting == null)
             {
                 setting = new SettingModel();
@@ -35,10 +34,13 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Saves or updates the setting
         public void saveSetting()
         {
+            // Force all props to be validated
             setting.validateAllProps();
 
+            // If no errors, insert
             if (!setting.HasErrors)
             {
                 setting.insertSetting();
@@ -46,6 +48,7 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Used to enable and disable the save button
         public Boolean canSaveSetting()
         {
             return !setting.HasErrors;

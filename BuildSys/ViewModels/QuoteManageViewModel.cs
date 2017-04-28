@@ -14,19 +14,20 @@ namespace BuildSys.ViewModels
     class QuoteManageViewModel: BaseViewModel
     {
 
-        //MainViewModel parent;
-
         public QuoteManageViewModel(BaseViewModel parent)
         {
             this.parent = parent;
 
+            // Get the list of all quotes
             quoteList = QuoteModel.getQuoteList();
+            // gets the list of all deleted questions
             deletedQuoteList = QuoteModel.getDeletedQuoteList();
 
             // Keep a copy of the quoteList so that we can restore the list after filtering
             originalQuoteList = new ObservableCollection<QuoteModel>(quoteList);
         }
 
+        // The filter input text
         private String _quoteFilter = "";
         public String quoteFilter
         {
@@ -39,11 +40,13 @@ namespace BuildSys.ViewModels
                 if (value != _quoteFilter)
                 {
                     _quoteFilter = value;
+                    // filter quotes when filter has changed
                     filterQuotes();
                 }
             }
         }
 
+        // publicly accessible properties from view
         public ObservableCollection<QuoteModel> deletedQuoteList { get; set; }
 
         private ObservableCollection<QuoteModel> originalQuoteList;
@@ -59,10 +62,12 @@ namespace BuildSys.ViewModels
             {
                 if (value == null) return;
                 _quoteList = value;
+                // Notify that the quote list has changed
                 NotifyPropertyChanged("quoteList");
             }
         }
 
+        // Called when the edit quote button is clicked
         public ICommand editQuoteCmd
         {
             get
@@ -71,6 +76,7 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Called when the delete quote command button is clicked
         public ICommand deleteQuoteCmd
         {
             get
@@ -79,6 +85,7 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Called when the restore quote button is clicked
         public ICommand restoreQuoteCmd
         {
             get
@@ -87,11 +94,15 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Navigates to the edit quote view
         public void editQuote(int quoteId)
         {
             navigateTo(new QuoteFormViewModel(parent, quoteId, true));
         }
 
+        // Delete a quote
+        // Remove from the active quote list
+        // And add to the deleted quote list
         public void deleteQuote(int quoteId)
         {
             QuoteModel.deleteQuote(quoteId);
@@ -104,6 +115,9 @@ namespace BuildSys.ViewModels
             deletedQuoteList.Add(deletedQuote);
         }
 
+        // Restores a deleted quote
+        // Removing from deleted quotes
+        // Adding to active quotes
         public void restoreQuote(int quoteId)
         {
             QuoteModel.restoreQuote(quoteId);
@@ -117,6 +131,7 @@ namespace BuildSys.ViewModels
             filterQuotes();
         }
 
+        // Filters the based on user input
         public void filterQuotes()
         {
             quoteList = new ObservableCollection<QuoteModel>(originalQuoteList);
@@ -124,6 +139,7 @@ namespace BuildSys.ViewModels
 
             if (quoteFilter.Length > 0)
             {
+                // Remove from quote list where the quote does not match
                 quoteList.Where(cust => !matchDescription.IsMatch(cust.description))
                     .ToList()
                     .All(i => quoteList.Remove(i));

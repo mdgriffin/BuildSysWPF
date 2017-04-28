@@ -8,9 +8,11 @@ namespace BuildSys.ViewModels
         public MainViewModel()
         {
             this.parent = this;
+            // The first view model is the home view model
             navigateTo(new HomeViewModel(this));
         }
 
+        // Navigation  command, go to the manage customer view
         public ICommand goToManageCustomer
         {
             get

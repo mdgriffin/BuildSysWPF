@@ -17,6 +17,7 @@ namespace BuildSys.ViewModels
         // Set to true when the form has saved and we are updating not registering
         Boolean updating;
 
+        // Default constructor for creating a new quote
         public QuoteFormViewModel (BaseViewModel parent, int customerId)
         {
             this.parent = parent;
@@ -26,10 +27,13 @@ namespace BuildSys.ViewModels
 
             this.customerId = customerId;
 
+            // Create a new blank quote
             quote = new QuoteModel(customerId);
 
+            // Get the customer's model
             customer = CustomerModel.getCustomer(customerId);
 
+            // Set the visibility of the customer vat and company name details
             if (customer.companyName == null || customer.vatNo == null)
             {
                 isBusinessCustomer = "Collapsed";
@@ -38,14 +42,18 @@ namespace BuildSys.ViewModels
                 isBusinessCustomer = "Visible";
             }
 
+            // The the list of all active materials
             materialList = MaterialModel.getMaterialList();
             originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
 
+            // Create an empty list ot store quote materials
             quoteMaterialList = new ObservableCollection<QuoteMaterialModel>();
 
+            // Update the total quote cost
             updateTotalQuoteCosts();
         }
 
+        // Form for updating an exisiting quote
         public QuoteFormViewModel(BaseViewModel parent, int quoteId, Boolean updating)
         {
             this.parent = parent;
@@ -53,11 +61,14 @@ namespace BuildSys.ViewModels
             this.updating = updating;
             btnText = "Update Quote";
 
+            // Get the quote
             this.quote = QuoteModel.getQuote(quoteId);
             this.customerId = quote.customer.customerId;
 
+            // Get the customer the quote is being issued for
             customer = CustomerModel.getCustomer(customerId);
 
+            // Set visibility of business textblocks
             if (customer.companyName == null || customer.vatNo == null)
             {
                 isBusinessCustomer = "Collapsed";
@@ -67,14 +78,19 @@ namespace BuildSys.ViewModels
                 isBusinessCustomer = "Visible";
             }
 
+            // Get all materials
             materialList = MaterialModel.getMaterialList();
+            // Keep a copy of the material list for filtering
             originalMaterialList = new ObservableCollection<MaterialModel>(materialList);
 
+            // Get the quote materials that have been generated for this quote
             quoteMaterialList = QuoteMaterialModel.getQuoteMaterialList(quoteId);
 
+            // Update the total quote cost
             updateTotalQuoteCosts();
         }
 
+        // Publicly accessible properties for the view
         public String addOrUpdateQuoteMaterialBtn { get; set; } = "Add to Quote";
 
         public ObservableCollection<QuoteMaterialModel> quoteMaterialList { get; set; }
@@ -98,6 +114,7 @@ namespace BuildSys.ViewModels
                 if (value != _quoteMaterial)
                 {
                     _quoteMaterial = value;
+                    // Notify changed so view is updated
                     NotifyPropertyChanged("quoteMaterial");
                 }
             }
@@ -119,6 +136,7 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // The text of the material filter input
         private String _materialFilter;
         public String materialFilter
         {
@@ -150,6 +168,7 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Filters down the list of materials based on user's input
         public void filterMaterials()
         {
             materialList = new ObservableCollection<MaterialModel>(originalMaterialList);
@@ -157,12 +176,14 @@ namespace BuildSys.ViewModels
 
             if (materialFilter.Length > 0)
             {
+                // Remove any non-matching materials
                 materialList.Where(mat => !matchName.IsMatch(mat.name))
                     .ToList()
                     .All(i => materialList.Remove(i));
             }
         }
 
+        // Called when add material button is pressed
         public ICommand addMaterialToQuoteCmd
         {
             get
@@ -171,13 +192,16 @@ namespace BuildSys.ViewModels
             }
         }
 
-
+        // Adds a material to form
         public void addMaterial (int materialId)
         {
+            // Set as selected material
             selectedMaterial = MaterialModel.getMaterial(materialId);
+            // Create a new blank quote material
             quoteMaterial = new QuoteMaterialModel(quote.quoteId, materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
         }
 
+        // Called when the add/update button is pressed
         public ICommand addOrUpdateQuoteMaterialCmd
         {
             get
@@ -186,9 +210,11 @@ namespace BuildSys.ViewModels
             }
         }
 
-
+        // Either adds a new material to the quote
+        // or updates and existing material
         public void addOrUpdateQuoteMaterial()
         {
+            // Force all properties to be validated
             quoteMaterial.validateAllProps();
 
             if (selectedMaterial != null && quoteMaterial != null && !quoteMaterial.HasErrors)
@@ -196,18 +222,24 @@ namespace BuildSys.ViewModels
                 // this is a newly added material
                 if (quoteMaterial.listIndex == null)
                 {
+                    // Add to list
                     quoteMaterialList.Add(quoteMaterial);
+                    // Set's its list index
                     quoteMaterial.listIndex = quoteMaterialList.IndexOf(quoteMaterial);
                 }
+                // This is an existing material
                 else
                 {
                     quoteMaterialList[quoteMaterial.listIndex.Value] = quoteMaterial;
                 }
 
+                // Set the button back  to it's original text
                 addOrUpdateQuoteMaterialBtn = "Add to Quote";
                 NotifyPropertyChanged("addOrUpdateQuoteMaterialBtn");
 
+                // Update the total again
                 updateTotalQuoteCosts();
+                // Initialize a new material
                 quoteMaterial = new QuoteMaterialModel(quote.quoteId, selectedMaterial.materialId, selectedMaterial.pricePerUnit, selectedMaterial.isService);
             }
             else
@@ -217,6 +249,7 @@ namespace BuildSys.ViewModels
             
         }
 
+        // Called when the remove quote material button is clicked
         public ICommand removeQuoteMaterialCmd
         {
             get
@@ -225,6 +258,7 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Remove a quote material from the list
         public void removeQuoteMaterial (int quoteMaterialIndex)
         {
             // Check if this material has been saved
@@ -243,6 +277,7 @@ namespace BuildSys.ViewModels
             updateTotalQuoteCosts();
         }
 
+        // Called when edit quote button is clicked
         public ICommand editQuoteMaterialCmd
         {
             get
@@ -251,6 +286,7 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Edit the quote material
         public void editQuoteMaterial(int quoteMaterialIndex)
         {
             addOrUpdateQuoteMaterialBtn = "Update In Quote";
@@ -270,14 +306,19 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Updates the total costs of the quote
         public void updateTotalQuoteCosts ()
         {
+            // Initialize subtotal and vat to 0
             double subtotal = 0;
             double vat = 0;
 
+            // Loop over all materials added to the quote
             foreach (QuoteMaterialModel quoteMaterial in quoteMaterialList)
             {
+                // Add to subtotal
                 subtotal += quoteMaterial.totalCost;
+                // If is a service, tax at 13.5%, otherwise 21% (Todo: Should be 23%)
                 if (quoteMaterial.isService)
                 {
                     vat += quoteMaterial.totalCost * 0.135;
@@ -287,11 +328,13 @@ namespace BuildSys.ViewModels
                 }
             }
 
+            // Set the values of the quote model
             quote.subtotal = subtotal;
             quote.vat = vat;
             quote.total = subtotal + vat;
         }
 
+        // Called when save quote command button is clicked
         public ICommand saveQuoteCmd
         {
             get
@@ -300,14 +343,17 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Saves a quote
         public void saveQuote()
         {
             if (materialList.Count > 0)
             {
                 quote.validateAllProps();
 
+                // If thw quote has errors
                 if (!quote.HasErrors)
                 {
+                    // update or insert
                     if (updating)
                     {
                         quote.updateQuote();
@@ -349,7 +395,7 @@ namespace BuildSys.ViewModels
             }
         }
 
-
+        // Called when the print quote button is clicked
         public ICommand printQuoteCmd
         {
             get
@@ -358,11 +404,13 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Prins the quote
         private void printQuote ()
         {
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
+                // Creates a new instance of QuotePrint, passing in the quote model
                 printDialog.PrintVisual(new QuotePrint(quote), "Quote");
             }
         }

@@ -11,27 +11,31 @@ namespace BuildSys.ViewModels
 {
     class MaterialFormViewModel : BaseViewModel
     {
-
-        //MainViewModel parent;
-
+        
+        // The form for creating a new material
         public MaterialFormViewModel(BaseViewModel parent)
         {
             this.parent = parent;
             material = new MaterialModel();
+            // Since we are registering, set the button to the correct text
             btnText = "Register Material";
         }
 
+        // Form for updating a material
         public MaterialFormViewModel(BaseViewModel parent, int materalId)
         {
             this.parent = parent;
 
+            // Get the material being updating
             material = MaterialModel.getMaterial(materalId);
             btnText = "Update Material";
         }
 
+        // Properties accessible from the view
         public MaterialModel material { get; set; }
         public String btnText { get; set; }
 
+        // Save material command
         public ICommand saveMaterialCommand
         {
             get
@@ -40,12 +44,16 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Saves or updates the material
         public void saveMaterial()
         {
+            // Forece validation of all properties
             material.validateAllProps();
 
+            // If the material  does not have errors
             if (!material.HasErrors)
             {
+                // Check if registering or updating
                 if (btnText.Equals("Update Material"))
                 {
                     // Update the Customer's record
@@ -53,10 +61,12 @@ namespace BuildSys.ViewModels
 
                     MessageBox.Show("Material Updated Successfully");
 
+                    // Navigate to the same view, resetting form 
                     navigateTo(new MaterialManageViewModel(parent));
                 }
                 else
                 {
+                    // Insert the material into the database
                     material.insertMaterial();
 
                     MessageBox.Show("Sucessfully Register a new Material");
@@ -67,11 +77,11 @@ namespace BuildSys.ViewModels
             }
         }
 
+        // Used to enable and disable the save button
         public Boolean canSaveMaterial()
         {
             return !material.HasErrors;
         }
-
     }
 
 }
