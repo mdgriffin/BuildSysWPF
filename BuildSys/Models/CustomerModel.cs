@@ -5,6 +5,12 @@ using System.Data;
 
 namespace BuildSys.Models
 {
+
+    /*
+     * Models a Customer in the system and provides database functions
+     * for selecting, inserting, updating and deleting customers 
+     */
+
     public class CustomerModel : BaseModel, INotifyDataErrorInfo
     {
         public int customerId { get; set; }

@@ -5,6 +5,10 @@ using System.Data;
 
 namespace BuildSys.Models
 {
+    /*
+     *  Models a Material as part of a quote and Provides access to Database functions
+     */
+
     public class QuoteMaterialModel: BaseModel, INotifyDataErrorInfo
     {
         // If a Quote Material has an id, it has already been saved

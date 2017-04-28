@@ -6,6 +6,11 @@ using System.Globalization;
 
 namespace BuildSys.Models
 {
+
+    /*
+     *  Models a Quote and Provides access to Database functions
+     */
+
     public class QuoteModel : BaseModel, INotifyDataErrorInfo
     {
         public int quoteId { get; set; } // Foreign key to quote table

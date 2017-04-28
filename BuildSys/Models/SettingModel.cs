@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace BuildSys.Models
 {
+    /*
+     *  Models the Settings of the System and Provides access to Database functions
+     *  There can only be a single setting, so update and insert check for the 
+     *  exisitence of a row in the settings table and then decide whether to update or insert
+     */
+
     public class SettingModel : BaseModel, INotifyDataErrorInfo
     {
 

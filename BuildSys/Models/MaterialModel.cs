@@ -5,6 +5,10 @@ using System.Data;
 
 namespace BuildSys.Models
 {
+    /*
+     *  Models a Material and Provides access to Database functions
+     */
+
     public class MaterialModel: BaseModel, INotifyDataErrorInfo
     {
         public int materialId { get; set; }
