@@ -233,7 +233,11 @@ namespace BuildSys.Models
             DataTable materialsTable = select("SELECT ROUND(AVG(price_per_unit), 2) FROM Materials WHERE status = 'A'");
             DataRow mat = materialsTable.Rows[0];
 
-            return Double.Parse(mat[0].ToString());
+            Double avgQuote = 0;
+
+            Double.TryParse(mat[0].ToString(), out avgQuote);
+
+            return avgQuote;
         }
 
         public static DataTable getMaterialsByCost ()

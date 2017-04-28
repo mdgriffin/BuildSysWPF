@@ -328,7 +328,11 @@ namespace BuildSys.Models
             if (avgValTbl.Rows.Count > 0)
             {
                 DataRow quoteVal = avgValTbl.Rows[0];
-                return Double.Parse(quoteVal["avg_val"].ToString());
+                Double avgVal = 0;
+
+                Double.TryParse(quoteVal["avg_val"].ToString(), out avgVal);
+
+                return avgVal;
             }
             else
             {

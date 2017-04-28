@@ -482,16 +482,24 @@ namespace BuildSys.Models
                     ") WHERE rownum = 1)"    
             );
 
-            DataRow cust = customersTable.Rows[0];
-
-            if (cust["account_type"] != null && cust["account_type"].ToString() == "B")
+            if (customersTable.Rows.Count > 0)
             {
-                return new CustomerModel(Int32.Parse(cust["customer_id"].ToString()), cust["title"].ToString(), cust["firstname"].ToString(), cust["surname"].ToString(), cust["street"].ToString(), cust["town"].ToString(), cust["county"].ToString(), cust["telephone"].ToString(), cust["email"].ToString(), cust["account_type"].ToString().ToCharArray()[0], cust["company_name"].ToString(), cust["vat_no"].ToString());
+                DataRow cust = customersTable.Rows[0];
+
+                if (cust["account_type"] != null && cust["account_type"].ToString() == "B")
+                {
+                    return new CustomerModel(Int32.Parse(cust["customer_id"].ToString()), cust["title"].ToString(), cust["firstname"].ToString(), cust["surname"].ToString(), cust["street"].ToString(), cust["town"].ToString(), cust["county"].ToString(), cust["telephone"].ToString(), cust["email"].ToString(), cust["account_type"].ToString().ToCharArray()[0], cust["company_name"].ToString(), cust["vat_no"].ToString());
+                }
+                else
+                {
+                    return new CustomerModel(Int32.Parse(cust["customer_id"].ToString()), cust["title"].ToString(), cust["firstname"].ToString(), cust["surname"].ToString(), cust["street"].ToString(), cust["town"].ToString(), cust["county"].ToString(), cust["telephone"].ToString(), cust["email"].ToString(), cust["account_type"].ToString().ToCharArray()[0]);
+                }
             }
             else
             {
-                return new CustomerModel(Int32.Parse(cust["customer_id"].ToString()), cust["title"].ToString(), cust["firstname"].ToString(), cust["surname"].ToString(), cust["street"].ToString(), cust["town"].ToString(), cust["county"].ToString(), cust["telephone"].ToString(), cust["email"].ToString(), cust["account_type"].ToString().ToCharArray()[0]);
+                return new CustomerModel();
             }
+            
         }
     }
 }
